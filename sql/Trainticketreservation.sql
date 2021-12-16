@@ -1,6 +1,6 @@
 
 CREATE TABLE TRAINS (
-  TRAIN_ID VARCHAR(20),
+  TRAIN_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 2000 increment by 1,
  
   TRAIN_NAME varchar(50) NOT NULL,
   TRAIN_CLASS varchar(50) NOT NULL,
@@ -13,14 +13,15 @@ CREATE TABLE TRAINS (
   AVAILABLE_SEAT int NOT NULL,
   TICKET_PRICE int NOT NULL,
 
-  CONSTRAINT pk_trainid PRIMARY KEY (train_Id),
+  CONSTRAINT pk_trainid PRIMARY KEY (train_Id)
+  );
 
 
 CREATE TABLE BOOKING_DETAILS (
-  BOOKING_ID varchar(20) NOT NULL,
-  PNR_NUMBER INT(20) NOT NULL,
-  USER_ID varchar(20) NOT NULL,
-  TRAIN_ID varchar(20) NOT NULL,
+  BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
+  PNR_NUMBER int NOT NULL UNIQUE,
+  USER_ID int NOT NULL,
+  TRAIN_ID int NOT NULL,
   TRAIN_SOURCE varchar(100) NOT NULL,
   TRAIN_DESTINATION varchar(100) NOT NULL,
   JOURNEY_DATE date NOT NULL,
@@ -33,9 +34,8 @@ CREATE TABLE BOOKING_DETAILS (
   CONSTRAINT fk_booking_trainid FOREIGN KEY (train_Id) REFERENCES trains (train_Id) 
 );
 
-
 CREATE TABLE USERS (
-  USER_ID varchar(20) NOT NULL ,
+  USER_ID  NUMBER GENERATED ALWAYS AS IDENTITY START WITH 1 ,
   USER_NAME varchar(40) NOT NULL,
   USER_AGE int NOT NULL,
   USER_EMAIL varchar(30) NOT NULL ,
@@ -44,11 +44,12 @@ CREATE TABLE USERS (
   USER_PASSWORD varchar(50) NOT NULL ,
   
   CONSTRAINT pk_userid PRIMARY KEY (user_id),
-  CONSTRAINT unique_user UNIQUE (user_email, user_password)
+  CONSTRAINT unique_user UNIQUE (user_email, user_mobilenumber)
 );
 
 
 CREATE TABLE ADMINS (
+ ADMIN_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 200 increment by 1 ,
  ADMIN_NAME varchar(128) NOT NULL,
  ADMIN_PASSWORD varchar(128) NOT NULL ,
  ADMIN_EMAIL varchar(128) NOT NULL,
@@ -56,8 +57,23 @@ CREATE TABLE ADMINS (
  CONSTRAINT pk_adminid primary key (Admin_Id),
  CONSTRAINT unique_admin UNIQUE (Admin_Email,Admin_Password)
  );
+drop table users;
+truncate table users;
+select * from users;
+
+--select * from admins;
+select * from trains;
+--select * from booking_details;
+--
+--
+--drop table users cascade constraint;
+--drop table admins cascade constraint;
+--drop table trains cascade constraint;
+--drop table booking_details cascade constraint;
+
+insert into admins (ADMIN_NAME, ADMIN_PASSWORD,ADMIN_EMAIL)values('dhivakar','hello','dhivaadmin@gmail.com');
 
 
-
-
-
+select * from users;
+select * from users where user_mobilenumber='8181634782';
+drop table users cascade constraints;
