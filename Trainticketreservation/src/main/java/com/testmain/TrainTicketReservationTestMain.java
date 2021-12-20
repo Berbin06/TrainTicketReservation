@@ -3,13 +3,14 @@ package com.testmain;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.trainticketreservation.dao.TrainDao;
 import com.trainticketreservation.dao.UserDao;
 import com.trainticketreservation.module.UserModule;
 
 public class TrainTicketReservationTestMain {
 	public static void main(String args []) throws ClassNotFoundException, SQLException {
 	UserDao ud=new UserDao();
-	
+	TrainDao td=new TrainDao();
 	
 	Scanner scan=new Scanner(System.in);
 	
@@ -19,7 +20,7 @@ public class TrainTicketReservationTestMain {
 	System.out.println("select the operation:  ");
 	System.out.println("1.To login \t");
 	System.out.println("2.To Register \t");
-//	System.out.println("3.To update the value \t");
+	System.out.println("3.To update user details \t");
 //	System.out.println("4.To delete the value \t");
 //	System.out.println("5.To fetch the data \t");
 	System.out.println("Enter your option \t");
@@ -62,6 +63,7 @@ public class TrainTicketReservationTestMain {
 		UserModule usermodule=new UserModule(UserMobileNumber,password);
 			UserDao loginud=new UserDao();
 			loginud.login(usermodule);
+			
 	
 		break;
 	
@@ -150,7 +152,9 @@ public class TrainTicketReservationTestMain {
 			break;
 			
 		case 3:
-			System.out.println("To Update query");
+			System.out.println("To Update user details");
+			System.out.println("Enter your emailid");
+			String userEmail1=scan.nextLine();
 			System.out.println("Enter the user name ");
 			String userName1=scan.nextLine();
 			System.out.println("Enter the user age ");
@@ -162,7 +166,8 @@ public class TrainTicketReservationTestMain {
 			System.out.println("Enter the user password");
 			String userPassword1=scan.nextLine();
 			
-			UserModule usermodule11=new UserModule(userName1,userAge1,userMobileNumber1,userGender1,userPassword1);
+			UserModule usermodule11=new UserModule(  userName1,userAge1,userEmail1,userMobileNumber1,
+					userGender1,userPassword1);
 			ud.update(usermodule11);
 			break;
 			
@@ -174,7 +179,8 @@ public class TrainTicketReservationTestMain {
 			ud.delete(usermodule2);
 			
 		case 5:
-			System.out.println("To list users table ");
+			System.out.println("to insert train ");
+			
 			
 			
 		case 6:

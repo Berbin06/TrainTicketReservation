@@ -22,7 +22,7 @@ if(rs.next()) {
 	
 }
 else {
-	System.out.println("error");
+	System.out.println("Invalid user please register");
 }
 	}
 	
@@ -81,7 +81,7 @@ else {
 		con.close();		
 	}
     
-    
+   
 }
 
 

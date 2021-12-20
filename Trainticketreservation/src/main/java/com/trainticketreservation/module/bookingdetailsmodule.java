@@ -5,80 +5,80 @@ import java.util.Objects;
 
 public class bookingdetailsmodule {
 
-	private int bookingid;
-	private int pnrnumber;
-	private int userid;
-	private int trainid;
-	private String trainsource;
-	private String traindestination;
-	private Date journeydate;
-	private Date bookingdate;
-	private int ticketcount;
-	private int totalprice;
-	public int getBookingid() {
-		return bookingid;
+	private int bookingId;
+	private int pnrNumber;
+	private int userId;
+	private int trainId;
+	private String trainSource;
+	private String trainDestination;
+	private Date journeyDate;
+	private Date bookingDate;
+	private int ticketCount;
+	private int totalPrice;
+	public int getBookingId() {
+		return bookingId;
 	}
-	public void setBookingid(int bookingid) {
-		this.bookingid = bookingid;
+	public void setBookingId(int bookingId) {
+		this.bookingId = bookingId;
 	}
-	public int getPnrnumber() {
-		return pnrnumber;
+	public int getPnrNumber() {
+		return pnrNumber;
 	}
-	public void setPnrnumber(int pnrnumber) {
-		this.pnrnumber = pnrnumber;
+	public void setPnrNumber(int pnrNumber) {
+		this.pnrNumber = pnrNumber;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	public int getTrainid() {
-		return trainid;
+	public int getTrainId() {
+		return trainId;
 	}
-	public void setTrainid(int trainid) {
-		this.trainid = trainid;
+	public void setTrainId(int trainId) {
+		this.trainId = trainId;
 	}
-	public String getTrainsource() {
-		return trainsource;
+	public String getTrainSource() {
+		return trainSource;
 	}
-	public void setTrainsource(String trainsource) {
-		this.trainsource = trainsource;
+	public void setTrainSource(String trainSource) {
+		this.trainSource = trainSource;
 	}
-	public String getTraindestination() {
-		return traindestination;
+	public String getTrainDestination() {
+		return trainDestination;
 	}
-	public void setTraindestination(String traindestination) {
-		this.traindestination = traindestination;
+	public void setTrainDestination(String trainDestination) {
+		this.trainDestination = trainDestination;
 	}
-	public Date getJourneydate() {
-		return journeydate;
+	public Date getJourneyDate() {
+		return journeyDate;
 	}
-	public void setJourneydate(Date journeydate) {
-		this.journeydate = journeydate;
+	public void setJourneyDate(Date journeyDate) {
+		this.journeyDate = journeyDate;
 	}
-	public Date getBookingdate() {
-		return bookingdate;
+	public Date getBookingDate() {
+		return bookingDate;
 	}
-	public void setBookingdate(Date bookingdate) {
-		this.bookingdate = bookingdate;
+	public void setBookingDate(Date bookingDate) {
+		this.bookingDate = bookingDate;
 	}
-	public int getTicketcount() {
-		return ticketcount;
+	public int getTicketCount() {
+		return ticketCount;
 	}
-	public void setTicketcount(int ticketcount) {
-		this.ticketcount = ticketcount;
+	public void setTicketCount(int ticketCount) {
+		this.ticketCount = ticketCount;
 	}
-	public int getTotalprice() {
-		return totalprice;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	public void setTotalprice(int totalprice) {
-		this.totalprice = totalprice;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(bookingdate, bookingid, journeydate, pnrnumber, ticketcount, totalprice, traindestination,
-				trainid, trainsource, userid);
+		return Objects.hash(bookingDate, bookingId, journeyDate, pnrNumber, ticketCount, totalPrice, trainDestination,
+				trainId, trainSource, userId);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -89,41 +89,37 @@ public class bookingdetailsmodule {
 		if (getClass() != obj.getClass())
 			return false;
 		bookingdetailsmodule other = (bookingdetailsmodule) obj;
-		return Objects.equals(bookingdate, other.bookingdate) && bookingid == other.bookingid
-				&& Objects.equals(journeydate, other.journeydate) && pnrnumber == other.pnrnumber
-				&& ticketcount == other.ticketcount && totalprice == other.totalprice
-				&& Objects.equals(traindestination, other.traindestination) && trainid == other.trainid
-				&& Objects.equals(trainsource, other.trainsource) && userid == other.userid;
+		return Objects.equals(bookingDate, other.bookingDate) && bookingId == other.bookingId
+				&& Objects.equals(journeyDate, other.journeyDate) && pnrNumber == other.pnrNumber
+				&& ticketCount == other.ticketCount && totalPrice == other.totalPrice
+				&& Objects.equals(trainDestination, other.trainDestination) && trainId == other.trainId
+				&& Objects.equals(trainSource, other.trainSource) && userId == other.userId;
 	}
 	@Override
 	public String toString() {
-		return "bookingdetailsmodule [bookingid=" + bookingid + ", pnrnumber=" + pnrnumber + ", userid=" + userid
-				+ ", trainid=" + trainid + ", trainsource=" + trainsource + ", traindestination=" + traindestination
-				+ ", journeydate=" + journeydate + ", bookingdate=" + bookingdate + ", ticketcount=" + ticketcount
-				+ ", totalprice=" + totalprice + ", getBookingid()=" + getBookingid() + ", getPnrnumber()="
-				+ getPnrnumber() + ", getUserid()=" + getUserid() + ", getTrainid()=" + getTrainid()
-				+ ", getTrainsource()=" + getTrainsource() + ", getTraindestination()=" + getTraindestination()
-				+ ", getJourneydate()=" + getJourneydate() + ", getBookingdate()=" + getBookingdate()
-				+ ", getTicketcount()=" + getTicketcount() + ", getTotalprice()=" + getTotalprice() + ", hashCode()="
-				+ hashCode() + ", getClass()=" + getClass() + ", toString()=" + super.toString() + "]";
+		return "bookingdetailsmodule [bookingId=" + bookingId + ", pnrNumber=" + pnrNumber + ", userId=" + userId
+				+ ", trainId=" + trainId + ", trainSource=" + trainSource + ", trainDestination=" + trainDestination
+				+ ", journeyDate=" + journeyDate + ", bookingDate=" + bookingDate + ", ticketCount=" + ticketCount
+				+ ", totalPrice=" + totalPrice + "]";
 	}
-	public bookingdetailsmodule(int bookingid, int pnrnumber, int userid, int trainid, String trainsource,
-			String traindestination, Date journeydate, Date bookingdate, int ticketcount, int totalprice) {
+	public bookingdetailsmodule(int bookingId, int pnrNumber, int userId, int trainId, String trainSource,
+			String trainDestination, Date journeyDate, Date bookingDate, int ticketCount, int totalPrice) {
 		super();
-		this.bookingid = bookingid;
-		this.pnrnumber = pnrnumber;
-		this.userid = userid;
-		this.trainid = trainid;
-		this.trainsource = trainsource;
-		this.traindestination = traindestination;
-		this.journeydate = journeydate;
-		this.bookingdate = bookingdate;
-		this.ticketcount = ticketcount;
-		this.totalprice = totalprice;
+		this.bookingId = bookingId;
+		this.pnrNumber = pnrNumber;
+		this.userId = userId;
+		this.trainId = trainId;
+		this.trainSource = trainSource;
+		this.trainDestination = trainDestination;
+		this.journeyDate = journeyDate;
+		this.bookingDate = bookingDate;
+		this.ticketCount = ticketCount;
+		this.totalPrice = totalPrice;
 	}
 	public bookingdetailsmodule() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }
