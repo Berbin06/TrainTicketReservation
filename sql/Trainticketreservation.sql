@@ -1,4 +1,3 @@
-
 CREATE TABLE TRAINS (
   TRAIN_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 2000 increment by 1,
  
@@ -7,31 +6,30 @@ CREATE TABLE TRAINS (
   TRAIN_NUMBER int NOT NULL,
   TRAIN_SOURCE varchar(100) NOT NULL,
   TRAIN_DESTINATION varchar(100) NOT NULL,
-  SOURCE_TIME timestamp NOT NULL,
-  DESTINATION_TIME timestamp NOT NULL,
+  TRAIN_DEPARTURE_TIME timestamp NOT NULL,
+  TRAIN_ARRAIVAL_TIME timestamp NOT NULL,
   TOTAL_SEAT int NOT NULL,
-  AVAILABLE_SEAT int NOT NULL,
   TICKET_PRICE int NOT NULL,
 
-  CONSTRAINT pk_trainid PRIMARY KEY (train_Id)
+  CONSTRAINT pk_trainid PRIMARY KEY (train_Id),
+  CONSTRAINT train_number unique(train_number)
   );
+  alter table users add wallet number(20);
 
 
 CREATE TABLE BOOKING_DETAILS (
   BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
-  PNR_NUMBER int NOT NULL UNIQUE,
   USER_ID int NOT NULL,
-  TRAIN_ID int NOT NULL,
-  TRAIN_SOURCE varchar(100) NOT NULL,
-  TRAIN_DESTINATION varchar(100) NOT NULL,
-  JOURNEY_DATE date NOT NULL,
-  BOOKING_DATE date NOT NULL,
+  PNR_NUMBER int NOT NULL UNIQUE,
+  TRAIN_ID int NOT NULL,  
+  BOOKING_DATE date default SYSDATE,
   TICKET_COUNT int NOT NULL,
   TOTAL_PRICE int,
   
   CONSTRAINT pk_bookingid PRIMARY KEY (Booking_Id),
   CONSTRAINT fk_booking_userid FOREIGN KEY (user_Id) REFERENCES users (user_Id) ,
-  CONSTRAINT fk_booking_trainid FOREIGN KEY (train_Id) REFERENCES trains (train_Id) 
+  CONSTRAINT fk_booking_trainid FOREIGN KEY (train_Id) REFERENCES trains (train_Id)
+  
 );
 
 CREATE TABLE USERS (
@@ -59,21 +57,21 @@ CREATE TABLE ADMINS (
  );
 drop table users;
 truncate table users;
-select * from users;
-
+select * from admins;
+insert INTO ADMINS (admin_name,admin_password,admin_email)values ('HARSHA','Qwerty@123','admin@gmail.com');
 --select * from admins;
-select * from trains;
+select * from booking_details;
 --select * from booking_details;
 --
 --
---drop table users cascade constraint;
---drop table admins cascade constraint;
---drop table trains cascade constraint;
---drop table booking_details cascade constraint;
+drop table users cascade constraint;
+drop table admins cascade constraint;
+drop table trains cascade constraint;
+drop table booking_details cascade constraint;
 
-insert into admins (ADMIN_NAME, ADMIN_PASSWORD,ADMIN_EMAIL)values('dhivakar','hello','dhivaadmin@gmail.com');
+
 
 
 select * from users;
-select * from users where user_mobilenumber='8181634782';
+
 drop table users cascade constraints;
