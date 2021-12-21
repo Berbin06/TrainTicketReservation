@@ -5,4 +5,4 @@
  * @author berb2928
  *
  */
-package com.trainticketreservation.module;
+package com.trainticketreservation.model;

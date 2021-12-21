@@ -1,8 +1,8 @@
-package com.trainticketreservation.module;
+package com.trainticketreservation.model;
 
 import java.util.Objects;
 
-public class UserModule {
+public class UserModel {
 	private int userId;
 	private String userName;
 	private int userAge;
@@ -28,7 +28,7 @@ public class UserModule {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserModule other = (UserModule) obj;
+		UserModel other = (UserModel) obj;
 		return userAge == other.userAge && Objects.equals(userEmail, other.userEmail)
 				&& Objects.equals(userGender, other.userGender) && userId == other.userId
 				&& userMobileNumber == other.userMobileNumber && Objects.equals(userName, other.userName)
@@ -43,13 +43,14 @@ public class UserModule {
 	public String getUserName() {
 		return userName;
 	}
-	public UserModule() {
+	public UserModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UserModule( String userName, int userAge, String userEmail, long userMobileNumber,
+	public UserModel(int userId, String userName, int userAge, String userEmail, long userMobileNumber,
 			String userGender, String userPassword) {
 		super();
+		this.userId = userId;
 		this.userName = userName;
 		this.userAge = userAge;
 		this.userEmail = userEmail;
@@ -57,7 +58,7 @@ public class UserModule {
 		this.userGender = userGender;
 		this.userPassword = userPassword;
 	}
-	public UserModule(String userName1, int userAge1, long userMobileNumber1, String userGender1, String userPassword1) {
+	public UserModel(String userName1, int userAge1, long userMobileNumber1, String userGender1, String userPassword1) {
 		super();
 		this.userName=userName1;
 		this.userAge=userAge1;
@@ -65,11 +66,11 @@ public class UserModule {
 		this.userPassword=userPassword1;
 		
 	}
-	public UserModule(int userId2) {
+	public UserModel(int userId2) {
 		super();
 		this.userId=userId2;
 	}
-	public UserModule(long userMobileNumber, String userPassword) {
+	public UserModel(long userMobileNumber, String userPassword) {
 		super();
 		this.userMobileNumber = userMobileNumber;
 		this.userPassword = userPassword;
@@ -107,6 +108,18 @@ public class UserModule {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	public UserModel(String userName, int userAge, String userEmail, long userMobileNumber, String userGender,
+			String userPassword) {
+		super();
+		this.userName = userName;
+		this.userAge = userAge;
+		this.userEmail = userEmail;
+		this.userMobileNumber = userMobileNumber;
+		this.userGender = userGender;
+		this.userPassword = userPassword;
+	}
+	
+	
 	
 
 }

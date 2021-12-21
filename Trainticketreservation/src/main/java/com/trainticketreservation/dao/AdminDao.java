@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.trainticketreservation.connectionutil.ConnectionUtil;
-import com.trainticketreservation.module.AdminModule;
-import com.trainticketreservation.module.TrainModule;
-import com.trainticketreservation.module.UserModule;
+import com.trainticketreservation.model.AdminModel;
+import com.trainticketreservation.model.TrainModel;
+import com.trainticketreservation.model.UserModel;
 
 public class AdminDao {
 
-		public AdminModule admin(String adminemail) throws ClassNotFoundException, SQLException {
-			AdminModule adminmodule;
+		public AdminModel admin(String adminemail) throws ClassNotFoundException, SQLException {
+			AdminModel adminmodule;
 			String loginadmin="select * from admins where admin_email='"+adminemail+"'";
 			Connection con=ConnectionUtil.getDBconnect();
 			PreparedStatement ps=con.prepareStatement(loginadmin);
@@ -23,7 +23,7 @@ public class AdminDao {
 			ResultSet rs=ps.executeQuery(loginadmin);
 			
 			rs.next() ;
-				adminmodule=new AdminModule(rs.getString(2),rs.getString(3),rs.getString(4));
+				adminmodule=new AdminModel(rs.getString(2),rs.getString(3),rs.getString(4));
 			
 			
 			return adminmodule;
@@ -31,7 +31,7 @@ public class AdminDao {
 		
 		
 		
-		 public void delete (UserModule UserModule) throws ClassNotFoundException, SQLException {
+		 public void delete (UserModel UserModule) throws ClassNotFoundException, SQLException {
 				
 				String delete="delete from users where user_id=?";
 				

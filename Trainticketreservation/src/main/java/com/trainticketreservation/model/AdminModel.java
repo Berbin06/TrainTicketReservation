@@ -1,8 +1,8 @@
-package com.trainticketreservation.module;
+package com.trainticketreservation.model;
 
 import java.util.Objects;
 
-public class AdminModule {
+public class AdminModel {
 private int AdminId;
 private String AdminName;
 private String AdminPassword;
@@ -43,7 +43,7 @@ public boolean equals(Object obj) {
 		return false;
 	if (getClass() != obj.getClass())
 		return false;
-	AdminModule other = (AdminModule) obj;
+	AdminModel other = (AdminModel) obj;
 	return Objects.equals(AdminEmail, other.AdminEmail) && AdminId == other.AdminId
 			&& Objects.equals(AdminName, other.AdminName) && Objects.equals(AdminPassword, other.AdminPassword);
 }
@@ -52,18 +52,18 @@ public String toString() {
 	return "AdminModule [AdminId=" + AdminId + ", AdminName=" + AdminName + ", AdminPassword=" + AdminPassword
 			+ ", AdminEmail=" + AdminEmail + "]";
 }
-public AdminModule(int adminId, String adminName, String adminPassword, String adminEmail) {
+public AdminModel(int adminId, String adminName, String adminPassword, String adminEmail) {
 	super();
 	AdminId = adminId;
 	AdminName = adminName;
 	AdminPassword = adminPassword;
 	AdminEmail = adminEmail;
 }
-public AdminModule() {
+public AdminModel() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public AdminModule(String string, String string2, String string3) {
+public AdminModel(String string, String string2, String string3) {
 	// TODO Auto-generated constructor stub
 	this.AdminEmail=string;
 	this.AdminName=string2;

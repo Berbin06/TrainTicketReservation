@@ -23,6 +23,7 @@ CREATE TABLE BOOKING_DETAILS (
   PNR_NUMBER int NOT NULL UNIQUE,
   TRAIN_ID int NOT NULL,  
   BOOKING_DATE date default SYSDATE,
+  SEAT_NO int not null,
   TICKET_COUNT int NOT NULL,
   TOTAL_PRICE int,
   
@@ -73,5 +74,10 @@ drop table booking_details cascade constraint;
 
 
 select * from users;
+select * from trains;
+select * from admins;
+select * from booking_details;
+delete from trains where train_number=234;
+update trains set  train_name='qwertyu', train_class='sdfghj', train_source='chennai', train_destination='kanyakumari',source_time='01-01-70 12:12:12.000000000 AM', destination_time='01-01-70 01:13:13.000000000 PM', total_seat=500,ticket_price=400 where train_number=234;
 
 drop table users cascade constraints;
