@@ -126,6 +126,25 @@ public String toString() {
 			+ ",\n trainDepartureTime=" + trainDepartureTime.format(format) + ",\n trainArraivalTime=" + trainArraivalTime.format(format) + ",\n totalseat="
 			+ totalseat + ",\n ticketPrice=" + ticketPrice ;
 }
+public TrainModel(int i, String trainName, String trainClass, int trainNumber, String trainSource, String trainDestination,
+		LocalDateTime trainDepartureTime, LocalDateTime trainArraivalTime, int totalseat, int ticketPrice, int j) {
+	super();
+	this.trainName = trainName;
+	this.trainClass = trainClass;
+	this.trainNumber = trainNumber;
+	this.trainSource = trainSource;
+	this.trainDestination = trainDestination;
+	this.trainDepartureTime = trainDepartureTime;
+	this.trainArraivalTime = trainArraivalTime;
+	this.totalseat = totalseat;
+	this.ticketPrice = ticketPrice;
+}
+
+public TrainModel(String trainName1, String trainClass1, String trainSource1, String trainDestination1,
+		Date trainDepartureTime1, Date trainArraivalTime1, int totalSeat1, int ticketPrice1) {
+	// TODO Auto-generated constructor stub
+}
+
 public TrainModel(String trainName, String trainClass, int trainNumber, String trainSource, String trainDestination,
 		LocalDateTime trainDepartureTime, LocalDateTime trainArraivalTime, int totalseat, int ticketPrice) {
 	super();
@@ -138,14 +157,6 @@ public TrainModel(String trainName, String trainClass, int trainNumber, String t
 	this.trainArraivalTime = trainArraivalTime;
 	this.totalseat = totalseat;
 	this.ticketPrice = ticketPrice;
-}
-public TrainModel() {
-	super();
-	// TODO Auto-generated constructor stub
-}
-public TrainModel(String trainName1, String trainClass1, String trainSource1, String trainDestination1,
-		Date trainDepartureTime1, Date trainArraivalTime1, int totalSeat1, int ticketPrice1) {
-	// TODO Auto-generated constructor stub
 }
 public TrainModel(int trainNumber) {
 	// TODO Auto-generated constructor stu

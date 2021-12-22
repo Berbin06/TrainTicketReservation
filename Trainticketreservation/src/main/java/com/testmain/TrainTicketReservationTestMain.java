@@ -3,6 +3,7 @@ package com.testmain;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -20,6 +21,7 @@ public class TrainTicketReservationTestMain {
 	TrainDao td=new TrainDao();
 	 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
 	 DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	 DateTimeFormatter dateFormat=DateTimeFormatter.ofPattern("dd-MM-yyyy");
 	
 	Scanner scan=new Scanner(System.in);
 	
@@ -36,6 +38,8 @@ public class TrainTicketReservationTestMain {
 	System.out.println("7.To show all trains");
 	System.out.println("8.To show all users");
 	System.out.println("9.To delete train");
+	System.out.println("10. To find train id");
+	System.out.println("11.To search train");
 	int choice=scan.nextInt();
 	scan.nextLine();
 	
@@ -184,7 +188,7 @@ public class TrainTicketReservationTestMain {
 			break;
 			
 		case 4:
-			System.out.println("To Delete query");
+			System.out.println("To Delete user");
 			System.out.println("Enter the id to delete ");
 			int userId=scan.nextInt();
 			UserModel usermodule2=new UserModel(userId);
@@ -271,6 +275,28 @@ public class TrainTicketReservationTestMain {
 			TrainModel trainmodule1= new TrainModel(TrainNumber);
 			td.deletetrain(trainmodule1);
 			break;
+		case 10:
+			System.out.println("To find train id");
+			System.out.println("Enter train number");
+			int TrainNumber1=scan.nextInt();
+			TrainModel trainmodel=new TrainModel(TrainNumber1);
+			int trainId= td.findTrainId(trainmodel);
+			System.out.println(trainId);
+			break;
+		case 11:
+			System.out.println("to search Train");
+			System.out.println("Enter date");
+			String date=scan.nextLine();
+			LocalDate givenDepartureDate=LocalDate.parse(date,dateFormat);
+			//System.out.println(givenDepartureDate);
+			System.out.println("Enter source location");
+			String source=scan.nextLine();
+			System.out.println("Enter destination location");
+			String destination=scan.nextLine();
+			List<TrainModel>listSearchTrain=td.searchTrain(givenDepartureDate, source, destination);
+			for(int i=0;i<listSearchTrain.size();i++) {
+				System.out.println(listSearchTrain.get(i));
+			}
 	}
 	
 	

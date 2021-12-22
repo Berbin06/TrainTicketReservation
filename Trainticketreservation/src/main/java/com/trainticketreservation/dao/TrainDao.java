@@ -5,13 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.trainticketreservation.connectionutil.ConnectionUtil;
 import com.trainticketreservation.model.TrainModel;
+import com.trainticketreservation.model.UserModel;
 
 public class TrainDao {
 
@@ -123,11 +126,64 @@ public class TrainDao {
 	return trainList;
 	 
  }
- public void searchTrain(TrainModel trainmodel)
+
+ public static int findTrainId(TrainModel trainModel) {
+ 	String findTrainIdQuery="select train_id from trains where train_number = "+trainModel.getTrainNumber();
+ 	Connection con = null;
+		try {
+			con = ConnectionUtil.getDBconnect();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 	Statement stmt = null;
+ 	int trainId = 0;
+ 	try {
+			stmt = con.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+ 	try {
+			ResultSet rs=stmt.executeQuery(findTrainIdQuery);
+			if(rs.next()) {
+				//System.out.println(rs.getInt(1));
+				trainId = rs.getInt(1);
+				//System.out.println(trainId);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return trainId;
+ }
+ public List<TrainModel>searchTrain(LocalDate givenDepartureDate,String source,String destination)
  {
-	 String findTrain="select * from trains where to_char(departure,'dd-mm-yyyy')=? and train_source=? and train_destination=?";
+	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+givenDepartureDate+"'and train_source='"+source+"' and train_destination='"+destination+"'";
 	 Connection con=null;
-	 //Statement pstatement=null;
+	 Statement stmt=null;
+	 TrainModel trainModel;
+	 List<TrainModel>trainsearchList=new ArrayList<TrainModel>();
 	 
+	 try {
+		con=ConnectionUtil.getDBconnect();
+		stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(findTrain);
+		while(rs.next()) {
+			trainModel = new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+			trainsearchList.add(trainModel);
+	//		trainModel.toString();
+		}
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return trainsearchList;
  }
 }
