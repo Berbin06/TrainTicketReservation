@@ -10,6 +10,7 @@ public class UserModel {
 	private long userMobileNumber;
 	private String userGender;
 	private String userPassword;
+	private int wallet;
 	@Override
 	public String toString() {
 		return "UserModule [userId=" + userId + ", userName=" + userName + ", userAge=" + userAge + ", userEmail="

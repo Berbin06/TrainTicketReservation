@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import com.trainticketreservation.dao.BookingDetailsDao;
 import com.trainticketreservation.dao.TrainDao;
 import com.trainticketreservation.dao.UserDao;
+import com.trainticketreservation.model.BookingDetailsModel;
 import com.trainticketreservation.model.TrainModel;
 import com.trainticketreservation.model.UserModel;
 
@@ -19,6 +21,8 @@ public class TrainTicketReservationTestMain {
 	public static void main(String args []) throws ClassNotFoundException, SQLException, ParseException {
 	UserDao ud=new UserDao();
 	TrainDao td=new TrainDao();
+	BookingDetailsDao bDao= new BookingDetailsDao();
+	BookingDetailsModel bookingDetailsModel=new BookingDetailsModel();
 	 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
 	 DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 	 DateTimeFormatter dateFormat=DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -39,8 +43,6 @@ public class TrainTicketReservationTestMain {
 	System.out.println("8.To show all users");
 	System.out.println("9.To delete train");
 	System.out.println("10. To find train id");
-	System.out.println("11.To find userid");
-	System.out.println("12.To search and book trains");
 	int choice=scan.nextInt();
 	scan.nextLine();
 	
@@ -71,6 +73,75 @@ public class TrainTicketReservationTestMain {
 			"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$")) {
 			flagpswd = false;
 			System.out.println(password);
+			
+			UserModel userModel=ud.findUserDetails(UserMobileNumber);
+			
+			System.out.println("1. search and book train");
+			System.out.println("Enter the choice number to proceed : ");
+			int userChoice=scan.nextInt();
+			scan.nextLine();
+			switch(userChoice) {
+			
+			case 1:
+				System.out.println("to search Train and book train");
+				System.out.println("Enter date");
+				String date=scan.nextLine();
+				LocalDate givenDepartureDate=LocalDate.parse(date,dateFormat);
+				//System.out.println(givenDepartureDate);
+				System.out.println("Enter source location");
+				String source=scan.nextLine();
+				//source=source.toLowerCase();
+				System.out.println("Enter destination location");
+				String destination=scan.nextLine();
+				List<TrainModel>listSearchTrain=td.searchTrain(givenDepartureDate, source, destination);
+				for(int i=0;i<listSearchTrain.size();i++) {
+					System.out.println(listSearchTrain.get(i));
+				}
+				System.out.println("Enter the train train number that want to book");
+				int trainNoofselectedTrain=Integer.parseInt(scan.nextLine());
+				TrainModel trainModel=new TrainModel();
+				trainModel = td.findTrainDetails(trainNoofselectedTrain);
+				System.out.println(trainModel);
+				
+				System.out.println("enter the no of person");
+				int noOfPerson = Integer.parseInt(scan.nextLine());
+				System.out.println("select the class");
+				System.out.println("Select 1 for Non AC / 2 for  AC");
+				
+				int classCategoryChoice=Integer.parseInt(scan.nextLine());
+				int ticketPriceForClass=0;
+				if(classCategoryChoice==1) {
+					
+					ticketPriceForClass=(trainModel.getTicketPrice())*noOfPerson;
+				}
+				else {
+					
+					ticketPriceForClass=(trainModel.getTicketPrice()+300)*noOfPerson;
+				}
+				
+				System.out.println("Total price:"+ticketPriceForClass);
+				System.out.println("To confirm booking press 1 else 2");
+				int bookingChoice=Integer.parseInt(scan.nextLine());
+				if(bookingChoice==1) {
+					bookingDetailsModel=new BookingDetailsModel(userModel,trainModel,noOfPerson,ticketPriceForClass);
+					boolean resultBooking=bDao.bookTicket(userModel, trainModel, bookingDetailsModel);
+					if(resultBooking=true) {
+						System.out.println("successfully booked");
+					}
+					else {
+						System.out.println("Not Booked!!");
+					}
+				}
+				else {
+					
+				}
+					
+				break;
+				
+			}
+			
+			
+			
 			} else {
 			System.out.println("password must have 8 to 15 characters only \n"
 			+ "contains one upper case \n" + "atleast one lower case \n"
@@ -285,40 +356,9 @@ public class TrainTicketReservationTestMain {
 			int trainId= td.findTrainId(trainmodel);
 			System.out.println(trainId);
 			break;
-		case 11:
-			System.out.println("To find user id");
-			System.out.println("Enter user Email");
-			String usermailid=scan.nextLine();
-			UserModel userModel=new UserModel(usermailid);
-			int userId1=ud.findUserId(userModel);
-			System.out.println(userId1);
-			break;
-		case 12:
-			System.out.println("to search Train and book train");
-			System.out.println("Enter date");
-			String date=scan.nextLine();
-			LocalDate givenDepartureDate=LocalDate.parse(date,dateFormat);
-			//System.out.println(givenDepartureDate);
-			System.out.println("Enter source location");
-			String source=scan.nextLine();
-			//source=source.toLowerCase();
-			System.out.println("Enter destination location");
-			String destination=scan.nextLine();
-			List<TrainModel>listSearchTrain=td.searchTrain(givenDepartureDate, source, destination);
-			for(int i=0;i<listSearchTrain.size();i++) {
-				System.out.println(listSearchTrain.get(i));
-			}
-			System.out.println("Enter the train train number that want to book");
-			int trainNoofselectedTrain=scan.nextInt();
-			TrainModel trainModel=new TrainModel();
-			trainModel = td.findTrainDetails(trainNoofselectedTrain);
-			System.out.println(trainModel);
-			System.out.println("Enter the ticket count");
-			int ticketcount=scan.nextInt();
+		
+		
 			
-			
-			
-			break;
 		
 			
 	}

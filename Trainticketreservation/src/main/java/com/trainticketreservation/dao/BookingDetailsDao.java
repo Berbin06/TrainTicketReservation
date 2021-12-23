@@ -13,7 +13,7 @@ import com.trainticketreservation.model.UserModel;
 public class BookingDetailsDao {
 public boolean bookTicket(UserModel userModel,TrainModel trainModel, BookingDetailsModel bookingDetailsModel)
 {
-	String bookTicketQuery="insert into booking_details(user_id,train_id,pnr_number,journey_date,ticket_count,seat_no,total_price)values(?,?,?,?,?,?)";
+	String bookTicketQuery="insert into booking_details(user_id,train_id,journey_date,ticket_count,total_price)values(?,?,?,?,?)";
 	Connection con;
 	int result=0;
 	 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -22,11 +22,11 @@ public boolean bookTicket(UserModel userModel,TrainModel trainModel, BookingDeta
 		PreparedStatement pstmt=con.prepareStatement(bookTicketQuery);
 		pstmt.setInt(1, userModel.getUserId());
 		pstmt.setInt(2,trainModel.getTrainId());
-		pstmt.setLong(3, bookingDetailsModel.getPnrNumber());
-		pstmt.setDate(4, java.sql.Date.valueOf(trainModel.getTrainDepartureTime().toLocalDate()));
-		pstmt.setInt(5,bookingDetailsModel.getTicketCount());
-		pstmt.setString(6,bookingDetailsModel.getSeatNo());
-		pstmt.setInt(7,bookingDetailsModel.getTotalPrice());
+		//pstmt.setLong(3, bookingDetailsModel.getPnrNumber());
+		pstmt.setDate(3, java.sql.Date.valueOf(trainModel.getTrainDepartureTime().toLocalDate()));
+		pstmt.setInt(4,bookingDetailsModel.getTicketCount());
+		//pstmt.setString(6,bookingDetailsModel.getSeatNo());
+		pstmt.setInt(5,bookingDetailsModel.getTotalPrice());
 		result=	pstmt.executeUpdate();
 		
 	} catch (ClassNotFoundException e) {

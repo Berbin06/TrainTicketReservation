@@ -124,36 +124,25 @@ else {
     	return userList;
     }
     //find userId 
-    public static int findUserId(UserModel userModel) {
-    	String findUserIdQuery="select user_id from users where user_email='" + userModel.getUserEmail()+"'";
+    public static UserModel findUserDetails(long userContact) {
+    	String findUserDetailsQuery="select * from users where user_mobilenumber='" + userContact+"'";
     	Connection con = null;
-		try {
-			con = ConnectionUtil.getDBconnect();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
     	Statement stmt = null;
-    	int userId = 0;
-    	try {
-			stmt = con.createStatement();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	try {
-			ResultSet rs=stmt.executeQuery(findUserIdQuery);
-			if(rs.next()) {
-				userId = rs.getInt(1);
+    	UserModel userModel = null;
+			try {
+				con = ConnectionUtil.getDBconnect();
+				stmt = con.createStatement();
+				ResultSet rs=stmt.executeQuery(findUserDetailsQuery);
+				if(rs.next()) {
+					userModel=new UserModel(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getLong(5),rs.getString(6),rs.getString(7));
+				}
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return userId;
+		
+		return userModel;
     }
 }
 
