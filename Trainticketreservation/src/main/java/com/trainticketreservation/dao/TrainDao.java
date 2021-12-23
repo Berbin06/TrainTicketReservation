@@ -53,9 +53,9 @@ public class TrainDao {
 	ps.setString(3,trainmodule.getTrainSource() );
 	ps.setString(4,trainmodule.getTrainDestination());
 	Timestamp departureDateTime = Timestamp.valueOf(trainmodule.getTrainDepartureTime());
-	ps.setTimestamp(6,departureDateTime );
+	ps.setTimestamp(5,departureDateTime );
 	Timestamp arrivalDateTime = Timestamp.valueOf(trainmodule.getTrainArraivalTime());
-	ps.setTimestamp(7,arrivalDateTime);
+	ps.setTimestamp(6,arrivalDateTime);
 	ps.setInt(7,trainmodule.getTotalseat());
 	ps.setInt(8,trainmodule.getTicketPrice());
 	int result=ps.executeUpdate();
@@ -92,7 +92,7 @@ public class TrainDao {
 //			 {
 //				System.out.println("\n" +rs.getInt(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getInt(4)+"\n"+rs.getString(5)+"\n"+rs.getString(6)+"\n"+rs.getDate(7)+"\n"+rs.getDate(8)+"\n"+rs.getInt(9)+"\n"+rs.getInt(10));
 //			 }
-//	// List<TrainModule> trains=new ArrayList<TrainModule>();
+//	
 //
 // }
  public List<TrainModel> showAllTrains()
@@ -126,7 +126,7 @@ public class TrainDao {
 	return trainList;
 	 
  }
-
+//to find train id
  public static int findTrainId(TrainModel trainModel) {
  	String findTrainIdQuery="select train_id from trains where train_number = "+trainModel.getTrainNumber();
  	Connection con = null;
@@ -160,6 +160,44 @@ public class TrainDao {
 		}
 		return trainId;
  }
+ //to find train details
+ public static TrainModel findTrainDetails(int trainModel) {
+	 	String findTrainDetails="select*from trains where train_number = "+trainModel;
+	 	//System.out.println(findTrainDetails);
+	 	Connection con = null;
+	 	TrainModel trainDetail = null;
+	 	Statement ps=null;
+	 	
+			try {
+				con = ConnectionUtil.getDBconnect();
+				ps= con.createStatement();
+				
+				 ResultSet rs=ps.executeQuery(findTrainDetails);
+				 while(rs.next())
+				 {
+					 trainDetail= new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+					 
+				 }
+			}
+				
+			 catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return trainDetail;
+
+			
+	 }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  public List<TrainModel>searchTrain(LocalDate givenDepartureDate,String source,String destination)
  {
 	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+givenDepartureDate+"'and train_source='"+source+"' and train_destination='"+destination+"'";
@@ -186,4 +224,5 @@ public class TrainDao {
 	}
 	return trainsearchList;
  }
+ 
 }

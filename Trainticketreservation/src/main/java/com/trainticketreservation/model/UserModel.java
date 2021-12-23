@@ -118,6 +118,10 @@ public class UserModel {
 		this.userGender = userGender;
 		this.userPassword = userPassword;
 	}
+	public UserModel(String userEmail) {
+		super();
+		this.userEmail = userEmail;
+	}
 	
 	
 	

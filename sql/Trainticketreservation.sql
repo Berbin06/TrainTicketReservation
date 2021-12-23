@@ -20,12 +20,14 @@ CREATE TABLE TRAINS (
 CREATE TABLE BOOKING_DETAILS (
   BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
   USER_ID int NOT NULL,
-  PNR_NUMBER int NOT NULL UNIQUE,
-  TRAIN_ID int NOT NULL,  
+  TRAIN_ID int NOT NULL,
+  PNR_NUMBER number NOT NULL UNIQUE,
+  JOURNEY_DATE date NOT NULL,
   BOOKING_DATE date default SYSDATE,
-  SEAT_NO int not null,
   TICKET_COUNT int NOT NULL,
+  SEAT_NO varchar(20) not null,
   TOTAL_PRICE int,
+  TICKET_STATUS varchar(20) default 'BOOKED',
   
   CONSTRAINT pk_bookingid PRIMARY KEY (Booking_Id),
   CONSTRAINT fk_booking_userid FOREIGN KEY (user_Id) REFERENCES users (user_Id) ,
@@ -81,3 +83,4 @@ delete from trains where train_number=234;
 update trains set  train_name='qwertyu', train_class='sdfghj', train_source='chennai', train_destination='kanyakumari',source_time='01-01-70 12:12:12.000000000 AM', destination_time='01-01-70 01:13:13.000000000 PM', total_seat=500,ticket_price=400 where train_number=234;
 
 drop table users cascade constraints;
+desc trains;

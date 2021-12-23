@@ -163,6 +163,11 @@ public TrainModel(int trainNumber) {
 	
 	this.trainNumber = trainNumber;
 }
+public TrainModel() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
 
 
 

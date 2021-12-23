@@ -33,13 +33,14 @@ public class TrainTicketReservationTestMain {
 	System.out.println("2.To Register \t");
 	System.out.println("3.To update user details \t");
 	System.out.println("4.To delete the user \t");
-	System.out.println("5.To insert train \t");
+	System.out.println("5.To Add train \t");
 	System.out.println("6.To update train \t");
 	System.out.println("7.To show all trains");
 	System.out.println("8.To show all users");
 	System.out.println("9.To delete train");
 	System.out.println("10. To find train id");
-	System.out.println("11.To search train");
+	System.out.println("11.To find userid");
+	System.out.println("12.To search and book trains");
 	int choice=scan.nextInt();
 	scan.nextLine();
 	
@@ -243,6 +244,7 @@ public class TrainTicketReservationTestMain {
 				System.out.println("Enter train arraival time");
 				String arrivalDate1=scan.nextLine();
 				LocalDateTime arrivalDateTime1 = LocalDateTime.parse(arrivalDate1, format);
+				System.out.println("Enter total seat");
 				int totalSeat1=Integer.parseInt(scan.nextLine());
 				System.out.println("Enter ticket price");
 				int ticketPrice1=Integer.parseInt(scan.nextLine());
@@ -284,19 +286,41 @@ public class TrainTicketReservationTestMain {
 			System.out.println(trainId);
 			break;
 		case 11:
-			System.out.println("to search Train");
+			System.out.println("To find user id");
+			System.out.println("Enter user Email");
+			String usermailid=scan.nextLine();
+			UserModel userModel=new UserModel(usermailid);
+			int userId1=ud.findUserId(userModel);
+			System.out.println(userId1);
+			break;
+		case 12:
+			System.out.println("to search Train and book train");
 			System.out.println("Enter date");
 			String date=scan.nextLine();
 			LocalDate givenDepartureDate=LocalDate.parse(date,dateFormat);
 			//System.out.println(givenDepartureDate);
 			System.out.println("Enter source location");
 			String source=scan.nextLine();
+			//source=source.toLowerCase();
 			System.out.println("Enter destination location");
 			String destination=scan.nextLine();
 			List<TrainModel>listSearchTrain=td.searchTrain(givenDepartureDate, source, destination);
 			for(int i=0;i<listSearchTrain.size();i++) {
 				System.out.println(listSearchTrain.get(i));
 			}
+			System.out.println("Enter the train train number that want to book");
+			int trainNoofselectedTrain=scan.nextInt();
+			TrainModel trainModel=new TrainModel();
+			trainModel = td.findTrainDetails(trainNoofselectedTrain);
+			System.out.println(trainModel);
+			System.out.println("Enter the ticket count");
+			int ticketcount=scan.nextInt();
+			
+			
+			
+			break;
+		
+			
 	}
 	
 	

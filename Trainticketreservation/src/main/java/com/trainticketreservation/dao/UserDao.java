@@ -125,7 +125,7 @@ else {
     }
     //find userId 
     public static int findUserId(UserModel userModel) {
-    	String findUserIdQuery="select user_id from users where user_email'" + userModel.getUserEmail()+"'";
+    	String findUserIdQuery="select user_id from users where user_email='" + userModel.getUserEmail()+"'";
     	Connection con = null;
 		try {
 			con = ConnectionUtil.getDBconnect();
