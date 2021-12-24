@@ -80,6 +80,7 @@ public class TrainTicketReservationTestMain {
 			
 			System.out.println("1. search and book train");
 			System.out.println("2 . Cancelled Ticket");
+			System.out.println("3. to search trains for a week");
 			System.out.println("Enter the choice number to proceed : ");
 			int userChoice=scan.nextInt();
 			scan.nextLine();
@@ -159,6 +160,71 @@ public class TrainTicketReservationTestMain {
 					System.out.println("Enter correct pnr number");
 				}
 				break;
+			case 3:
+				//to search train
+				System.out.println("to see all trains");
+				System.out.println("Enter the source location");
+				String source1=scan.nextLine();
+				System.out.println("Enter destination location");
+				String destination1=scan.nextLine();
+				List<TrainModel>searchAllTrain=td.searchAllTrain(source1, destination1);
+				for(int i=0;i<searchAllTrain.size();i++) {
+					System.out.println(searchAllTrain.get(i));
+				}
+			
+				System.out.println("Enter date");
+				String date1=scan.nextLine();
+				LocalDate givenDepartureDate1=LocalDate.parse(date1,dateFormat);
+				//System.out.println(givenDepartureDate);
+//				System.out.println("Enter source location");
+//				String source2=scan.nextLine();
+//				source=source.toLowerCase();
+//				System.out.println("Enter destination location");
+//				String destination2=scan.nextLine();
+//				List<TrainModel>listSearchTrain2=td.searchTrain(givenDepartureDate1, source2, destination2);
+//				for(int i=0;i<listSearchTrain2.size();i++) {
+//					System.out.println(listSearchTrain2.get(i));
+//				}
+				System.out.println("Enter the train train number that want to book");
+				int trainNoofselectedTrain2=Integer.parseInt(scan.nextLine());
+				TrainModel trainModel2=new TrainModel();
+				trainModel = td.findTrainDetails(trainNoofselectedTrain2);
+				System.out.println(trainModel);
+				
+				System.out.println("enter the no of person");
+				int noOfPerson2 = Integer.parseInt(scan.nextLine());
+				System.out.println("select the class");
+				System.out.println("Select 1 for Non AC / 2 for  AC");
+				
+				
+				int classCategoryChoice2=Integer.parseInt(scan.nextLine());
+				int ticketPriceForClass2=0;
+				if(classCategoryChoice2==1) {
+					
+					ticketPriceForClass2=(trainModel2.getTicketPrice())*noOfPerson2;
+				}
+				else {
+					
+					ticketPriceForClass2=(trainModel.getTicketPrice()+200)*noOfPerson2;
+				}
+				
+				System.out.println("Total price:"+ticketPriceForClass2);
+				System.out.println("To confirm booking press 1 else 2");
+				int bookingChoice2=Integer.parseInt(scan.nextLine());
+				if(bookingChoice2==1) {
+					bookingDetailsModel=new BookingDetailsModel(userModel,trainModel,noOfPerson2,ticketPriceForClass2);
+					boolean resultBooking=bDao.bookTicket(userModel, trainModel, bookingDetailsModel);
+					if(resultBooking=true) {
+						System.out.println("successfully booked");
+					}
+					else {
+						System.out.println("Not Booked!!");
+					}
+				}
+				else {
+					
+				}
+				
 				
 			}
 			
@@ -378,11 +444,7 @@ public class TrainTicketReservationTestMain {
 			TrainModel trainmodel=new TrainModel(TrainNumber1);
 			int trainId= td.findTrainId(trainmodel);
 			System.out.println(trainId);
-			break;
-		
-		
-			
-		
+			break;		
 			
 	}
 	

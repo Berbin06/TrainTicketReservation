@@ -226,4 +226,72 @@ public class TrainDao {
 	return trainsearchList;
  }
  
+ 
+ 
+ 
+ 
+ //to show all train and select on user's wish date
+ 
+ public List<TrainModel>searchAllTrain(String source,String destination)
+ {
+	 String findTrain="select*from trains where train_source='"+source+"' and train_destination='"+destination+"'";
+	 Connection con=null;
+	 Statement stmt=null;
+	 TrainModel trainModel;
+	 List<TrainModel>trainsearchList=new ArrayList<TrainModel>();
+	 
+	 try {
+		con=ConnectionUtil.getDBconnect();
+		stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(findTrain);
+		while(rs.next()) {
+			trainModel = new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+			trainsearchList.add(trainModel);
+	//		trainModel.toString();
+		}
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return trainsearchList;
+ }
+ 
+ 
+ 
+ 
+ public List<TrainModel>searchTrain1(LocalDate givenDepartureDate1,String source2,String destination2)
+ {
+	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+givenDepartureDate1+"'and train_source='"+source2+"' and train_destination='"+destination2+"'";
+	 Connection con=null;
+	 Statement stmt=null;
+	 TrainModel trainModel;
+	 List<TrainModel>trainsearchList=new ArrayList<TrainModel>();
+	 
+	 try {
+		con=ConnectionUtil.getDBconnect();
+		stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(findTrain);
+		while(rs.next()) {
+			trainModel = new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+			trainsearchList.add(trainModel);
+	//		trainModel.toString();
+		}
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return trainsearchList;
+ }
+ 
+ 
+ 
+ 
+ 
+ 
 }

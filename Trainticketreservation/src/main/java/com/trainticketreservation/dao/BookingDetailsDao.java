@@ -1,10 +1,8 @@
 package com.trainticketreservation.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-
 import com.trainticketreservation.connectionutil.ConnectionUtil;
 import com.trainticketreservation.model.BookingDetailsModel;
 import com.trainticketreservation.model.TrainModel;
@@ -53,5 +51,6 @@ public void cancelTrain(int cancelPnrNumber) throws ClassNotFoundException, SQLE
 
 
 }
+
 	
 }
