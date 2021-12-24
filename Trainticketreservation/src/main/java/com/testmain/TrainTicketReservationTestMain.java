@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import com.trainticketreservation.dao.AdminDao;
 import com.trainticketreservation.dao.BookingDetailsDao;
 import com.trainticketreservation.dao.TrainDao;
 import com.trainticketreservation.dao.UserDao;
@@ -21,6 +22,7 @@ public class TrainTicketReservationTestMain {
 	public static void main(String args []) throws ClassNotFoundException, SQLException, ParseException {
 	UserDao ud=new UserDao();
 	TrainDao td=new TrainDao();
+	AdminDao adao=new AdminDao();
 	BookingDetailsDao bDao= new BookingDetailsDao();
 	BookingDetailsModel bookingDetailsModel=new BookingDetailsModel();
 	 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
@@ -72,11 +74,12 @@ public class TrainTicketReservationTestMain {
 			if (password.matches(
 			"^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$")) {
 			flagpswd = false;
-			System.out.println(password);
+			//System.out.println(password);
 			
 			UserModel userModel=ud.findUserDetails(UserMobileNumber);
 			
 			System.out.println("1. search and book train");
+			System.out.println("2 . Cancelled Ticket");
 			System.out.println("Enter the choice number to proceed : ");
 			int userChoice=scan.nextInt();
 			scan.nextLine();
@@ -108,6 +111,7 @@ public class TrainTicketReservationTestMain {
 				System.out.println("select the class");
 				System.out.println("Select 1 for Non AC / 2 for  AC");
 				
+				
 				int classCategoryChoice=Integer.parseInt(scan.nextLine());
 				int ticketPriceForClass=0;
 				if(classCategoryChoice==1) {
@@ -116,7 +120,7 @@ public class TrainTicketReservationTestMain {
 				}
 				else {
 					
-					ticketPriceForClass=(trainModel.getTicketPrice()+300)*noOfPerson;
+					ticketPriceForClass=(trainModel.getTicketPrice()+200)*noOfPerson;
 				}
 				
 				System.out.println("Total price:"+ticketPriceForClass);
@@ -138,6 +142,24 @@ public class TrainTicketReservationTestMain {
 					
 				break;
 				
+			case 2 :
+				//to cancel ticket
+				System.out.println("Enter train pnr number to cancel");
+				try {
+				int cancelPnrNumber=Integer.parseInt(scan.nextLine());
+				System.out.println("Enter yes to confirm cancel");
+				String cancelChoice=scan.nextLine().toLowerCase();
+				if(cancelChoice.equals("yes")) {
+					bDao.cancelTrain(cancelPnrNumber);
+				}
+				else {
+					System.out.println("please type correct one ");
+				}
+				}catch(Exception e) {
+					System.out.println("Enter correct pnr number");
+				}
+				break;
+				
 			}
 			
 			
@@ -147,13 +169,14 @@ public class TrainTicketReservationTestMain {
 			+ "contains one upper case \n" + "atleast one lower case \n"
 			+ "atleast one number  \n" + "atleast one special character \n");
 			}
+			break;
+			
 			}while(flagpswd);
 		UserModel usermodule=new UserModel(UserMobileNumber,password);
 			UserDao loginud=new UserDao();
 			loginud.login(usermodule);
-			
+				break;
 	
-		break;
 	
 		case 2:
 			//To Insert 
@@ -349,7 +372,7 @@ public class TrainTicketReservationTestMain {
 			td.deletetrain(trainmodule1);
 			break;
 		case 10:
-			System.out.println("To find train id");
+			System.out.println("To find train id ");
 			System.out.println("Enter train number");
 			int TrainNumber1=scan.nextInt();
 			TrainModel trainmodel=new TrainModel(TrainNumber1);

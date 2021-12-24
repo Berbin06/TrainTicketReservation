@@ -28,6 +28,7 @@ public boolean bookTicket(UserModel userModel,TrainModel trainModel, BookingDeta
 		//pstmt.setString(6,bookingDetailsModel.getSeatNo());
 		pstmt.setInt(5,bookingDetailsModel.getTotalPrice());
 		result=	pstmt.executeUpdate();
+	
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -39,5 +40,18 @@ public boolean bookTicket(UserModel userModel,TrainModel trainModel, BookingDeta
 	return result>0;
 }
 	
+
+public void cancelTrain(int cancelPnrNumber) throws ClassNotFoundException, SQLException 
+{
+	String cancelTrainQuery="update booking_details set ticket_status='Cancelled' where PNR_NUMBER = ? ";
+	Connection con=ConnectionUtil.getDBconnect();
+	PreparedStatement pstmt=con.prepareStatement(cancelTrainQuery);
+	pstmt.setInt(1,cancelPnrNumber);
+	pstmt.executeUpdate();
+	
+	System.out.println("Ticket cancelled ");
+
+
+}
 	
 }

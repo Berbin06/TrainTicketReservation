@@ -95,6 +95,7 @@ public class TrainDao {
 //	
 //
 // }
+       //to show all trains
  public List<TrainModel> showAllTrains()
  {
 	 List<TrainModel> trainList = new ArrayList<TrainModel>();
