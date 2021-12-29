@@ -114,7 +114,7 @@ else {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
-				UserModel userModel =new UserModel(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),(long)rs.getInt(5),rs.getString(6),rs.getString(7));
+				UserModel userModel =new UserModel(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),(long)rs.getInt(5),rs.getString(6),rs.getString(7),rs.getInt(8));
 				userList.add(userModel);
 			}
 		} catch (SQLException e) {
@@ -134,7 +134,7 @@ else {
 				stmt = con.createStatement();
 				ResultSet rs=stmt.executeQuery(findUserDetailsQuery);
 				if(rs.next()) {
-					userModel=new UserModel(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getLong(5),rs.getString(6),rs.getString(7));
+					userModel=new UserModel(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getLong(5),rs.getString(6),rs.getString(7),rs.getInt(8));
 				}
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
@@ -144,6 +144,55 @@ else {
 		
 		return userModel;
     }
+	public boolean updateWallet(int updatedWallet, long userMobileNumber) {
+		String wallet = "update users set user_wallet=? where user_mobilenumber=?";
+
+		Connection con;
+		PreparedStatement pstatement;
+		int result = 0;
+		try {
+			con =ConnectionUtil.getDBconnect();
+			pstatement = con.prepareStatement(wallet);
+
+			pstatement.setInt(1, updatedWallet);
+			pstatement.setLong(2, userMobileNumber);
+			result = pstatement.executeUpdate();
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return result > 0;
+
+	}
+	public UserModel getUserDetailsById(int userId) 
+	{ 
+
+		String getUser = "select * from users where user_id=?";
+		Connection con = null;
+		PreparedStatement pstatement = null;
+		UserModel userModel = null;
+
+		try {
+			con = ConnectionUtil.getDBconnect();
+			pstatement = con.prepareStatement(getUser);
+			pstatement.setInt(1, userId);
+			ResultSet rs = pstatement.executeQuery();
+
+			if (rs.next()) {
+				userModel = new UserModel(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getLong(5),
+						rs.getString(6), rs.getString(7), rs.getInt(8));
+			}
+			con.close();
+			pstatement.close();
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		return userModel;
+
+	}
 }
 
 

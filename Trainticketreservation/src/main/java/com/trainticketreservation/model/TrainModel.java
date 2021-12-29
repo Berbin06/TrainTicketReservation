@@ -22,6 +22,7 @@ public TrainModel(int trainId, String trainName, String trainClass, int trainNum
 		this.trainArraivalTime = trainArraivalTime;
 		this.totalseat = totalseat;
 		this.ticketPrice = ticketPrice;
+		
 	}
 public int getTrainId() {
 		return trainId;

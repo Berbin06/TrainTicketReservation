@@ -162,11 +162,11 @@ public class TrainDao {
 		return trainId;
  }
  //to find train details
- public static TrainModel findTrainDetails(int trainModel) {
-	 	String findTrainDetails="select*from trains where train_number = "+trainModel;
-	 	//System.out.println(findTrainDetails);
+ public static  TrainModel findTrainDetailsUsingTrainNumber(int trainNumber) {
+	 	String findTrainDetails="select*from trains where train_number = "+trainNumber;
+	 	//System.out.println(findTra``inDetails);
 	 	Connection con = null;
-	 	TrainModel trainDetail = null;
+	 	TrainModel trainModel1 = null;
 	 	Statement ps=null;
 	 	
 			try {
@@ -176,7 +176,7 @@ public class TrainDao {
 				 ResultSet rs=ps.executeQuery(findTrainDetails);
 				 while(rs.next())
 				 {
-					 trainDetail= new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+					 trainModel1= new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
 					 
 				 }
 			}
@@ -185,7 +185,7 @@ public class TrainDao {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return trainDetail;
+			return trainModel1;
 
 			
 	 }
@@ -289,9 +289,58 @@ public class TrainDao {
 	return trainsearchList;
  }
  
+ public void updateSeatCount(TrainModel trainModel) {
+		
+		String updateSeat="update trains set total_seat=? where train_id=?";
+		 Connection con;
+	    	
+ 	    try {
+			con = ConnectionUtil.getDBconnect();
+			PreparedStatement pstatement=con.prepareStatement(updateSeat);
+			
+			pstatement.setInt(1, trainModel.getTotalseat());
+			pstatement.setInt(2, trainModel.getTrainId());
+			pstatement.executeUpdate();
+			con.close();
+			pstatement.close();
+			}
+ 	    catch (ClassNotFoundException e) {
+ 			System.out.println(e.getMessage());
+ 		} catch (SQLException e) {
+ 			System.out.println(e.getMessage());
+ 		}
+	}
  
+ //traindetails using id
  
- 
- 
- 
+ public TrainModel findTrainsDetailsUsingID(int trainId)  {
+	 String getTrain ="select * from trains where train_id=?";
+		Connection con = null;
+		PreparedStatement pstatement=null;
+		TrainModel trainModel = null;
+		
+		 try {
+			 
+			con = ConnectionUtil.getDBconnect();
+			pstatement=con.prepareStatement(getTrain);
+			pstatement.setInt(1, trainId);
+			ResultSet rs = pstatement.executeQuery();
+			
+			 if(rs.next()) {
+				 trainModel=new TrainModel(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
+				
+			 }
+			con.close();
+			pstatement.close();
+		} catch (ClassNotFoundException e) {
+			e.getMessage();
+			System.out.println("classnot found");
+		} catch (SQLException e) {
+			e.getMessage();
+			System.out.println("sql exception");
+		}
+		
+		 return trainModel;
+	}
+
 }

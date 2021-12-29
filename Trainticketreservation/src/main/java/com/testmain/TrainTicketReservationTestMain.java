@@ -23,6 +23,7 @@ public class TrainTicketReservationTestMain {
 	UserDao ud=new UserDao();
 	TrainDao td=new TrainDao();
 	AdminDao adao=new AdminDao();
+	
 	BookingDetailsDao bDao= new BookingDetailsDao();
 	BookingDetailsModel bookingDetailsModel=new BookingDetailsModel();
 	 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
@@ -78,154 +79,234 @@ public class TrainTicketReservationTestMain {
 			
 			UserModel userModel=ud.findUserDetails(UserMobileNumber);
 			
-			System.out.println("1. search and book train");
-			System.out.println("2 . Cancelled Ticket");
-			System.out.println("3. to search trains for a week");
+			System.out.println("1. Search and book train");
+			System.out.println("2. To cancel your Ticket");
+			System.out.println("3. To get invoice");
+			System.out.println("4.To see booking details");
+			System.out.println("5.To add money in wallet");
+			System.out.println("To check balance");
 			System.out.println("Enter the choice number to proceed : ");
 			int userChoice=scan.nextInt();
 			scan.nextLine();
 			switch(userChoice) {
-			
+//			
 			case 1:
-				System.out.println("to search Train and book train");
-				System.out.println("Enter date");
-				String date=scan.nextLine();
-				LocalDate givenDepartureDate=LocalDate.parse(date,dateFormat);
-				//System.out.println(givenDepartureDate);
-				System.out.println("Enter source location");
-				String source=scan.nextLine();
-				//source=source.toLowerCase();
-				System.out.println("Enter destination location");
-				String destination=scan.nextLine();
-				List<TrainModel>listSearchTrain=td.searchTrain(givenDepartureDate, source, destination);
-				for(int i=0;i<listSearchTrain.size();i++) {
-					System.out.println(listSearchTrain.get(i));
-				}
-				System.out.println("Enter the train train number that want to book");
-				int trainNoofselectedTrain=Integer.parseInt(scan.nextLine());
-				TrainModel trainModel=new TrainModel();
-				trainModel = td.findTrainDetails(trainNoofselectedTrain);
-				System.out.println(trainModel);
+			//to search train
+			System.out.println("to see all trains");
+			System.out.println("Enter the source location");
+			String source=scan.nextLine();
+			System.out.println("Enter destination location");
+			String destination=scan.nextLine();
+			List<TrainModel>searchAllTrain=td.searchAllTrain(source, destination);
+			for(int i=0;i<searchAllTrain.size();i++) {
+				System.out.println(searchAllTrain.get(i));
+			}
+		
+//		
+			//to book ticket
+			System.out.println("Enter the train train number that want to book");
+			int trainNoofselectedTrain=Integer.parseInt(scan.nextLine());
+			TrainModel trainModel=new TrainModel();
+			trainModel = td.findTrainDetailsUsingTrainNumber(trainNoofselectedTrain);
+			System.out.println(trainModel);
+			
+			System.out.println("enter the no of person");
+			int bookTicketCount = Integer.parseInt(scan.nextLine());
+			System.out.println("select the class");
+			System.out.println("Select 1 for Non AC / 2 for  AC");
+			
+			
+			int classChoice=Integer.parseInt(scan.nextLine());
+			int bookTotalPrice=0;
+			if(classChoice==1) {
 				
-				System.out.println("enter the no of person");
-				int noOfPerson = Integer.parseInt(scan.nextLine());
-				System.out.println("select the class");
-				System.out.println("Select 1 for Non AC / 2 for  AC");
+				bookTotalPrice=(trainModel.getTicketPrice())*bookTicketCount;
+			}
+			else {
 				
+				bookTotalPrice=(trainModel.getTicketPrice()+200)*bookTicketCount;
+			}
+			
+			System.out.println("Total price:"+bookTotalPrice);
+			// to get current object
+			userModel = ud.getUserDetailsById(userModel.getUserId());
+			System.out.println("Current balance in your wallet is : " + userModel.getUserWallet());
+
+			System.out.println("To confirm booking type yes");
+			String confirmation = scan.nextLine().toLowerCase();
+
+			
+				if (confirmation.equals("yes")) {
+					// to get current object
+					userModel = ud.getUserDetailsById(userModel.getUserId());
+					// to check whether wallet is having that much amount to book
+					if (userModel.getUserWallet() >= bookTotalPrice) {
 				
-				int classCategoryChoice=Integer.parseInt(scan.nextLine());
-				int ticketPriceForClass=0;
-				if(classCategoryChoice==1) {
-					
-					ticketPriceForClass=(trainModel.getTicketPrice())*noOfPerson;
-				}
-				else {
-					
-					ticketPriceForClass=(trainModel.getTicketPrice()+200)*noOfPerson;
-				}
-				
-				System.out.println("Total price:"+ticketPriceForClass);
-				System.out.println("To confirm booking press 1 else 2");
-				int bookingChoice=Integer.parseInt(scan.nextLine());
-				if(bookingChoice==1) {
-					bookingDetailsModel=new BookingDetailsModel(userModel,trainModel,noOfPerson,ticketPriceForClass);
-					boolean resultBooking=bDao.bookTicket(userModel, trainModel, bookingDetailsModel);
-					if(resultBooking=true) {
-						System.out.println("successfully booked");
+						
+						//to reduce seat according to seat count given by user
+						trainModel = td.findTrainDetailsUsingTrainNumber(trainNoofselectedTrain);
+						int reducedTrainSeat=trainModel.getTotalseat()-bookTicketCount;
+						trainModel.setTotalseat(reducedTrainSeat);											
+						td.updateSeatCount(trainModel);
+						
+						LocalDate departureDate=trainModel.getTrainDepartureTime().toLocalDate();
+
+						bookingDetailsModel = new BookingDetailsModel(userModel, trainModel,departureDate, bookTicketCount,
+								bookTotalPrice);
+						//to insert
+						boolean result = bDao.bookTicket(userModel,trainModel, bookingDetailsModel);
+						int yourPnrNumber;
+						if (result == true) {
+							// to reduce wallet amount according to ticket amount
+							int updatedBalanceAfterBooking = userModel.getUserWallet()- bookTotalPrice;
+							ud.updateWallet(updatedBalanceAfterBooking,userModel.getUserMobileNumber());
+							System.out.println("Booked successfully");
+						} else { //
+							System.out.println("Money is Not updated...something went wrong");
+						}
+						yourPnrNumber = bDao.findPnrNumber(userModel,bookingDetailsModel);
+						System.out.println("Your booking PNR number is : "+ yourPnrNumber);
+						System.out.println("please remember your PNR number");
 					}
 					else {
-						System.out.println("Not Booked!!");
-					}
+						System.out.println("Insufficient balance....please recharge");
+
+						System.out.println("Press 9 to recharge your wallet now");
+						int rechargeWalletChoiceAfterInsufficient = scan.nextInt();
+						if (rechargeWalletChoiceAfterInsufficient == 9) {
+							// System.out.println("Your current Balance is : "+userModel.getUserWallet());
+							System.out.println(
+									"Enter the amount to be add to your wallet");
+							int addedAmountInBooking = scan.nextInt();
+							int totalAmountInBooking = addedAmountInBooking+ userModel.getUserWallet();
+							userModel = ud.getUserDetailsById(userModel.getUserId());
+							
+							// userModel.setUserWallet(totalAmountInBooking);
+							boolean resultWallet = ud.updateWallet(totalAmountInBooking, userModel.getUserMobileNumber());
+							if (resultWallet == true) {
+								System.out.println("update successfully");
+								// System.out.println("Your current balance is : "+userModel.getUserWallet());
+							} else {
+								System.out.println("please give correct value (not booked)");
+								
+							}
+						
+						
+					
 				}
+					
+				
 				else {
-					
+					System.out.println(
+							"Booking was not confirmed...Hurry up!! Only few seats are left");
 				}
-					
+					}}
+				else {
+					System.out.println(" seats are not available...please go for other options");
+				
+				}
 				break;
 				
 			case 2 :
-				//to cancel ticket
-				System.out.println("Enter train pnr number to cancel");
-				try {
-				int cancelPnrNumber=Integer.parseInt(scan.nextLine());
-				System.out.println("Enter yes to confirm cancel");
-				String cancelChoice=scan.nextLine().toLowerCase();
-				if(cancelChoice.equals("yes")) {
-					bDao.cancelTrain(cancelPnrNumber);
-				}
-				else {
-					System.out.println("please type correct one ");
-				}
-				}catch(Exception e) {
-					System.out.println("Enter correct pnr number");
-				}
-				break;
-			case 3:
-				//to search train
-				System.out.println("to see all trains");
-				System.out.println("Enter the source location");
-				String source1=scan.nextLine();
-				System.out.println("Enter destination location");
-				String destination1=scan.nextLine();
-				List<TrainModel>searchAllTrain=td.searchAllTrain(source1, destination1);
-				for(int i=0;i<searchAllTrain.size();i++) {
-					System.out.println(searchAllTrain.get(i));
-				}
-			
-				System.out.println("Enter date");
-				String date1=scan.nextLine();
-				LocalDate givenDepartureDate1=LocalDate.parse(date1,dateFormat);
-				//System.out.println(givenDepartureDate);
-//				System.out.println("Enter source location");
-//				String source2=scan.nextLine();
-//				source=source.toLowerCase();
-//				System.out.println("Enter destination location");
-//				String destination2=scan.nextLine();
-//				List<TrainModel>listSearchTrain2=td.searchTrain(givenDepartureDate1, source2, destination2);
-//				for(int i=0;i<listSearchTrain2.size();i++) {
-//					System.out.println(listSearchTrain2.get(i));
-//				}
-				System.out.println("Enter the train train number that want to book");
-				int trainNoofselectedTrain2=Integer.parseInt(scan.nextLine());
-				TrainModel trainModel2=new TrainModel();
-				trainModel = td.findTrainDetails(trainNoofselectedTrain2);
-				System.out.println(trainModel);
+				System.out.println("To Cancel your ticket");
+				System.out.println("Enter your PNR Number");
+				int cancelPnrNumber;
 				
-				System.out.println("enter the no of person");
-				int noOfPerson2 = Integer.parseInt(scan.nextLine());
-				System.out.println("select the class");
-				System.out.println("Select 1 for Non AC / 2 for  AC");
-				
-				
-				int classCategoryChoice2=Integer.parseInt(scan.nextLine());
-				int ticketPriceForClass2=0;
-				if(classCategoryChoice2==1) {
+					cancelPnrNumber = scan.nextInt();
 					
-					ticketPriceForClass2=(trainModel2.getTicketPrice())*noOfPerson2;
-				}
-				else {
-					
-					ticketPriceForClass2=(trainModel.getTicketPrice()+200)*noOfPerson2;
-				}
+					bookingDetailsModel = bDao.findBookedTicketsDetails(cancelPnrNumber);
+					System.out.println(bookingDetailsModel);
+					if(bookingDetailsModel.getTicketStatus().equals("BOOKED")) {
+						
 				
-				System.out.println("Total price:"+ticketPriceForClass2);
-				System.out.println("To confirm booking press 1 else 2");
-				int bookingChoice2=Integer.parseInt(scan.nextLine());
-				if(bookingChoice2==1) {
-					bookingDetailsModel=new BookingDetailsModel(userModel,trainModel,noOfPerson2,ticketPriceForClass2);
-					boolean resultBooking=bDao.bookTicket(userModel, trainModel, bookingDetailsModel);
-					if(resultBooking=true) {
-						System.out.println("successfully booked");
+					
+					//to update (+) bus seats according to user booking
+					//TrainModel trainModel = new TrainModel();
+					trainModel = td.findTrainsDetailsUsingID(bookingDetailsModel.getTrainmodel().getTrainId());
+					int addedTrainSeat= bookingDetailsModel.getTrainmodel().getTotalseat()+bookingDetailsModel.getTicketCount();
+					trainModel.setTotalseat(addedTrainSeat);											
+					td.updateSeatCount(trainModel);
+					
+					//refund process
+					int amountRefund = userModel.getUserWallet()+ bookingDetailsModel.getTotalPrice();
+					System.out.println("The ticket amount " + bookingDetailsModel.getTotalPrice()+ " is refunded to your wallet successfully");
+					ud.updateWallet(amountRefund, userModel.getUserMobileNumber());
+					
+					// to update refund amount to the wallet
+					userModel = ud.getUserDetailsById(userModel.getUserId());
+					
+					// userModel.setUserWallet(amountRefund);
+					boolean cancelResult = bDao.cancelTicket(userModel,bookingDetailsModel);
+					if (cancelResult == true) {
+						System.out.println("Ticket Cancelled successfully ");
+						System.out.println("Your current Available balance is : "+ userModel.getUserWallet());
+					} else {
+						System.out.println("Ticket cancellation  failed");
+					}
 					}
 					else {
-						System.out.println("Not Booked!!");
+						System.out.println("The ticket is invalid or already this ticket has been cancelled by you");
+				
 					}
-				}
-				else {
-					
+				break;
+
+			case 3:
+				System.out.println("Invoice for your ticket");
+				BookingDetailsModel bookingDetailssModel = null;
+				System.out.println("Enter Your PNR Number");
+				int pnrNumber = (scan.nextInt());
+				bookingDetailssModel = bDao.findBookedTicketsDetails(pnrNumber);
+				trainModel = td.findTrainsDetailsUsingID(bookingDetailssModel.getTrainmodel().getTrainId());
+				
+				System.out.println("TicketNumber    : " + pnrNumber);
+				System.out.println("Name            : " + userModel.getUserName());
+				System.out.println("Date of Journey : " + trainModel.getTrainDepartureTime());
+				System.out.println("Date of Arraival : " + trainModel.getTrainArraivalTime());
+				System.out.println("Source          : " + trainModel.getTrainSource());
+				System.out.println("Destination     : " + trainModel.getTrainDestination());
+				System.out.println("Seat Count      :"  +  bookingDetailssModel.getTicketCount());
+				System.out.println("Total Price     : " + bookingDetailssModel.getTotalPrice());
+				System.out.println("Ticket  status  : " + bookingDetailsModel.getTicketStatus());
+				
+				break;
+				
+			
+	case 4:
+				
+				System.out.println(" Booking History");
+			
+				List<BookingDetailsModel>bookingList=bDao.getBookingDetailsForCurrentUser(userModel);
+				for(int i=0;i<bookingList.size();i++) {
+					System.out.println(bookingList.get(i).toString());
 				}
 				
-				
+			
+	case 5:
+		System.out.println("To add money in wallet");
+		System.out.println("Your current Available Balance in "
+				+ userModel.getUserMobileNumber() + "is : " + userModel.getUserWallet());
+		System.out.println("press 1 to add amount in your wallet");
+		int walletChoice = scan.nextInt();
+		if (walletChoice == 1) {
+			System.out.println("Enter the amount to be credit in your wallet: ");
+			int toAddBalance = scan.nextInt();
+			int updatedWallet = userModel.getUserWallet() + toAddBalance;
+			boolean resultWallet = ud.updateWallet(updatedWallet,userModel.getUserMobileNumber());
+			if (resultWallet == true) {
+				System.out.println("update successfully");
+				System.out.println("Your current balance is : " + updatedWallet);
+			} else {
+				System.out.println("Money is Not added");
+			}
+		} else {
+			System.out.println("enter correct choice");
+		}
+		break;
+	case 6:
+		// System.out.println("-------------To view Balance------------------");
+		userModel = ud.getUserDetailsById(userModel.getUserId());
+		System.out.println("Available Balance : " + userModel.getUserWallet());
+		break;
 			}
 			
 			
@@ -236,14 +317,17 @@ public class TrainTicketReservationTestMain {
 			+ "atleast one number  \n" + "atleast one special character \n");
 			}
 			break;
+		
+			
 			
 			}while(flagpswd);
 		UserModel usermodule=new UserModel(UserMobileNumber,password);
 			UserDao loginud=new UserDao();
 			loginud.login(usermodule);
 				break;
-	
-	
+
+
+		
 		case 2:
 			//To Insert 
 			String userName=null;
@@ -451,5 +535,4 @@ public class TrainTicketReservationTestMain {
 	
 
 }
-	}}
-
+}}

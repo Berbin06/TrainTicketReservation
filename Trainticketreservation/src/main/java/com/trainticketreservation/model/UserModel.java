@@ -10,17 +10,26 @@ public class UserModel {
 	private long userMobileNumber;
 	private String userGender;
 	private String userPassword;
-	private int wallet;
+	private int userwallet;
 	@Override
 	public String toString() {
 		return "UserModule [userId=" + userId + ", userName=" + userName + ", userAge=" + userAge + ", userEmail="
 				+ userEmail + ", userMobileNumber=" + userMobileNumber + ", userGender=" + userGender
-				+ ", userPassword=" + userPassword + "]";
+				+ ", userPassword=" + userPassword +", userWallet=" + userwallet + "]";
+	}
+	public int getUserWallet() {
+		return userwallet;
+	}
+	public void setuserWallet(int userwallet) {
+		this.userwallet = userwallet;
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(userAge, userEmail, userGender, userId, userMobileNumber, userName, userPassword);
+		return Objects.hash(userAge, userEmail, userGender, userId, userMobileNumber, userName, userPassword,
+				userwallet);
 	}
+
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -33,7 +42,7 @@ public class UserModel {
 		return userAge == other.userAge && Objects.equals(userEmail, other.userEmail)
 				&& Objects.equals(userGender, other.userGender) && userId == other.userId
 				&& userMobileNumber == other.userMobileNumber && Objects.equals(userName, other.userName)
-				&& Objects.equals(userPassword, other.userPassword);
+				&& Objects.equals(userPassword, other.userPassword) && userwallet == other.userwallet;
 	}
 	public int getUserId() {
 		return userId;
@@ -49,7 +58,7 @@ public class UserModel {
 		// TODO Auto-generated constructor stub
 	}
 	public UserModel(int userId, String userName, int userAge, String userEmail, long userMobileNumber,
-			String userGender, String userPassword) {
+			String userGender, String userPassword, int userWallet) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -58,6 +67,7 @@ public class UserModel {
 		this.userMobileNumber = userMobileNumber;
 		this.userGender = userGender;
 		this.userPassword = userPassword;
+		this.userwallet = userWallet;
 	}
 	public UserModel(String userName1, int userAge1, long userMobileNumber1, String userGender1, String userPassword1) {
 		super();

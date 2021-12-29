@@ -18,18 +18,18 @@ CREATE TABLE TRAINS (
 
 
 CREATE TABLE BOOKING_DETAILS (
-  BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
+--  BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
   USER_ID int NOT NULL,
   TRAIN_ID int NOT NULL,
-  PNR_NUMBER number NOT NULL UNIQUE,
+  PNR_NUMBER number generated always as identity start with 60000 increment by 3,
   JOURNEY_DATE date NOT NULL,
   BOOKING_DATE date default SYSDATE,
   TICKET_COUNT int NOT NULL,
-  SEAT_NO varchar(20) not null,
+--  SEAT_NO varchar(20) not null,
   TOTAL_PRICE int,
   TICKET_STATUS varchar(20) default 'BOOKED',
   
-  CONSTRAINT pk_bookingid PRIMARY KEY (Booking_Id),
+  CONSTRAINT pk_bookingid PRIMARY KEY (PNR_NUMBER),
   CONSTRAINT fk_booking_userid FOREIGN KEY (user_Id) REFERENCES users (user_Id) ,
   CONSTRAINT fk_booking_trainid FOREIGN KEY (train_Id) REFERENCES trains (train_Id)
   
@@ -44,10 +44,11 @@ CREATE TABLE USERS (
   USER_GENDER varchar(30) NOT NULL,
   USER_PASSWORD varchar(50) NOT NULL ,
   
+  
   CONSTRAINT pk_userid PRIMARY KEY (user_id),
   CONSTRAINT unique_user UNIQUE (user_email, user_mobilenumber)
 );
-
+ alter table users add wallet number(20) default 0;
 
 CREATE TABLE ADMINS (
  ADMIN_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 200 increment by 1 ,
@@ -61,7 +62,7 @@ CREATE TABLE ADMINS (
 drop table users;
 truncate table users;
 select * from admins;
-insert INTO ADMINS (admin_name,admin_password,admin_email)values ('HARSHA','Qwerty@123','admin@gmail.com');
+
 --select * from admins;
 select * from booking_details;
 --select * from booking_details;
@@ -72,15 +73,15 @@ drop table admins cascade constraint;
 drop table trains cascade constraint;
 drop table booking_details cascade constraint;
 
+select pnr_number from booking_Details where user_id=1 and to_char(journey_date,'dd-mm-yyyy')='27-12-2021';
 
-
-
+select pnr_number from booking_Details where user_id=1;
 select * from users;
 select * from trains;
 select * from admins;
 select * from booking_details;
-delete from trains where train_number=234;
-update trains set  train_name='qwertyu', train_class='sdfghj', train_source='chennai', train_destination='kanyakumari',source_time='01-01-70 12:12:12.000000000 AM', destination_time='01-01-70 01:13:13.000000000 PM', total_seat=500,ticket_price=400 where train_number=234;
+
+desc booking_details;
 
 drop table users cascade constraints;
 desc trains;

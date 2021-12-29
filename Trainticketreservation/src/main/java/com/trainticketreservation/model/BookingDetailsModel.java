@@ -35,17 +35,22 @@ public BookingDetailsModel(UserModel usermodel, TrainModel trainmodel, long pnrN
 	this.bookingDate = bookingDate;
 	this.ticketCount = ticketCount;
 	this.totalPrice = totalPrice;
+	
 	this.ticketStatus = ticketStatus;
 }
 
 
 
-public BookingDetailsModel(UserModel userModel1, TrainModel trainModel1, int noOfPerson1, int ticketPriceForClass1) {
+public BookingDetailsModel(UserModel userModel1, TrainModel trainModel1,LocalDate journeyDate,  int noOfPerson1, int ticketPriceForClass1) {
 	this.usermodel=userModel1;
 	this.trainmodel=trainModel1;
+	this.journeyDate=journeyDate;
 	this.ticketCount=noOfPerson1;
 	this.totalPrice=ticketPriceForClass1;
 }
+
+
+
 
 
 
