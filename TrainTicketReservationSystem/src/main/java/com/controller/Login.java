@@ -27,8 +27,7 @@ public class Login extends HttpServlet{
 		String loginId=req.getParameter("LoginID");
 		String password=req.getParameter("password");
 		
-//		System.out.println(loginId);
-//		System.out.println(password);
+
 		AdminDao adminDao=new AdminDao();
 		UserDao userDao=new UserDao();
 		AdminModel adminModel;
@@ -95,12 +94,5 @@ public class Login extends HttpServlet{
 
 
 
-//HttpSession session=req.getSession();
-//session.setAttribute("error", "user name and password mismatch");
-//req.getRequestDispatcher("login.jsp").forward(req,res);
-//<% String error=(String)session.getAttribute("error");
-//if(error!=null) {%>
-//<p ><%=session.getAttribute("error") %></p>
-//<%} session.removeAttribute("error"); %>
 
 
