@@ -1,9 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="ISO-8859-1">
     <title>Login Page</title>
     <link rel="stylesheet" href="login.css">
 </head>
@@ -17,11 +17,11 @@
         <table id="logintable">
             <tr>
                 <th><img src="images/user.png.png" alt="" ></th>
-                <th><input type="text" placeholder="UserName" required ><br><br></th>
+                <th><input type="text" name="LoginID"  placeholder="LoginID" required ><br><br></th>
             </tr>
             <tr>
                 <th><img src="images/pswd.png.png" alt=""></th>
-                <th><input type="password" placeholder="Password" required><br><br></th>
+                <th><input type="password" name="password" placeholder="Password" required><br><br></th>
             </tr>
             
         </table>
@@ -30,13 +30,11 @@
             <!-- <a href="forgetPassword.html">Forget Password?</a><br><br> -->
 
             <label for="signup">Don't have an account ? </label>
-            <a id="signup" href="signup.html">SignUp</a>
+            <a id="signup" href="signup.jsp">SignUp</a>
 
         </form>  
  </div>
 
 
 
-    
-</body>
 </html>

@@ -18,14 +18,12 @@ CREATE TABLE TRAINS (
 
 
 CREATE TABLE BOOKING_DETAILS (
---  BOOKING_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 3000 increment by 1,
   USER_ID int NOT NULL,
   TRAIN_ID int NOT NULL,
   PNR_NUMBER number generated always as identity start with 60000 increment by 3,
   JOURNEY_DATE date NOT NULL,
   BOOKING_DATE date default SYSDATE,
   TICKET_COUNT int NOT NULL,
---  SEAT_NO varchar(20) not null,
   TOTAL_PRICE int,
   TICKET_STATUS varchar(20) default 'BOOKED',
   
@@ -43,44 +41,36 @@ CREATE TABLE USERS (
   USER_MOBILENUMBER varchar(30) NOT NULL,
   USER_GENDER varchar(30) NOT NULL,
   USER_PASSWORD varchar(50) NOT NULL ,
+  USER_WALLET int default 0,
   
   
   CONSTRAINT pk_userid PRIMARY KEY (user_id),
   CONSTRAINT unique_user UNIQUE (user_email, user_mobilenumber)
 );
- alter table users add wallet number(20) default 0;
 
 CREATE TABLE ADMINS (
- ADMIN_ID NUMBER GENERATED ALWAYS AS IDENTITY START WITH 200 increment by 1 ,
- ADMIN_NAME varchar(128) NOT NULL,
- ADMIN_PASSWORD varchar(128) NOT NULL ,
- ADMIN_EMAIL varchar(128) NOT NULL,
+ ADMIN_ID int GENERATED ALWAYS AS IDENTITY START WITH 1,
+ ADMIN_NAME varchar(50) NOT NULL,
+ ADMIN_MOBILENUMBER int NOT NULL,
+ ADMIN_PASSWORD varchar(50) NOT NULL ,
+ ADMIN_EMAIL varchar(50) NOT NULL,
  
  CONSTRAINT pk_adminid primary key (Admin_Id),
- CONSTRAINT unique_admin UNIQUE (Admin_Email,Admin_Password)
+ CONSTRAINT unique_admin UNIQUE (Admin_Email)
  );
-drop table users;
-truncate table users;
-select * from admins;
+ insert into admins (admin_name,admin_mobilenumber,admin_password,admin_email)values('Selvaraj',9486209571,'Qwerty@123','selvarajadmin@gmail.com');
 
---select * from admins;
+select * from admins;
 select * from booking_details;
---select * from booking_details;
---
---
 drop table users cascade constraint;
 drop table admins cascade constraint;
 drop table trains cascade constraint;
 drop table booking_details cascade constraint;
 
-select pnr_number from booking_Details where user_id=1 and to_char(journey_date,'dd-mm-yyyy')='27-12-2021';
-
-select pnr_number from booking_Details where user_id=1;
 select * from users;
 select * from trains;
 select * from admins;
 select * from booking_details;
-
 desc booking_details;
 
 drop table users cascade constraints;
