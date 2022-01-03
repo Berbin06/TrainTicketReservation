@@ -17,11 +17,11 @@
         <table id="logintable">
             <tr>
                 <th><img src="images/user.png.png" alt="" ></th>
-                <th><input type="text" name="LoginID"  placeholder="LoginID" required ><br><br></th>
+                <th><input type="text" name="logincredentials"  placeholder="Enter your Mobile Number" required ><br><br></th>
             </tr>
             <tr>
                 <th><img src="images/pswd.png.png" alt=""></th>
-                <th><input type="password" name="password" placeholder="Password" required><br><br></th>
+                <th><input type="password" name="password" placeholder="Enter your Password" required><br><br></th>
             </tr>
             
         </table>

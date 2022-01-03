@@ -23,8 +23,8 @@
             <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" required><br><br></th>
         </tr>
         <tr>
-            <th><label for="regage">Age:</label>
-            <input type="text" name="age" pattern="[0-9]{2}" title="contain two numbers only" id="regage" placeholder="Enter your age" required><br><br></th>
+            <th><label for="regage">DOB:</label>
+            <input type="date" name="dob"   id="regage" ><br><br></th>
         </tr>
         <tr>
             <th>

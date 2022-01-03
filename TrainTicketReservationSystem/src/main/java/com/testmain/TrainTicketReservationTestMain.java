@@ -10,22 +10,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import com.trainticketreservation.dao.AdminDao;
-import com.trainticketreservation.dao.BookingDetailsDao;
-import com.trainticketreservation.dao.TrainDao;
-import com.trainticketreservation.dao.UserDao;
-import com.trainticketreservation.model.BookingDetailsModel;
-import com.trainticketreservation.model.TrainModel;
-import com.trainticketreservation.model.UserModel;
+import in.berbin.daoimpl.AdminDaoImpl;
+import in.berbin.daoimpl.BookingDetailsDaoImpl;
+import in.berbin.daoimpl.TrainDaoImpl;
+import in.berbin.daoimpl.UserDaoImpl;
+import in.berbin.model.BookingDetails;
+import in.berbin.model.Trains;
+import in.berbin.model.Users;
 
 public class TrainTicketReservationTestMain {
 	public static void main(String args []) throws ClassNotFoundException, SQLException, ParseException {
-	UserDao ud=new UserDao();
-	TrainDao td=new TrainDao();
-	AdminDao adao=new AdminDao();
+	UserDaoImpl ud=new UserDaoImpl();
+	TrainDaoImpl td=new TrainDaoImpl();
+	AdminDaoImpl adao=new AdminDaoImpl();
 	
-	BookingDetailsDao bDao= new BookingDetailsDao();
-	BookingDetailsModel bookingDetailsModel=new BookingDetailsModel();
+	BookingDetailsDaoImpl bDao= new BookingDetailsDaoImpl();
+	BookingDetails bookingDetailsModel=new BookingDetails();
 	 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
 	 DateTimeFormatter format=DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 	 DateTimeFormatter dateFormat=DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -77,7 +77,7 @@ public class TrainTicketReservationTestMain {
 			flagpswd = false;
 			//System.out.println(password);
 			
-			UserModel userModel=ud.findUserDetails(UserMobileNumber);
+			Users userModel=ud.findUserDetails(UserMobileNumber);
 			
 			System.out.println("1. Search and book train");
 			System.out.println("2. To cancel your Ticket");
@@ -97,7 +97,7 @@ public class TrainTicketReservationTestMain {
 			String source=scan.nextLine();
 			System.out.println("Enter destination location");
 			String destination=scan.nextLine();
-			List<TrainModel>searchAllTrain=td.searchAllTrain(source, destination);
+			List<Trains>searchAllTrain=td.searchAllTrain(source, destination);
 			for(int i=0;i<searchAllTrain.size();i++) {
 				System.out.println(searchAllTrain.get(i));
 			}
@@ -106,7 +106,7 @@ public class TrainTicketReservationTestMain {
 			//to book ticket
 			System.out.println("Enter the train train number that want to book");
 			int trainNoofselectedTrain=Integer.parseInt(scan.nextLine());
-			TrainModel trainModel=new TrainModel();
+			Trains trainModel=new Trains();
 			trainModel = td.findTrainDetailsUsingTrainNumber(trainNoofselectedTrain);
 			System.out.println(trainModel);
 			
@@ -151,7 +151,7 @@ public class TrainTicketReservationTestMain {
 						
 						LocalDate departureDate=trainModel.getTrainDepartureTime().toLocalDate();
 
-						bookingDetailsModel = new BookingDetailsModel(userModel, trainModel,departureDate, bookTicketCount,
+						bookingDetailsModel = new BookingDetails(userModel, trainModel,departureDate, bookTicketCount,
 								bookTotalPrice);
 						//to insert
 						boolean result = bDao.bookTicket(userModel,trainModel, bookingDetailsModel);
@@ -252,7 +252,7 @@ public class TrainTicketReservationTestMain {
 
 			case 3:
 				System.out.println("Invoice for your ticket");
-				BookingDetailsModel bookingDetailssModel = null;
+				BookingDetails bookingDetailssModel = null;
 				System.out.println("Enter Your PNR Number");
 				int pnrNumber = (scan.nextInt());
 				bookingDetailssModel = bDao.findBookedTicketsDetails(pnrNumber);
@@ -275,7 +275,7 @@ public class TrainTicketReservationTestMain {
 				
 				System.out.println(" Booking History");
 			
-				List<BookingDetailsModel>bookingList=bDao.getBookingDetailsForCurrentUser(userModel);
+				List<BookingDetails>bookingList=bDao.getBookingDetailsForCurrentUser(userModel);
 				for(int i=0;i<bookingList.size();i++) {
 					System.out.println(bookingList.get(i).toString());
 				}
@@ -321,8 +321,8 @@ public class TrainTicketReservationTestMain {
 			
 			
 			}while(flagpswd);
-		UserModel usermodule=new UserModel(UserMobileNumber,password);
-			UserDao loginud=new UserDao();
+		Users usermodule=new Users(UserMobileNumber,password);
+			UserDaoImpl loginud=new UserDaoImpl();
 			loginud.loginUser(UserMobileNumber);
 				break;
 
@@ -408,7 +408,7 @@ public class TrainTicketReservationTestMain {
 			}
 			}while(flagpswdlog);
 			
-			UserModel usermodule1=new UserModel(userName,age,userMail,userMobilenumber,userGender,userPassword);
+			Users usermodule1=new Users(userName,age,userMail,userMobilenumber,userGender,userPassword);
 			ud.insert(usermodule1);
 			break;
 			
@@ -427,7 +427,7 @@ public class TrainTicketReservationTestMain {
 			System.out.println("Enter the user password");
 			String userPassword1=scan.nextLine();
 			
-			UserModel usermodule11=new UserModel(  userName1,userAge1,userEmail1,userMobileNumber1,
+			Users usermodule11=new Users(  userName1,userAge1,userEmail1,userMobileNumber1,
 					userGender1,userPassword1);
 			ud.update(usermodule11);
 			break;
@@ -436,7 +436,7 @@ public class TrainTicketReservationTestMain {
 			System.out.println("To Delete user");
 			System.out.println("Enter the id to delete ");
 			int userId=scan.nextInt();
-			UserModel usermodule2=new UserModel(userId);
+			Users usermodule2=new Users(userId);
 			ud.delete(usermodule2);
 			break;
 			
@@ -464,7 +464,7 @@ public class TrainTicketReservationTestMain {
 			System.out.println("Enter ticket price");
 			int ticketPrice=Integer.parseInt(scan.nextLine());
 			
-			TrainModel trainmoduleinsert=new TrainModel(trainName,trainClass,trainNumber,trainSource,
+			Trains trainmoduleinsert=new Trains(trainName,trainClass,trainNumber,trainSource,
 		trainDestination,departureDateTime,arrivalDateTime,totalSeat,ticketPrice);
 			td.insertTrain(trainmoduleinsert);
 			
@@ -492,14 +492,14 @@ public class TrainTicketReservationTestMain {
 				int totalSeat1=Integer.parseInt(scan.nextLine());
 				System.out.println("Enter ticket price");
 				int ticketPrice1=Integer.parseInt(scan.nextLine());
-				TrainModel trainmoduleupdate=new TrainModel(trainName1,trainClass1,trainNumber1,trainSource1,
+				Trains trainmoduleupdate=new Trains(trainName1,trainClass1,trainNumber1,trainSource1,
 						trainDestination1,departureDateTime1,arrivalDateTime1,totalSeat1,ticketPrice1);
 				td.updatetrain(trainmoduleupdate);
 				break;
 		case 7:
 			System.out.println("To view all trains");
-			TrainDao listTrains = new TrainDao();
-			List<TrainModel> trainList = listTrains.showAllTrains();
+			TrainDaoImpl listTrains = new TrainDaoImpl();
+			List<Trains> trainList = listTrains.showAllTrains();
 			for(int i=0;i<trainList.size();i++)
 			{
 				System.out.println(trainList.get(i));
@@ -507,8 +507,8 @@ public class TrainTicketReservationTestMain {
 			break;
 		case 8:
 			System.out.println("To view all users");
-			UserDao listUsers = new UserDao();
-			List<UserModel> userList = listUsers.showAllUsers();
+			UserDaoImpl listUsers = new UserDaoImpl();
+			List<Users> userList = listUsers.showAllUsers();
 			for(int i=0;i<userList.size();i++)
 			{
 				System.out.println(userList.get(i));
@@ -518,14 +518,14 @@ public class TrainTicketReservationTestMain {
 			System.out.println("To delete train");
 			System.out.println("Enter train number to delete");
 			int TrainNumber=scan.nextInt();
-			TrainModel trainmodule1= new TrainModel(TrainNumber);
+			Trains trainmodule1= new Trains(TrainNumber);
 			td.deletetrain(trainmodule1);
 			break;
 		case 10:
 			System.out.println("To find train id ");
 			System.out.println("Enter train number");
 			int TrainNumber1=scan.nextInt();
-			TrainModel trainmodel=new TrainModel(TrainNumber1);
+			Trains trainmodel=new Trains(TrainNumber1);
 			int trainId= td.findTrainId(trainmodel);
 			System.out.println(trainId);
 			break;		
