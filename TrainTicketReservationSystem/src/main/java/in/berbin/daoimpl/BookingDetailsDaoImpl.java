@@ -22,6 +22,7 @@ public boolean bookTicket(Users userModel,Trains trainModel, BookingDetails book
 	int result=0;
 	 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	try {
+		System.out.println("hii");
 		con=ConnectionUtil.getDBconnect();
 		PreparedStatement pstmt=con.prepareStatement(bookTicketQuery);
 		pstmt.setInt(1, userModel.getUserId());
@@ -32,7 +33,7 @@ public boolean bookTicket(Users userModel,Trains trainModel, BookingDetails book
 		//pstmt.setString(6,bookingDetailsModel.getSeatNo());
 		pstmt.setInt(5,bookingDetailsModel.getTotalPrice());
 		result=	pstmt.executeUpdate();
-	
+	System.out.println("hello");
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block

@@ -105,18 +105,18 @@ left: 30px;
         </ul>
     </div>
     <div class="addtrain">
-        <form action="addtrainpage">
+        <form action="updatetrainpage">
         <h2 class="Entertrdetails">Enter Train Details</h2>
         <table id="logintable">
             
             
             <tr>
                <th><label for="trainname">Train Name:</label>
-                <input type="text" name="trainname" id="trainname" pattern="[A-Za-z]+{3,20}" placeholder="Enter Train Name" required><br><br></th>
+                <input type="text" name="trainname" id="trainname" placeholder="Enter Train Name" required><br><br></th>
             </tr>
             <tr>
                 <th><label for="trainclass">Train Class:</label>
-                <input type="text" name="trainclass" id="trclass" pattern="[A-Za-z]+{3,6}" placeholder="Enter Train class" required><br><br></th>
+                <input type="text" name="trainclass" id="trclass" placeholder="Enter Train class" required><br><br></th>
             </tr>
             <tr>
                 <th>

@@ -159,8 +159,8 @@ public class UserDaoImpl implements UserDAO {
 		
 		return userModel;
     }
-	public boolean updateWallet(int updatedWallet, long userMobileNumber) {
-		String wallet = "update users set user_wallet=? where user_mobilenumber=?";
+	public boolean updateWallet(int updatedWallet, int userId) {
+		String wallet = "update users set user_wallet=? where user_id=?";
 
 		Connection con;
 		PreparedStatement pstatement;
@@ -170,7 +170,7 @@ public class UserDaoImpl implements UserDAO {
 			pstatement = con.prepareStatement(wallet);
 
 			pstatement.setInt(1, updatedWallet);
-			pstatement.setLong(2, userMobileNumber);
+			pstatement.setLong(2, userId);
 			result = pstatement.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -261,6 +261,12 @@ public class UserDaoImpl implements UserDAO {
 		}
 		return checkUserFlag;
 
+	}
+
+	@Override
+	public boolean updateWallet(int updatedWallet, long userMobileNumber) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 

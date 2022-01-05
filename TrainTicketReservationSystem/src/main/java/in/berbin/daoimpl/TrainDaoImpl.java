@@ -199,40 +199,45 @@ public class TrainDaoImpl {
  
  
  //to search train
- public List<Trains>searchTrain(LocalDate DepartureDate,String source,String destination)
- {
-	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+DepartureDate+"'and train_source='"+source+"' and train_destination='"+destination+"'";
-	 Connection con=null;
-	 Statement stmt=null;
+ public List<Trains>searchTrain(LocalDate DepartureDate,String source,String destination) throws ClassNotFoundException, SQLException
+ { 
+	 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//	 LocalDate date= sdf.parse(DepartureDate);
+	 LocalDate ld = LocalDate();
+	 
+	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+DepartureDate+"' and train_source='"+source+"' and train_destination='"+destination+"'";
+	System.out.println(findTrain);
+	
+	 
 	 Trains trainModel;
 	 List<Trains>trainsearchList=new ArrayList<Trains>();
 	 
-	 try {
-		con=ConnectionUtil.getDBconnect();
-		stmt=con.createStatement();
-		ResultSet rs=stmt.executeQuery(findTrain);
+	
+	 Connection con=ConnectionUtil.getDBconnect();
+	 PreparedStatement pstatement=con.prepareStatement(findTrain);
+
+		ResultSet rs=pstatement.executeQuery();
+		System.out.println("resultset");
 		while(rs.next()) {
 			trainModel = new Trains(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
 			trainsearchList.add(trainModel);
-	//		trainModel.toString();
+			System.out.println(trainModel);
 		}
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	return trainsearchList;
+		return trainsearchList;
+	
  }
  
  
  
  
  
- //to show all train and select on user's wish date
+ private LocalDate LocalDate() {
+	// TODO Auto-generated method stub
+	return null;
+}
+//to show all train and select on user's wish date
  
- public List<Trains>searchAllTrain(String source,String destination)
+ public List<Trains>searchAllTrain(String source,String destination) throws ClassNotFoundException, SQLException
  {
 	 String findTrain="select*from trains where train_source='"+source+"' and train_destination='"+destination+"'";
 	 Connection con=null;
@@ -240,7 +245,7 @@ public class TrainDaoImpl {
 	 Trains trainModel;
 	 List<Trains>trainsearchList=new ArrayList<Trains>();
 	 
-	 try {
+	
 		con=ConnectionUtil.getDBconnect();
 		stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(findTrain);
@@ -249,13 +254,7 @@ public class TrainDaoImpl {
 			trainsearchList.add(trainModel);
 	//		trainModel.toString();
 		}
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (SQLException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+	
 	return trainsearchList;
  }
  

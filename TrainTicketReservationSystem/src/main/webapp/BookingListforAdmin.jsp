@@ -37,7 +37,7 @@
             <li><a href="AddTrain.jsp">Add Train</a></li>            
             <li><a href="TrainList.jsp">Train list</a></li>            
             <li><a href="UserList.jsp">User list</a></li>
-            <li><a href="BookingList.jsp">Booking list</a></li>
+            <li><a href="BookingListforAdmin.jsp">Booking list</a></li>
         </ul>
     </div>
 </body>

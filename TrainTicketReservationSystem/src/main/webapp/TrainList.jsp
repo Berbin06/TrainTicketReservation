@@ -43,6 +43,7 @@
     </style>
 </head>
 <body>
+
     <div id="trainlist">
         <ul>
             <li><a href="AdminHome.jsp">Profile</a></li>
@@ -94,6 +95,8 @@ i++;
 <td> <%=showTrain.getTrainArraivalTime().format(formatter)%></td>
 <td> <%=showTrain.getTotalseat()%></td>
 <td> <%=showTrain.getTicketPrice()%></td>
+<td><a href="updateTrain.jsp"><button type="button">Update</button></a>
+    <a href="deletetrain.jsp"><button type="button">Delete</button></td></a>
 </tr>
 <%
 }

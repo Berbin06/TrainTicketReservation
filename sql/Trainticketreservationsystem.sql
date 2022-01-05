@@ -72,7 +72,12 @@ select * from users;
 select * from trains;
 select * from admins;
 select * from booking_details;
-desc booking_details;
-
+desc trains;
+select*from trains;
 drop table users cascade constraints;
 desc trains;
+select*from trains where to_char(train_departure_time,'dd-mm-yyyy')='30-12-2021' and train_source='madurai' and train_destination='chennai';
+resultset
+
+select*from trains where train_departure_time='2021-12-30 08:20:00' and train_source='madurai' and train_destination='chennai';
+select*from trains where to_char(train_departure_time,'dd-mm-yyyy')='30-12-2021' and train_source='Madurai' and train_destination='Chennai';

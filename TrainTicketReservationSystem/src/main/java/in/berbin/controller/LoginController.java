@@ -58,6 +58,7 @@ public class LoginController extends HttpServlet{
 				userModel=userDao.loginUser(userId);
 				if(userModel.getUserPassword().equals(password)) {
 					try {
+						session.setAttribute("userdata", userModel);
 						res.sendRedirect("UserHomePage.jsp");
 					} catch (IOException e) {
 						System.out.println(e.getMessage());
