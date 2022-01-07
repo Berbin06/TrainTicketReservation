@@ -34,7 +34,7 @@
             box-sizing: border-box;
             font-family: Arial, Helvetica, sans-serif;
          }
-         legend{
+        /*  legend{
              border: 1px solid black;
              height: 33px;
              width: 170px;
@@ -44,7 +44,7 @@
          }
          legend h3{
              margin-left: 7px;
-         }
+         } */
          table,tr,th,td{
              text-align: center;
              border: 1px solid black;
@@ -66,7 +66,7 @@
              margin-left: 2px;
              
          }
-         #forcontent{
+         /* #forcontent{
             border: 1px solid rgb(32, 32, 32);
              padding: 20px;
              border-bottom: none;
@@ -75,7 +75,7 @@
              background-color:rgb(113, 99, 177);
              color: white;
              margin-top: -15px;
-         }
+         } */
          #forcontent ul li{
             padding: 3px;
          }
@@ -117,15 +117,15 @@
     <form action="ticketBooking.jsp">
         <div>
             <fieldset id="fieldsettable">
-                <legend><h3>Trains</h3></legend>
+              <!--   <legend><h3>Trains</h3></legend> -->
            
                 <div id="forcontent">
                       <ul id="forcontentinlist">
-                        <li><h4><%=source %></h4></li>
+                       <%--  <li><h4><%=source %></h4></li>
                         <li><p>to</p></li>
                         <li><h4><%=destination %></h4></li>
                         <li><p>Journey Date :</p></li>
-                        <li><h4><%=dateStr %></h4></li>
+                        <li><h4><%=dateStr %></h4></li> --%>
                         
                     </ul>
                 </div>
@@ -182,6 +182,8 @@ i++;
 }
 %>
                    
-</table></table></div></fieldset></div></form>                     
+</table></table></div></fieldset></div></form> 
+ 
+<a href="UserHomePage.jsp"><button class="button button3">Back to HomePage</button></a>                
 </body>
 </html>

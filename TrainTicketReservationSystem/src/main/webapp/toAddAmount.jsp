@@ -4,20 +4,20 @@
         <%@page import="in.berbin.daoimpl.UserDaoImpl"%>
     
     <%@page import="in.berbin.model.*"%>
-        <%@page import="javax.servlet.http.HttpSession" %>
-         <%HttpSession session2=request.getSession();%> 
+   <%--      <%@page import="javax.servlet.http.HttpSession" %>
+        <%HttpSession session2=request.getSession();%> 
              <% Users userData=(Users)session2.getAttribute("userdata");%>
              <%UserDaoImpl userDao=new UserDaoImpl();
-               Users userModel=userDao.getUserDetailsById(userData.getUserId());  %>
-      <!--        /*   int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
+               Users userModel=userDao.getUserDetailsById(userData.getUserId());
+               int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
                int totalAmount=amountEntered+userData.getUserwallet();
                userDao.updateWallet(totalAmount, userData.getUserwallet());
                
                
                Users userModel1=new Users(userModel.getUserId(),userModel.getUserName(),userModel.getUserDob(),userModel.getUserEmail(),
              		  userModel.getUserMobileNumber(),userModel.getUserGender(),userModel.getUserPassword(),totalAmount);
-               session.setAttribute("userdata2", userModel1); */
-             %> -->
+               session.setAttribute("userdata2", userModel1);
+             %>  --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,24 +85,13 @@ input{
 </style>
 </head>
 <body>
+ <form action="amountaddsucessfully.jsp" >
 <div class="signup">
-        <form action="toAddAmount.jsp">
+       
         <h2 class="SignUphere">Manage Wallet</h2>
         <table id="logintable">
             
-            <!-- <tr>
-                <th> <label for="usn">User Name:</label>
-                <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
-            </tr> -->
-            <tr>
-                <th><label for="UserName">UserName:</label>
-                 <input type="text" name="username" value=<%=userModel.getUserName() %> disabled="disabled" id="username"  required><br><br></th>
-             </tr>
-            <tr>
-               <th><label for="available balance">Available Balance:</label>
-                <input type="text" name="" id="availablebalance" value=<%=userModel.getUserwallet() %> disabled="disabled" required><br><br></th>
-            </tr>
-            
+          
                 <th>
                      <h6>To Add Wallet</h6>
 
@@ -110,21 +99,23 @@ input{
             </tr>
            
            
-                <!-- <tr>
+                <tr>
                     <th>
                         <label for="addwallet">Enter Amount:</label>
-                        <input type="number" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
+                        <input type="number" min="0" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
                     </th>
                 </tr>
-       -->
+      
                 <br>
                <tr>
-               <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add amount</button></th>
-            <!--    <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th> -->
+               <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add</button></th>
+              
             </tr>
+             
         </table>
+   
+    </div>
     </form>
      <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
-    </div>
 </body>
 </html>

@@ -7,11 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="UserHomePage.jsp">
-
-<h1>.Booked Sucessfully!!</h1>
-<button class=""- id="" type="submit">Back to home page</button>
-</form>
-<a ></a>
+<h1>About us</h1>
 </body>
 </html>

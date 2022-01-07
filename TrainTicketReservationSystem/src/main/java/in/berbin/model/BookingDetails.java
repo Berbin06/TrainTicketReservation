@@ -7,7 +7,8 @@ import java.util.Objects;
 public class BookingDetails {
 
 private Users usermodel;
-private Trains trainmodel;
+private Trains trainModel;
+private int trainid;
 private long pnrNumber;
 private LocalDate journeyDate;
 private LocalDate bookingDate;
@@ -18,6 +19,10 @@ private String ticketStatus;
 
 
 
+
+
+
+
 public BookingDetails() {
 	super();
 	// TODO Auto-generated constructor stub
@@ -25,32 +30,93 @@ public BookingDetails() {
 
 
 
-public BookingDetails(Users usermodel, Trains trainmodel, long pnrNumber, LocalDate journeyDate,
-		LocalDate bookingDate, int ticketCount, int totalPrice, String ticketStatus) {
+public BookingDetails(Users usermodel, int trainid, LocalDate journeyDate,
+		 int ticketCount, int totalPrice
+		) {
 	super();
 	this.usermodel = usermodel;
-	this.trainmodel = trainmodel;
+	this.trainid = trainid;
+	this.journeyDate = journeyDate;
+	this.ticketCount = ticketCount;
+	this.totalPrice = totalPrice;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public BookingDetails(Users usermodel, int trainid, long pnrNumber, LocalDate journeyDate, LocalDate bookingDate,
+		int ticketCount, int totalPrice, String ticketStatus) {
+	super();
+	this.usermodel = usermodel;
+	this.trainid = trainid;
 	this.pnrNumber = pnrNumber;
 	this.journeyDate = journeyDate;
 	this.bookingDate = bookingDate;
 	this.ticketCount = ticketCount;
 	this.totalPrice = totalPrice;
-	
 	this.ticketStatus = ticketStatus;
 }
 
 
 
-public BookingDetails(Users userModel1, Trains trainModel1,LocalDate journeyDate,  int noOfPerson1, int ticketPriceForClass1) {
-	this.usermodel=userModel1;
-	this.trainmodel=trainModel1;
-	this.journeyDate=journeyDate;
-	this.ticketCount=noOfPerson1;
-	this.totalPrice=ticketPriceForClass1;
+public BookingDetails(Users usermodel, Trains trainModel, long pnrNumber, LocalDate journeyDate, LocalDate bookingDate,
+		int ticketCount, int totalPrice, String ticketStatus) {
+	super();
+	this.usermodel = usermodel;
+	this.trainModel = trainModel;
+	this.pnrNumber = pnrNumber;
+	this.journeyDate = journeyDate;
+	this.bookingDate = bookingDate;
+	this.ticketCount = ticketCount;
+	this.totalPrice = totalPrice;
+	this.ticketStatus = ticketStatus;
 }
 
 
 
+public BookingDetails(Users usermodel, int trainid, long pnrNumber, LocalDate journeyDate, int ticketCount,
+		int totalPrice) {
+	super();
+	this.usermodel = usermodel;
+	this.trainid = trainid;
+	this.pnrNumber = pnrNumber;
+	this.journeyDate = journeyDate;
+	this.ticketCount = ticketCount;
+	this.totalPrice = totalPrice;
+}
+
+
+
+public BookingDetails(Users userModel2, Trains trainModel ,long pnrnumber, LocalDate journeyDate, int ticketCount, int totalPrice) {
+	// TODO Auto-generated constructor stub
+	this.usermodel=userModel2;
+	this.trainModel=trainModel;
+	this.pnrNumber=pnrnumber;
+	this.journeyDate=journeyDate;
+	this.ticketCount=ticketCount;
+	this.totalPrice=totalPrice;
+}
+
+
+
+public Trains getTrainModel() {
+	return trainModel;
+}
+
+
+
+public void setTrainModel(Trains trainModel) {
+	this.trainModel = trainModel;
+}
 
 
 
@@ -66,14 +132,18 @@ public void setUsermodel(Users usermodel) {
 
 
 
-public Trains getTrainmodel() {
-	return trainmodel;
+
+
+
+
+public int getTrainid() {
+	return trainid;
 }
 
 
 
-public void setTrainmodel(Trains trainmodel) {
-	this.trainmodel = trainmodel;
+public void setTrainid(int trainid) {
+	this.trainid = trainid;
 }
 
 
@@ -152,7 +222,7 @@ public void setTicketStatus(String ticketStatus) {
 
 @Override
 public String toString() {
-	return "BookingDetailsModel [usermodel=" + usermodel + ", trainmodel=" + trainmodel + ", pnrNumber=" + pnrNumber
+	return "BookingDetailsModel [usermodel=" + usermodel + ", trainmodel=" + trainid + ", pnrNumber=" + pnrNumber
 			+ ", journeyDate=" + journeyDate + ", bookingDate=" + bookingDate + ", ticketCount=" + ticketCount
 			+ ", totalPrice=" + totalPrice + ", ticketStatus=" + ticketStatus + "]";
 }
@@ -161,26 +231,11 @@ public String toString() {
 
 @Override
 public int hashCode() {
-	return Objects.hash(bookingDate, journeyDate, pnrNumber, ticketCount, ticketStatus, totalPrice, trainmodel,
+	return Objects.hash(bookingDate, journeyDate, pnrNumber, ticketCount, ticketStatus, totalPrice, trainid,
 			usermodel);
 }
 
 
-
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	BookingDetails other = (BookingDetails) obj;
-	return Objects.equals(bookingDate, other.bookingDate) && Objects.equals(journeyDate, other.journeyDate)
-			&& pnrNumber == other.pnrNumber && ticketCount == other.ticketCount
-			&& Objects.equals(ticketStatus, other.ticketStatus) && totalPrice == other.totalPrice
-			&& Objects.equals(trainmodel, other.trainmodel) && Objects.equals(usermodel, other.usermodel);
-}
 
 
 

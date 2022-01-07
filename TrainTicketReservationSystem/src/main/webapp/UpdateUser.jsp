@@ -69,40 +69,39 @@ input{
 </head>
 <body>
 <div class="signup">
-    <form action="signuppage">
-    <h2 class="SignUphere">Sign Up!!</h2>
+    <form action="updateuser">
+    <h2 class="SignUphere">Update Here!!</h2>
     <table id="logintable">
         
-        <!-- <tr>
-            <th> <label for="usn">User Name:</label>
-            <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
-        </tr> -->
+       
+       
         <tr>
            <th><label for="fullname">FullName:</label>
-            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" required><br><br></th>
+            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" autofocus="autofocus"
+            value = "<%=request.getParameter("Username") %>" required><br><br></th>
         </tr>
         <tr>
             <th><label for="regage">DOB:</label>
-            <input type="date" name="dob"   id="regage" ><br><br></th>
+            <input type="date" name="dob"  value="<%=request.getParameter("Userdob") %>" id="regage" ><br><br></th>
         </tr>
         <tr>
             <th>
                 <label  for="regemail">Email:</label>
-                <input type="email" name="email" id="regemail" pattern="[a-zA_z][A-Za-z0-9]+[@][a-zA-Z]+[.][A-Za-z]+{2,3}" placeholder="Enter your MailID" required><br><br>
+                <input type="email" name="email" id="regemail" value="<%=request.getParameter("Usermailid")%>"  readonly><br><br>
             </th>
         </tr>
        
             <tr>
                 <th>
                     <label for="regpswd">Password:</label>
-                    <input type="password" name="password" id="regpswd" placeholder="Enter your Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+{8,15}$" required><br><br>
+                    <input type="password" name="password" id="regpswd"    required><br><br>
                 </th>
             </tr>
             
             <tr>
                 <th>
                     <label for="regmobilenum">MobileNo:</label>
-                    <input type="tel" name="mobileno" id="regmobilenum" pattern="[6-9]{1}+[0-9]{9}" placeholder="Enter your MobileNumber" required><br><br>
+                    <input type="tel" name="mobileno" id="regmobilenum" value="<%=request.getParameter("Usermobileno")%>" readonly><br><br>
                 </th>
             </tr>
             <tr>
@@ -115,10 +114,12 @@ input{
             
             <tr>
            <th> <button class="buttonsignup" id="subsignup" type="submit">Submit</button></th>
-           <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th>
+        <!--    <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th> -->
+  
         </tr>
     </table>
 </form>
+      <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
 </div>
 </body>
 

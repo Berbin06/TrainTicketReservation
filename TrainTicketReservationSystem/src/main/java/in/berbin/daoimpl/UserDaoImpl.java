@@ -30,6 +30,7 @@ public class UserDaoImpl implements UserDAO {
 					rs.getString(6), rs.getString(7), rs.getInt(8));
 			con.close();
 			pstatement.close();
+			return userModel;
 		} catch (ClassNotFoundException e) {
 			System.out.println(e.getMessage());
 		} catch (SQLException e) {
@@ -67,7 +68,7 @@ public class UserDaoImpl implements UserDAO {
 	
     public void update (Users UserModule) throws ClassNotFoundException, SQLException {
     	
-    	String update="update users set user_name=?, user_age=?, user_mobilenumber=?, user_gender=?, user_password=? where user_email='"+UserModule.getUserEmail()+"'";
+    	String update="update users set user_name=?, user_dob=?, user_mobilenumber=?, user_gender=?, user_password=? where user_email='"+UserModule.getUserEmail()+"'";
     	
     	Connection con=ConnectionUtil.getDBconnect();
 		PreparedStatement ps=con.prepareStatement(update);

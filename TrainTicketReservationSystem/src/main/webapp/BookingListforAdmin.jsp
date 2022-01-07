@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+     <%@page import="in.berbin.model.Trains"%>
+    <%@page import="java.util.*"%>
+         <%@page import="in.berbin.model.BookingDetails"%>
+    <%@page import="java.time.format.DateTimeFormatter"%>
+            <%@page import="in.berbin.daoimpl.TrainDaoImpl"%>
+            <%@page import="in.berbin.daoimpl.BookingDetailsDaoImpl"%>
+           <%  DateTimeFormatter formatter =
+     DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");%>
+            
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +48,47 @@
             <li><a href="UserList.jsp">User list</a></li>
             <li><a href="BookingListforAdmin.jsp">Booking list</a></li>
         </ul>
+        <%BookingDetailsDaoImpl bookingDao=new BookingDetailsDaoImpl();
+List<BookingDetails> allBookings=new ArrayList<BookingDetails>();
+allBookings=bookingDao.showAllBookings();%> 
+   <table border="2" id="alltrains">
+<h1><b>Booking List</b></h1>
+<thead>
+<tr>
+<th>No</th>
+ <th >Train ID</th>
+<th>PNR NUMBER</th>
+<th>Booking Date</th>
+<th>Journey Date</th>
+<th>Ticket count</th>
+<th>Ticket Price</th>
+<th>Ticket Status</th>
+
+</tr>
+</thead>
+<br>
+<br>
+<tbody>
+<%
+int i = 0;
+for (BookingDetails showBooking : allBookings) {
+i++;
+%> 
+
+<tr>
+<td><%=i%></td>
+<%-- <td><%=showBooking.getUsermodel()%></td> --%>
+<td><%= showBooking.getTrainid()%></td>
+<td><%=showBooking.getPnrNumber()%></td>
+<td> <%=showBooking.getBookingDate()%></td>
+<td> <%=showBooking.getJourneyDate()%></td>
+<td> <%=showBooking.getTicketCount()%></td>
+<td> <%=showBooking.getTotalPrice()%></td>
+<td> <%=showBooking.getTicketStatus()%></td>   
+  </tr>
+<%
+  }
+%>      
     </div>
 </body>
 </html>

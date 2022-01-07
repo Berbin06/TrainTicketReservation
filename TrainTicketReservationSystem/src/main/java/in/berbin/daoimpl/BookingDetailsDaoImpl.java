@@ -33,7 +33,6 @@ public boolean bookTicket(Users userModel,Trains trainModel, BookingDetails book
 		//pstmt.setString(6,bookingDetailsModel.getSeatNo());
 		pstmt.setInt(5,bookingDetailsModel.getTotalPrice());
 		result=	pstmt.executeUpdate();
-	System.out.println("hello");
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -48,20 +47,36 @@ public boolean bookTicket(Users userModel,Trains trainModel, BookingDetails book
 
 
 
-public boolean cancelTicket(Users userModel,BookingDetails bookingDetailsModel) {
-	String ticketCancel="update booking_Details set Ticket_status='Cancelled' where user_id='"+userModel.getUserId()+"' and to_char(journey_date,'yyyy-mm-dd')='"+bookingDetailsModel.getJourneyDate()+"'";
-	System.out.println(ticketCancel);
+
+public boolean cancelTicket(Users userModel1,BookingDetails booking,Trains train,int totalAmount) {
+	
+	int totalseat = booking.getTicketCount() + train.getTotalseat();
+	
+	String toCancel="update booking_details set ticket_status='Cancelled' where pnr_number="+booking.getPnrNumber()+"";
+	System.out.println(toCancel);
+	String refund = "update users set user_wallet="+totalAmount+" where user_id ="+userModel1.getUserId();
+	System.out.println(refund);
+	String seats = "update  TRAINS set TOTAL_SEAT="+totalseat+" where TRAIN_ID="+train.getTrainId();
+	System.out.println(seats);
 	int result = 0;
 	try {
 		Connection con=ConnectionUtil.getDBconnect();
-		PreparedStatement pstatement=con.prepareStatement(ticketCancel);
-		result=pstatement.executeUpdate();
-	} catch (ClassNotFoundException e) {
-		e.getMessage();
-	} catch (SQLException e) {
-		e.getMessage();
-		System.out.println("invalid Ticket number");
+		PreparedStatement pstatement=con.prepareStatement(toCancel);
+		PreparedStatement pstwallet=con.prepareStatement(refund);
+		PreparedStatement pstseat=con.prepareStatement(seats);
+		
+		result = pstatement.executeUpdate();
+		
+		result = pstwallet.executeUpdate();
+		
+		result = pstseat.executeUpdate();
+		
+	
+		
+	}catch(Exception  e) {
+		System.out.println(e.getMessage());
 	}
+	
 	return result>0;
 }
 	
@@ -96,25 +111,30 @@ public boolean cancelTicket(Users userModel,BookingDetails bookingDetailsModel) 
 
 //to show booking history of particular user
 
-public List<BookingDetails>getBookingDetailsForCurrentUser(Users userModel){
+public List<BookingDetails>getBookingDetailsForPresentUser(Users userModel){
+	
 	String Query="select*from booking_details where user_id='"+userModel.getUserId()+"'";
+	System.out.println();
 	Connection con;
+	
 	PreparedStatement pstmt;
 	ResultSet rs;
-	Trains trainModel=null;
-	TrainDaoImpl TrainDaoImpl=null;
-	UserDaoImpl userDaoImpl=null;
-	Users userModel1=null;
+	
 	List<BookingDetails>bookingList=new ArrayList<BookingDetails>();
+	
     try {
 		con=ConnectionUtil.getDBconnect();
 		pstmt=con.prepareStatement(Query);
+		System.out.println("6");
 		rs=pstmt.executeQuery();
+		System.out.println("7");
 		while(rs.next()) {
-			trainModel=TrainDaoImpl.findTrainDetailsUsingTrainNumber(rs.getInt(1));
-			userModel1= userDaoImpl.findUserDetails(userModel.getUserMobileNumber());
-			BookingDetails bookingDetailsModel=new BookingDetails(userModel1,trainModel,rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
+			
+			BookingDetails bookingDetailsModel=new BookingDetails(userModel,rs.getInt(2),rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
+	
 			bookingList.add(bookingDetailsModel);
+			
+			
 			
 		}
 	} catch (ClassNotFoundException e) {
@@ -125,7 +145,7 @@ public List<BookingDetails>getBookingDetailsForCurrentUser(Users userModel){
 		e.printStackTrace();
 	}
 	return bookingList;
-	
+
 }
 
 public int findPnrNumber(Users userModel, BookingDetails bookingDetailsModel) {
@@ -172,10 +192,10 @@ public BookingDetails findBookedTicketsDetails(long pnrNumber) {
 			userModel=uDao.getUserDetailsById(rs.getInt(1));
 			System.out.println(rs.getString(8));
 			
-			bookingDetailsModel=new BookingDetails(userModel,trainModel,rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
+			bookingDetailsModel=new BookingDetails(userModel,rs.getInt(2),rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
 			
 		}	
-		
+		return bookingDetailsModel;	
 	} catch (ClassNotFoundException e) {
 		e.getMessage();
 	} catch (SQLException e) {
@@ -184,5 +204,37 @@ public BookingDetails findBookedTicketsDetails(long pnrNumber) {
 	
 	return bookingDetailsModel;
 }
+
+public List<BookingDetails> showAllBookings()
+{
+	List<BookingDetails> allBookings= new ArrayList<BookingDetails>();
+	String allUserBooking="select*from booking_details";
+	Connection con =null;
+	PreparedStatement ps;
+	Users userModel=null;
+	try {
+		con=ConnectionUtil.getDBconnect();
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	try {
+		ps=con.prepareStatement(allUserBooking);
+		ResultSet rs=ps.executeQuery();
+		while(rs.next())
+		{
+			BookingDetails bookingDetailsModel=new BookingDetails(userModel,rs.getInt(2),rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
+			allBookings.add(bookingDetailsModel);
+		}
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return allBookings;
 	
+}
 }

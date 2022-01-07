@@ -6,7 +6,8 @@
     <%@page import="in.berbin.daoimpl.UserDaoImpl" %>
     <%@page import="javax.servlet.http.HttpSession" %>
     <%HttpSession session1=request.getSession();
-      Users userData=(Users)session1.getAttribute("userdata");%>
+      Users userData=(Users)session1.getAttribute("userdata");
+      System.out.println(userData);%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +15,21 @@
 <title>Insert title here</title>
 
 <style>
+ body{
+    background: url(https://wallpapercave.com/dwp1x/wp10432195.jpg);
+    background-size: cover;
+    filter: blur();
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
         *{
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: Arial, Helvetica, sans-serif;
         }
+        
         ul,li{
             list-style: none;
             display: flex;
@@ -32,7 +42,7 @@
         #nav{
             border: 1px solid blanchedalmond ;
             height: 90px;
-            background-color: black;
+            background-color: #03fc8c;
         }
         #nav a{
             text-decoration: none;
@@ -106,11 +116,14 @@
         #searchlocation{
             padding: 40px;
             border: 1px solid black;
+            color:#5203fc;
             border-radius: 0px;
             height: 350px;
             width: 300px;
-            margin-left: -2000px;
-            margin-top: 100px;
+            position: absolute;
+            top: 170px;
+            left: 250px;
+          
         }.fromto{
             border: 0.100px solid black;
             width: 200px;
@@ -126,14 +139,14 @@
             margin-top: 21px;
             margin-left: 1px;
             color: white;
-            background-color: rgb(241, 26, 26);
+            background-color: #35fc03;
             border: none;
             border-radius: 0px;
             cursor: pointer;
         }
         #username{
             font-size: larger;
-            margin-left: 1100px;
+            margin-right: 0;
         }
         .fromto input{
             width: 170px;
@@ -150,26 +163,34 @@
     <div id="nav">
         <ul>
             <li><span>icon</span></li>
-            <li><a href="Searchtrain.jsp">Train</a></li>
+         <!--    <li><a href="Searchtrain.jsp">Train</a></li> -->
             <li><a href="AboutUs.jsp">About us</a></li>
-            <li><a href="UserProfile.jsp">Profile</a></li>
-
-              <li><div class="dropdown">
+            <li><a href="UpdateUser.jsp?Username=<%=userData.getUserName()%>&Userdob=<%=userData.getUserDob()%>&Usermailid=<%=userData.getUserEmail()%>
+            &Usermobileno=<%=userData.getUserMobileNumber()%>">Update Profile</a></li>
+            <li><a href="ManageWallet.jsp">Manage Wallet</a></li>
+            <li>  <a href="BookingHistory.jsp">Bookings</a></li>
+              <li>  <a href="login.jsp">Logout</a></li>
+<li> <div id="username"><label for="username">
+     Hello _ <%=userData.getUserName() %></label></div>
+<%System.out.println(userData.getUserName()); %> 
+    </li>
+             <!--  <li><div class="dropdown">
                 <button class="dropbtn">Bookings</button>
                 <div class="dropdown-content">
                   <a href="BookingHistory.jsp">Bookings</a>
-                  <a href="CancelTicket.jsp">Cancel Booking</a>
+                 
                 </div>
-              </div> </li>
+              </div> </li> -->
 
-              <li><div class="dropdown">
-                <button class="dropbtn">Wallet
-                </button>
+              <!-- <li>
+              <div class="dropdown">
+                <button class="dropbtn">Wallet </button>
+               
                 <div class="dropdown-content">
                   <a href="ManageWallet.jsp">Manage Wallet</a>
-                 <!--  <a href="UpdateWallet.jsp">Recharge Wallet</a> -->
+                  <a href="UpdateWallet.jsp">Recharge Wallet</a>
                 </div>
-              </div> </li>
+              </div> </li> -->
 
             <!-- <li><a href="Login.jsp">SignIn</a></li>
             <li><a href="UserRegister.jsp">SignUp</a></li>
@@ -177,10 +198,7 @@
         </div> -->
         
 
-<div id="username"><label for="username">
-     Hello _ <%=userData.getUserName() %></label></div>
-<%System.out.println(userData.getUserName()); %> 
-    <div>
+
     <form action="filtertrain.jsp">
         <div id="searchlocation">
             <table>
@@ -192,18 +210,26 @@
                             <option value="madurai">Madurai</option>
                             <option value="chennai">Chennai</option>
                             <option value="nagercoil">Nagercoil</option>
+                             <option value="bangalore">Bangalore</option>
+                              <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                                <option value="thoothukudi">Thoothukudi</option>
+                                 <option value="kuzhithurai">Kuzhithurai</option>
                             </datalist></div></td >
                     <tr><div class="fromto">
                         <span>SOURCE</span><br>
                         <input name="sourcelocation" id="sourcelocation" placeholder="From" list = "source">
                         <datalist id = "source">
                         <option value="madurai">Madurai</option>
-      <option value="chennai">Chennai</option>
+                        <option value="chennai">Chennai</option>
                         <option value="nagercoil">Nagercoil</option>
+                        <option value="bangalore">Bangalore</option>
+                        <option value="thiruvananthapuram">Thiruvananthapuram</option>
+                           <option value="thoothukudi">Thoothukudi</option>
+                            <option value="kuzhithurai">Kuzhithurai</option>
                         </datalist></div></td>
                     <td><div class="fromto">
                         <span>DATE</span><br>
-                        <input name="date" id="date" type="date"></div></tr>
+                        <input type="date" id="datefield" name="date"></div></tr>
                 </tr>
             </table>
             <button type="submit" id="searchbutton"><h2>SEARCH</h2></button>
@@ -211,5 +237,23 @@
         </div>
         </form>
     </div>
+
+    
 </body>
+    
+    <script type="text/javascript">
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; 
+var yyyy = today.getFullYear();
+if(dd<10){
+  dd='0'+dd
+} 
+if(mm<10){
+  mm='0'+mm
+} 
+
+today = yyyy+'-'+mm+'-'+dd;
+document.getElementById("datefield").setAttribute("min", today);
+</script>
 </html>

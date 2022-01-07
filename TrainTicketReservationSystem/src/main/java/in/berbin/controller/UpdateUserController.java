@@ -3,7 +3,6 @@ package in.berbin.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import in.berbin.daoimpl.UserDaoImpl;
 import in.berbin.model.Users;
-
-
-
-
-
-
-@WebServlet("/signuppage")
-public class SignupController extends HttpServlet{
-
+@WebServlet("/updateuser")
+public class UpdateUserController extends HttpServlet {
 	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
 	    
 		// DateTimeFormatter dateFormat=DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -40,16 +32,15 @@ public class SignupController extends HttpServlet{
 		Users userModel=new Users(name,dob,email,mobile,gender,password);
 		UserDaoImpl userDao=new UserDaoImpl();
 		
-		
-		
 		try {
-			userDao.insert(userModel);
+			userDao.update(userModel);
 			if(userDao!=null) {
 				res.sendRedirect("login.jsp");
 			}else
 			{
-				res.getWriter().print("You'r not registered");
+				res.getWriter().print("Your profile not updated");
 			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -5,20 +5,23 @@
     
     <%@page import="in.berbin.model.*"%>
         <%@page import="javax.servlet.http.HttpSession" %>
-         <%HttpSession session2=request.getSession();%> 
-             <% Users userData=(Users)session2.getAttribute("userdata");%>
-             <%UserDaoImpl userDao=new UserDaoImpl();
-               Users userModel=userDao.getUserDetailsById(userData.getUserId());  %>
-      <!--        /*   int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
+        <%HttpSession session2=request.getSession();%> 
+             <% Users userData=(Users)session2.getAttribute("userdata");
+             UserDaoImpl userDao=new UserDaoImpl();
+               Users userModel=userDao.getUserDetailsById(userData.getUserId());
+              
+               int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
+               System.out.println(amountEntered);
                int totalAmount=amountEntered+userData.getUserwallet();
-               userDao.updateWallet(totalAmount, userData.getUserwallet());
-               
+               userDao.updateWallet(amountEntered,userData.getUserId() );
+             
                
                Users userModel1=new Users(userModel.getUserId(),userModel.getUserName(),userModel.getUserDob(),userModel.getUserEmail(),
              		  userModel.getUserMobileNumber(),userModel.getUserGender(),userModel.getUserPassword(),totalAmount);
-               session.setAttribute("userdata2", userModel1); */
-             %> -->
-<!DOCTYPE html>
+               session.setAttribute("userdata2", userModel1);
+           
+             %> 
+             <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -86,41 +89,29 @@ input{
 </head>
 <body>
 <div class="signup">
-        <form action="toAddAmount.jsp">
+        <form action="UserHomePage.jsp">
         <h2 class="SignUphere">Manage Wallet</h2>
         <table id="logintable">
-            
-            <!-- <tr>
-                <th> <label for="usn">User Name:</label>
-                <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
-            </tr> -->
-            <tr>
-                <th><label for="UserName">UserName:</label>
-                 <input type="text" name="username" value=<%=userModel.getUserName() %> disabled="disabled" id="username"  required><br><br></th>
-             </tr>
-            <tr>
-               <th><label for="available balance">Available Balance:</label>
-                <input type="text" name="" id="availablebalance" value=<%=userModel.getUserwallet() %> disabled="disabled" required><br><br></th>
-            </tr>
-            
-                <th>
+            <h6>Added sucessful</h6>
+          
+          <!--       <th>
                      <h6>To Add Wallet</h6>
 
                 </th>
             </tr>
            
            
-                <!-- <tr>
+                <tr>
                     <th>
                         <label for="addwallet">Enter Amount:</label>
                         <input type="number" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
                     </th>
-                </tr>
-       -->
+                </tr> -->
+      
                 <br>
                <tr>
-               <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add amount</button></th>
-            <!--    <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th> -->
+               <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add</button></th>
+             <!--   <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th> -->
             </tr>
         </table>
     </form>

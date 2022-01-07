@@ -7,7 +7,7 @@
     <title>Login Page</title>
     <style>
     body{
-    background: url(images/lgbackground.jpg);
+    background: url(https://images.unsplash.com/photo-1442570468985-f63ed5de9086?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dHJhaW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
     background-size: cover;
     filter: blur();
     
@@ -85,10 +85,13 @@ a{
     </style>
 </head>
 <body>
+     <marquee width="60%" direction="right" height="300px">
+Welcome to train ticket reservation system.
+</marquee>
     <div class="login">
         <form action="loginusers">
-        
-        <img id="trainpng" class="pngtitle" src="images/Train.png.png" alt="">
+   
+        <img id="trainpng" class="pngtitle" src="https://images.unsplash.com/photo-1552823477-7d95b3b3f480?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHRyYWlufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt="">
         <h2 class="loginhere" >LogIn Here!!</h2>
 
         <table id="logintable">

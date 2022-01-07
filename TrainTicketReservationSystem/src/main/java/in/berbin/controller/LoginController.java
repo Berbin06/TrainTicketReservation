@@ -56,6 +56,7 @@ public class LoginController extends HttpServlet{
 			userCheckFlag=userDao.checkUser(userId);
 			if(userCheckFlag) {
 				userModel=userDao.loginUser(userId);
+				System.out.println(userModel.getUserId());
 				if(userModel.getUserPassword().equals(password)) {
 					try {
 						session.setAttribute("userdata", userModel);

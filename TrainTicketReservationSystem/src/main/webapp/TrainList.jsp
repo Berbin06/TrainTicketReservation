@@ -95,8 +95,14 @@ i++;
 <td> <%=showTrain.getTrainArraivalTime().format(formatter)%></td>
 <td> <%=showTrain.getTotalseat()%></td>
 <td> <%=showTrain.getTicketPrice()%></td>
-<td><a href="updateTrain.jsp"><button type="button">Update</button></a>
-    <a href="deletetrain.jsp"><button type="button">Delete</button></td></a>
+<td><a href="updateTrain.jsp?TrainName=<%=showTrain.getTrainName()%> &TrainClass=<%=showTrain.getTrainClass()%>&Departuretrain=
+<%=showTrain.getTrainDepartureTime()%>&TrainNumber=<%=showTrain.getTrainNumber()%>&Arrival=<%= showTrain.getTrainArraivalTime()%>&source=<%=showTrain.getTrainSource() %>
+&destination=<%= showTrain.getTrainDestination()%>&totalseat=<%=showTrain.getTotalseat()%>&ticketprice<%=showTrain.getTicketPrice()%>">Update</a>
+    
+    
+    
+    
+    <!-- <a href="deletetrain.jsp"><button type="button">Delete</button></td></a> -->
 </tr>
 <%
 }

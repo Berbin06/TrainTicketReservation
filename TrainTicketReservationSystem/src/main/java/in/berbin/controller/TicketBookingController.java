@@ -56,13 +56,13 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         
         System.out.println("6");
         
-        BookingDetails bookTickets=new BookingDetails(userModel,trainModel,trainModel.getTrainDepartureTime().toLocalDate(),ticketCount,totalPrice);
+        BookingDetails bookTickets=new BookingDetails(userModel,trainModel.getTrainId(),trainModel.getTrainDepartureTime().toLocalDate(),ticketCount,totalPrice);
         System.out.println("datetime " +trainModel.getTrainDepartureTime());
         System.out.println("7");
         boolean ticketInsertFlag=bookingdetailsDao.bookTicket(userModel, trainModel, bookTickets);
-        session.setAttribute("Final", bookTickets);
-        session.setAttribute("FinalModel", trainModel);  
-        session.setAttribute("FinalUserModel", userModel);
+        session.setAttribute("bookticket", bookTickets);
+        session.setAttribute("TrainModel", trainModel);  
+        session.setAttribute("lastuserModel", userModel);
         System.out.println("7");
         if(ticketInsertFlag) {
             try {

@@ -263,7 +263,7 @@ public class TrainDaoImpl {
  
 
  
- public void updateSeatCount(Trains trainModel) {
+ public boolean updateSeatCount(Trains trainModel) {
 		
 		String updateSeat="update trains set total_seat=? where train_id=?";
 		 Connection con;
@@ -283,6 +283,7 @@ public class TrainDaoImpl {
  		} catch (SQLException e) {
  			System.out.println(e.getMessage());
  		}
+		return false;
 	}
  
  //traindetails using id
