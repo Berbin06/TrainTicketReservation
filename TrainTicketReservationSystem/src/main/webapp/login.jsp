@@ -7,7 +7,7 @@
     <title>Login Page</title>
     <style>
     body{
-    background: url(https://images.unsplash.com/photo-1442570468985-f63ed5de9086?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dHJhaW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60);
+    background: url(https://images.squarespace-cdn.com/content/v1/5a3bb03b4c326d76de73ddaa/1622559786569-F4UVF7274QAKJHWD00UM/The_Common_Wanderer_india_train_travel_tips-17_1.jpg?format=1500w);
     background-size: cover;
     filter: blur();
     
@@ -24,6 +24,7 @@ div,input{
     border-right: none;
     outline: none;
     background: transparent;
+    position:absolute;
 }
 .login{
     margin-left: 120px;
@@ -57,12 +58,13 @@ div,input{
     margin-left: 80px;
 }
 button{
-    height: 35px;
+     height: 35px;
     width: 80px;
     background-color: rgb(127, 127, 221);
     outline: none;
-    border: none;
-
+    border: none; */
+     
+ 
 }
 table,th{
     border-spacing: 5px;
@@ -82,11 +84,15 @@ a{
    font-size: 20px;
 
 }
+.trainmarquee{
+width:250px;
+height:100px;
+}
     </style>
 </head>
 <body>
-     <marquee width="60%" direction="right" height="300px">
-Welcome to train ticket reservation system.
+     <marquee width="100%" direction="right" height="300px">
+<img alt="" class="trainmarquee" src="https://clipart-best.com/img/train/train-clip-art-39.png">
 </marquee>
     <div class="login">
         <form action="loginusers">

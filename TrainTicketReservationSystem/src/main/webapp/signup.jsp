@@ -37,8 +37,8 @@ input{
     border-left: none;
     border-right: none;
     background:transparent;
-    outline: none;
-
+    
+    
 }
 .buttonsignup{
     height: 35px;
@@ -46,12 +46,13 @@ input{
     background-color: rgb(127, 127, 221);
     outline: none;
     border: none;
+    margin-left:10px;
 }
 .buttonsignup:hover{
     background-color: rgb(247, 112, 112);
 }
 #subsignup{
-    margin-right: 80px;
+    margin-right: 130px;
     position: relative;
     top: 20px;
 }
@@ -78,39 +79,49 @@ input{
             <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
         </tr> -->
         <tr>
-           <th><label for="fullname">FullName:</label>
-            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" required><br><br></th>
+       
+           <th><label for="fullname">FullName:</label></th>
+            <td>
+            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" required><br><br>
+            </td>
         </tr>
         <tr>
-            <th><label for="regage">DOB:</label>
-            <input type="date" name="dob"   id="regage" ><br><br></th>
+            <th><label for="regage">DOB:</label></th>
+            <td>           
+            <input type="date" name="dob"   id="regage" ><br><br>
+            </td>
         </tr>
         <tr>
-            <th>
-                <label  for="regemail">Email:</label>
+            
+                <th><label  for="regemail">Email:</label></th>
+                <td>
                 <input type="email" name="email" id="regemail" pattern="[a-zA_z][A-Za-z0-9]+[@][a-zA-Z]+[.][A-Za-z]+{2,3}" placeholder="Enter your MailID" required><br><br>
-            </th>
+           </td>  
         </tr>
        
             <tr>
-                <th>
-                    <label for="regpswd">Password:</label>
+               
+                     <th><label for="regpswd">Password:</label> </th>
+                     <td>
                     <input type="password" name="password" id="regpswd" placeholder="Enter your Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+{8,15}$" required><br><br>
-                </th>
+                    </td>
+               
             </tr>
             
             <tr>
-                <th>
-                    <label for="regmobilenum">MobileNo:</label>
+               
+                    <th> <label for="regmobilenum">MobileNo:</label></th>
+                    <td>
                     <input type="tel" name="mobileno" id="regmobilenum" pattern="[6-9]{1}+[0-9]{9}" placeholder="Enter your MobileNumber" required><br><br>
-                </th>
+                </td>
             </tr>
             <tr>
-                <th>
-                    <label for="reggender">Gender:</label>
+              
+                      <th><label for="reggender">Gender:</label></th>
+                      <td>
                     <input  type="radio"name="gender" id="reggender" value="Male" required><label  for="">Male</label>
                     <input  type="radio" name="gender"id="reggender" value="Female" required><label  for="">Female</label>
-                </th>
+                    </td>
             </tr>
             
             <tr>

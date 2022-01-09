@@ -15,147 +15,160 @@
 <title>Insert title here</title>
 
 <style>
- body{
-    background: url(https://wallpapercave.com/dwp1x/wp10432195.jpg);
-    background-size: cover;
-    filter: blur();
-    background-repeat: no-repeat;
-    background-size: cover;
-    
+body{
+background: url(https://wallpapercave.com/dwp1x/wp10432195.jpg);
+background-size: cover;
+filter: blur();
+background-repeat: no-repeat;
+background-size: cover;
+
 }
-        *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-        }
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    ul,li{
+        list-style: none;
+        display: flex;
+        margin-left: 15px;
+        padding: 70px;
+        padding-left: 10px;
+        padding-top: 0px;
+        margin-top: 15px;
+    }
+    #nav{
+        border: 1px solid blanchedalmond ;
+        height: 90px;
+        background-color:black;
+        color:blanchedalmond;
         
-        ul,li{
-            list-style: none;
-            display: flex;
-            margin-left: 15px;
-            padding: 70px;
-            padding-left: 10px;
-            padding-top: 0px;
-            margin-top: 15px;
-        }
-        #nav{
-            border: 1px solid blanchedalmond ;
-            height: 90px;
-            background-color: #03fc8c;
-        }
-        #nav a{
-            text-decoration: none;
-            font-size: 20px;
-        }
+    }
+    
+    #nav a{
+        text-decoration: none;
+        font-size: 25px;
+        color:blanchedalmond;
        
-        #signlink {
-            display: flex;
-            margin-left: 540px;
-        }
-
-
-        .dropdown .dropbtn {
-            font-size: 20px;  
-            border: none;
-            outline: none;
-            color: rgb(113, 99, 177);
-        }
-        .dropbtn{
-            font-size: 20px;  
-            border: none;
-            outline: none;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    }
+    a:hover {
+  background-color:darkgoldenrod;
+  height: 35px;
+  border-radius: 10px;
  
-        }
 
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
+}
+    #signlink {
+        display: flex;
+        margin-left: 540px;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-       
-       
-        input{
-            height: 30px;
-            width: 220px;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            outline: none;
-        }
-        input,type{
-            font-size: 20px;
-            padding-top: 5px;
-            padding-left: 30px;
-            margin-left: 10px;
-        }
-        span{
-            font-size: larger;
-        }
-        table,tr,td{
-            padding: 0px;
-            border-spacing: 0px;
-        }
-        #searchlocation{
-            padding: 40px;
-            border: 1px solid black;
-            color:#5203fc;
-            border-radius: 0px;
-            height: 350px;
-            width: 300px;
-            position: absolute;
-            top: 170px;
-            left: 250px;
-          
-        }.fromto{
-            border: 0.100px solid black;
-            width: 200px;
-            height: 90px;
-            font-size: 20px;
-            padding: 10px;
-            margin-top: 0px;
-            border-radius: 0%;
-        }
-        #searchbutton{
-            height: 40px;
-            width: 200px;
-            margin-top: 21px;
-            margin-left: 1px;
-            color: white;
-            background-color: #35fc03;
-            border: none;
-            border-radius: 0px;
-            cursor: pointer;
-        }
-        #username{
-            font-size: larger;
-            margin-right: 0;
-        }
-        .fromto input{
-            width: 170px;
-        }
-        .fromto ::placeholder{
-            width: 170px;
-            font-size: 16px;
-        }
-    </style>
+    .dropdown .dropbtn {
+        font-size: 20px;  
+        border: none;
+        outline: none;
+        color: rgb(113, 99, 177);
+    }
+    .dropbtn{
+        font-size: 20px;  
+        border: none;
+        outline: none;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+   
+   
+    input{
+        height: 30px;
+        width: 220px;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        outline: none;
+    }
+    input,type{
+        font-size: 20px;
+        padding-top: 5px;
+        padding-left: 30px;
+        margin-left: 10px;
+    }
+    span{
+        font-size: larger;
+    }
+    table,tr,td{
+        padding: 0px;
+        border-spacing: 0px;
+    }
+    #searchlocation{
+        padding: 40px;
+        border: 1px solid black;
+        color:#5203fc;
+        border-radius: 0px;
+        height: 350px;
+        width: 300px;
+        position: absolute;
+        top: 170px;
+        left: 250px;
+      
+    }.fromto{
+        border: 0.100px solid black;
+        width: 200px;
+        height: 90px;
+        font-size: 20px;
+        padding: 10px;
+        margin-top: 0px;
+        border-radius: 0%;
+    }
+    #searchbutton{
+        height: 40px;
+        width: 200px;
+        margin-top: 21px;
+        margin-left: 1px;
+        color: white;
+        background-color: #35fc03;
+        border: none;
+        border-radius: 0px;
+        cursor: pointer;
+    }
+    #username{
+        font-size: larger;
+        margin-right: 0;
+    }
+    .fromto input{
+        width: 170px;
+    }
+    .fromto ::placeholder{
+        width: 170px;
+        font-size: 16px;
+    }
+</style>
 </head>
 
 
@@ -232,16 +245,15 @@
                         <input type="date" id="datefield" name="date"></div></tr>
                 </tr>
             </table>
-            <button type="submit" id="searchbutton"><h2>SEARCH</h2></button>
+            <button type="submit"  onclick="return validate()" id="searchbutton"><h2>SEARCH</h2></button>
 
         </div>
         </form>
     </div>
-
+   
     
 </body>
-    
-    <script type="text/javascript">
+     <script type="text/javascript">
 var today = new Date();
 var dd = today.getDate();
 var mm = today.getMonth()+1; 
@@ -255,5 +267,18 @@ if(mm<10){
 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datefield").setAttribute("min", today);
+
+function validate(){
+    var from=document.getElementById("sourcelocation");
+    var to=document.getElementById("destinationlocation");
+    if(from.value.trim()==to.value.trim()){
+    alert("please enter valid source and destination");
+        return false;
+    }
+    else{
+    return true;
+    }
+}
 </script>
+
 </html>

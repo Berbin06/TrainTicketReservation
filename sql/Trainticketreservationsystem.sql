@@ -14,7 +14,6 @@ CREATE TABLE TRAINS (
   CONSTRAINT pk_trainid PRIMARY KEY (train_Id),
   CONSTRAINT train_number unique(train_number)
   );
-  alter table users add wallet number(20);
 
 
 CREATE TABLE BOOKING_DETAILS (
@@ -47,8 +46,7 @@ CREATE TABLE USERS (
   CONSTRAINT pk_userid PRIMARY KEY (user_id),
   CONSTRAINT unique_user UNIQUE (user_email, user_mobilenumber)
 );
-desc users;
-commit;
+
 CREATE TABLE ADMINS (
  ADMIN_ID int GENERATED ALWAYS AS IDENTITY START WITH 1,
  ADMIN_NAME varchar(50) NOT NULL,
@@ -69,9 +67,11 @@ drop table trains cascade constraint;
 drop table booking_details cascade constraint;
 
 select * from users;    
+
 select * from trains;
 select * from admins;
 select * from booking_details;
+commit;
 desc trains;
 select*from trains;
 drop table users cascade constraints;
@@ -81,3 +81,5 @@ resultset
 
 select*from trains where train_departure_time='2021-12-30 08:20:00' and train_source='madurai' and train_destination='chennai';
 select*from trains where to_char(train_departure_time,'dd-mm-yyyy')='30-12-2021' and train_source='Madurai' and train_destination='Chennai';
+
+update users set user_wallet=10000 where user_id = 42;

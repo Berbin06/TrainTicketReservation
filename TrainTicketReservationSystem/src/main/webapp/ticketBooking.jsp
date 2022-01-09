@@ -143,7 +143,7 @@
                 <tr>
                     <th>
                         <label for="seatcount">Enter seat count:</label>
-                        <input type="number" name="seatcount" value="<% %>" id="Numberseat" placeholder="Up to 6 tickets" required><br><br>
+                        <input type="number" name="seatcount" value="<% %>" id="Numberseat" min="0" max="6" placeholder="Up to 6 tickets" required><br><br>
                     </th>
                 </tr>
                 <tr>

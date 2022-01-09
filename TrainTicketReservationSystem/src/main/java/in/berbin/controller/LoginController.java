@@ -1,6 +1,7 @@
 package in.berbin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +33,14 @@ public class LoginController extends HttpServlet{
 		UserDaoImpl userDao=new UserDaoImpl();
 		Admins adminModel;
 		Users userModel=new Users();
+		PrintWriter out=null;
+		res.setContentType("text/html");
+		try {
+			out = res.getWriter();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		//admin Login		
 		if(loginId.endsWith("admin@admin.com")) {
@@ -69,7 +78,8 @@ public class LoginController extends HttpServlet{
 				{
 					session.setAttribute("erroruserid", "password is incorrect");
 					try {
-						req.getRequestDispatcher("Login.jsp").forward(req,res);
+						out.print("Invalid username or password");
+						req.getRequestDispatcher("login.jsp").include(req,res);
 					} catch (ServletException e) {
 						System.out.println(e.getMessage());
 					} catch (IOException e) {
@@ -80,7 +90,8 @@ public class LoginController extends HttpServlet{
 			else {
 				session.setAttribute("erroruserid", "user name mismatch");
 				try {
-					req.getRequestDispatcher("Login.jsp").forward(req,res);
+					out.print("hello");
+					req.getRequestDispatcher("login.jsp").include(req,res);
 				} catch (ServletException e) {
 					System.out.println(e.getMessage());
 				} catch (IOException e) {
