@@ -83,18 +83,7 @@ public class TrainDaoImpl {
 		e.printStackTrace();
 	}
  }
-// public void showtrains(TrainModel trainmodule) throws ClassNotFoundException, SQLException {
-//	 String query ="select*from trains";
-//			 Connection con=ConnectionUtil.getDBconnect();
-//			 PreparedStatement ps =con.prepareStatement(query);
-//			 ResultSet rs=ps.executeQuery();
-//			 while(rs.next())
-//			 {
-//				System.out.println("\n" +rs.getInt(1)+"\n"+rs.getString(2)+"\n"+rs.getString(3)+"\n"+rs.getInt(4)+"\n"+rs.getString(5)+"\n"+rs.getString(6)+"\n"+rs.getDate(7)+"\n"+rs.getDate(8)+"\n"+rs.getInt(9)+"\n"+rs.getInt(10));
-//			 }
-//	
-//
-// }
+
        //to show all trains
  public List<Trains> showAllTrains()
  {
@@ -206,7 +195,7 @@ public class TrainDaoImpl {
 	 LocalDate ld = LocalDate();
 	 
 	 String findTrain="select*from trains where to_char(train_departure_time,'yyyy-mm-dd')='"+DepartureDate+"' and train_source='"+source+"' and train_destination='"+destination+"'";
-	System.out.println(findTrain);
+	
 	
 	 
 	 Trains trainModel;
@@ -217,7 +206,7 @@ public class TrainDaoImpl {
 	 PreparedStatement pstatement=con.prepareStatement(findTrain);
 
 		ResultSet rs=pstatement.executeQuery();
-		System.out.println("resultset");
+		
 		while(rs.next()) {
 			trainModel = new Trains(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
 			trainsearchList.add(trainModel);
@@ -252,7 +241,7 @@ public class TrainDaoImpl {
 		while(rs.next()) {
 			trainModel = new Trains(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7).toLocalDateTime(),rs.getTimestamp(8).toLocalDateTime(),rs.getInt(9),rs.getInt(10));
 			trainsearchList.add(trainModel);
-	//		trainModel.toString();
+	
 		}
 	
 	return trainsearchList;

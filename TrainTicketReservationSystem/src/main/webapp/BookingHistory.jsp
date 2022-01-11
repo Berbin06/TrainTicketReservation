@@ -19,6 +19,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Booking History of current user</title>
+
 <style>
 body{
     background: url();

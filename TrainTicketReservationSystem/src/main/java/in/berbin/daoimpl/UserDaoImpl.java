@@ -40,29 +40,60 @@ public class UserDaoImpl implements UserDAO {
 		return userModel;
 	}
 	
-	public void insert(Users UserModule) throws ClassNotFoundException, SQLException {
-		
-		String insertquery="insert into users (user_name,user_dob,user_email,user_mobilenumber,user_gender,user_password) values (?,?,?,?,?,?)";
-		Connection con=ConnectionUtil.getDBconnect();
-		PreparedStatement ps=con.prepareStatement(insertquery);
-		ps.setString(1,UserModule.getUserName());
-		ps.setDate(2, java.sql.Date.valueOf(UserModule.getUserDob()));
-		ps.setString(3, UserModule.getUserEmail());
-		ps.setLong(4,UserModule.getUserMobileNumber());
-		ps.setString(5,UserModule.getUserGender());
-		ps.setString(6, UserModule.getUserPassword());
+//	public void insert(Users UserModule) throws ClassNotFoundException, SQLException {
+//		
+//		String insertquery="insert into users (user_name,user_dob,user_email,user_mobilenumber,user_gender,user_password) values (?,?,?,?,?,?)";
+//		Connection con=ConnectionUtil.getDBconnect();
+//		PreparedStatement ps=con.prepareStatement(insertquery);
+//		ps.setString(1,UserModule.getUserName());
+//		ps.setDate(2, java.sql.Date.valueOf(UserModule.getUserDob()));
+//		ps.setString(3, UserModule.getUserEmail());
+//		ps.setLong(4,UserModule.getUserMobileNumber());
+//		ps.setString(5,UserModule.getUserGender());
+//		ps.setString(6, UserModule.getUserPassword());
+//	
+//		int result=ps.executeUpdate();
+//		if(result>0)
+//		{
+//			System.out.println(result + " user detail inserted !!");
+//	
+//		}
+//		else
+//			System.out.println("something went wrong");
+//		ps.close();
+//		con.close();
+//	}
 	
-		int result=ps.executeUpdate();
-		if(result>0)
-		{
-			System.out.println(result + " user detail inserted !!");
-	
+	public boolean signUpUser(Users userModel) {
+
+		String insertUser = "insert into users (user_name,user_dob,user_email,user_mobilenumber,user_gender,user_password) values (?,?,?,?,?,?)";
+		Connection con;
+		boolean signUpFlag=true;
+		try {
+			con = ConnectionUtil.getDBconnect();
+			PreparedStatement pstatement = con.prepareStatement(insertUser);
+
+			pstatement.setString(1, userModel.getUserName());
+			pstatement.setDate(2, java.sql.Date.valueOf(userModel.getUserDob()));
+			pstatement.setString(3, userModel.getUserEmail());
+			pstatement.setLong(4, userModel.getUserMobileNumber());
+			pstatement.setString(5, userModel.getUserGender());
+			pstatement.setString(6, userModel.getUserPassword());
+
+			int result = pstatement.executeUpdate();
+			if (result > 0) {
+				return signUpFlag;
+			} else {
+				return signUpFlag=false;
+			}
+		} catch (ClassNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
-		else
-			System.out.println("something went wrong");
-		ps.close();
-		con.close();
+		 return signUpFlag;
 	}
+
 	
 	
 	
@@ -130,7 +161,7 @@ public class UserDaoImpl implements UserDAO {
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
-				Users userModel =new Users(rs.getInt(1),rs.getString(2),rs.getDate(3).toLocalDate(),rs.getString(4),(long)rs.getInt(5),rs.getString(6),rs.getString(7),rs.getInt(8));
+				Users userModel =new Users(rs.getInt(1),rs.getString(2),rs.getDate(3).toLocalDate(),rs.getString(4),rs.getLong(5),rs.getString(6),rs.getString(7),rs.getInt(8));
 				userList.add(userModel);
 			}
 		} catch (SQLException e) {
@@ -269,6 +300,8 @@ public class UserDaoImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 }
 
 

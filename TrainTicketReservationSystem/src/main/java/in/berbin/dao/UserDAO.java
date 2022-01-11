@@ -9,7 +9,7 @@ public interface UserDAO {
 	public Users loginUser(long UserMobileNumber );
 	
 	
-	public void insert(Users UserModule) throws ClassNotFoundException, SQLException;
+	public boolean signUpUser(Users userModel);
 	
 	public void update (Users UserModule) throws ClassNotFoundException, SQLException;
 	

@@ -9,54 +9,57 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import in.berbin.daoimpl.UserDaoImpl;
+import in.berbin.exception.SignUpException;
 import in.berbin.model.Users;
 
 
 
 
-
-
 @WebServlet("/signuppage")
-public class SignupController extends HttpServlet{
+public class SignupController extends HttpServlet {
 
-	public void service(HttpServletRequest req,HttpServletResponse res) throws IOException {
-	    
-		// DateTimeFormatter dateFormat=DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		
-		String name=req.getParameter("fullname");
-		System.out.println(name);
-		String email=req.getParameter("email");
-		System.out.println(email);
-		long mobile=Long.parseLong(req.getParameter("mobileno"));
-		System.out.println(mobile);
-		String password=req.getParameter("password");
-		System.out.println(password);
-		LocalDate dob=LocalDate.parse(req.getParameter("dob"));
-		//System.out.println(dob.format(dateFormat));
-		String gender=req.getParameter("gender");
-		System.out.println(gender);
-		Users userModel=new Users(name,dob,email,mobile,gender,password);
-		UserDaoImpl userDao=new UserDaoImpl();
-		
-		
-		
+	UserDaoImpl userDao = new UserDaoImpl();
+
+	public void service(HttpServletRequest req, HttpServletResponse res) {
+		HttpSession session = req.getSession();
+
+		String name = req.getParameter("fullname");
+		String email = req.getParameter("email");
+		long mobile = Long.parseLong(req.getParameter("mobileno"));
+		boolean checkMobile = userDao.checkUser(mobile);
 		try {
-			userDao.insert(userModel);
-			if(userDao!=null) {
-				res.sendRedirect("login.jsp");
-			}else
-			{
-				res.getWriter().print("You'r not registered");
+			if (!(checkMobile)) {
+				String password = req.getParameter("password");
+				LocalDate dob = LocalDate.parse(req.getParameter("dob"));
+				String gender = req.getParameter("gender");
+				Users userModel = new Users( name, dob, email, mobile, gender, password);
+				UserDaoImpl userDao = new UserDaoImpl();
+				boolean signUpFlag = userDao.signUpUser(userModel);
+				System.out.println(signUpFlag);
+				if (signUpFlag) {
+					try {
+						res.sendRedirect("login.jsp");
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					throw new SignUpException();
+				}
+			} else {
+				throw new SignUpException();
 			}
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SignUpException e) {
+			session.setAttribute("registerMessage", e.getPhoneRegisterMessage());
+			try {
+				res.sendRedirect("signup.jsp");
+			} catch (IOException e1) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
-	
 }
+

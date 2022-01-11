@@ -88,7 +88,7 @@ input{
         <tr>
             <th><label for="regage">DOB:</label></th>
             <td>           
-            <input type="date" name="dob"   id="regage" ><br><br>
+            <input type="date" name="dob"   id="dob" ><br><br>
             </td>
         </tr>
         <tr>
@@ -129,8 +129,28 @@ input{
            <th> <button class="buttonsignup"id="ressignup" type="reset">Reset</button></th>
         </tr>
     </table>
+    <%String errorMsg=(String)session.getAttribute("registerMessage");
+        if(errorMsg!=null){%>
+        <h4 id="errormsg"><%=errorMsg %></h4>
+        <%}
+        session.removeAttribute("registerMessage");%>
 </form>
 </div>
+<script type="text/javascript">
+     
+    today();
+    function today(){
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        var yyyy1= today.getFullYear()-90;
+    mindate =yyyy1 + '-' + mm + '-'+ dd  ;
+    maxdate =yyyy + '-' + mm + '-'+ dd  ;
+    document.getElementById("dob").setAttribute("max",maxdate);
+    document.getElementById("dob").setAttribute("min",mindate);
+    }
+    </script>
 </body>
 
 </html>

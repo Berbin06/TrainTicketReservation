@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <title>Login Page</title>
     <style>
     body{
     background: url(https://images.squarespace-cdn.com/content/v1/5a3bb03b4c326d76de73ddaa/1622559786569-F4UVF7274QAKJHWD00UM/The_Common_Wanderer_india_train_travel_tips-17_1.jpg?format=1500w);
     background-size: cover;
     filter: blur();
+    
     
 }
 div,img{
@@ -91,8 +93,18 @@ height:100px;
     </style>
 </head>
 <body>
+<%String invalid=(String)session.getAttribute("invalid");
+if(invalid!=null){
+	%>
+	
+<h2><%=invalid %></h2>
+
+<%} %>
+
      <marquee width="100%" direction="right" height="300px">
 <img alt="" class="trainmarquee" src="https://clipart-best.com/img/train/train-clip-art-39.png">
+Welcome to Train Ticket Reservation System.
+Special Trains will available on special occasion!!
 </marquee>
     <div class="login">
         <form action="loginusers">
@@ -102,17 +114,17 @@ height:100px;
 
         <table id="logintable">
             <tr>
-                <th><img src="images/user.png.png" alt="" ></th>
+                <th><img src="https://www.logolynx.com/images/logolynx/90/90ae65b2d63dcc5776e4b8da976cc604.jpeg" alt="" ></th>
                 <th><input type="text" name="logincredentials" pattern="[6-9][0-9]+{9}"  placeholder="Enter your Mobile Number" required ><br><br></th>
             </tr>
             <tr>
-                <th><img src="images/pswd.png.png" alt=""></th>
+                <th><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_6WSwA5jhKurNXgM4KyrYeUGlho634NeXTQ&usqp=CAU" alt=""></th>
                 <th><input type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+{8,15}$" placeholder="Enter your Password" required><br><br></th>
             </tr>
             
         </table>
             
-            <button id="buttonlogin">Login</button><br><br>
+            <button class="btn btn-primary btn-block" id="buttonlogin">Login</button><br><br>
             <!-- <a href="forgetPassword.html">Forget Password?</a><br><br> -->
 
             <label for="signup">Don't have an account ? </label>
@@ -121,6 +133,6 @@ height:100px;
         </form>  
  </div>
 
-
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+</body>
 </html>

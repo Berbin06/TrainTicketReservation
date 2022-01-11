@@ -1,7 +1,7 @@
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import = "in.berbin.controller.*"%>
     <%@page import="in.berbin.model.Users" %>
     <%@page import="in.berbin.daoimpl.UserDaoImpl" %>
     <%@page import="javax.servlet.http.HttpSession" %>
@@ -12,11 +12,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>UserHomePage</title>
 
 <style>
 body{
-background: url(https://wallpapercave.com/dwp1x/wp10432195.jpg);
+background-image :url(Assests/userhomepage.jpg);
 background-size: cover;
 filter: blur();
 background-repeat: no-repeat;
@@ -32,18 +32,21 @@ background-size: cover;
     
     ul,li{
         list-style: none;
-        display: flex;
-        margin-left: 15px;
-        padding: 70px;
-        padding-left: 10px;
-        padding-top: 0px;
-        margin-top: 15px;
+    display: inline;
+    margin-left: 24px;
+    padding: 0px;
+    padding-left: 45px;
+    position: relative;
+    top: 15px;
+       
     }
     #nav{
         border: 1px solid blanchedalmond ;
         height: 90px;
         background-color:black;
         color:blanchedalmond;
+        width:100%;
+            border: none;
         
     }
     
@@ -51,9 +54,9 @@ background-size: cover;
         text-decoration: none;
         font-size: 25px;
         color:blanchedalmond;
-       
     font-weight: bold;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    margin-left:60px;
     }
     a:hover {
   background-color:darkgoldenrod;
@@ -117,7 +120,7 @@ background-size: cover;
         font-size: 20px;
         padding-top: 5px;
         padding-left: 30px;
-        margin-left: 10px;
+        margin-left: -8px;
     }
     span{
         font-size: larger;
@@ -129,13 +132,16 @@ background-size: cover;
     #searchlocation{
         padding: 40px;
         border: 1px solid black;
-        color:#5203fc;
+        color:black;
         border-radius: 0px;
         height: 350px;
         width: 300px;
         position: absolute;
-        top: 170px;
-        left: 250px;
+          top: 142px;
+    left: 225px;
+        background-color:white;
+            margin-left: -70px;
+    margin-top: 35px;
       
     }.fromto{
         border: 0.100px solid black;
@@ -159,57 +165,45 @@ background-size: cover;
     }
     #username{
         font-size: larger;
-        margin-right: 0;
+        margin-right: 40px;
+        float: right;
     }
     .fromto input{
-        width: 170px;
+        width: 195px;
     }
     .fromto ::placeholder{
         width: 170px;
         font-size: 16px;
     }
+    #logo{
+    width: 105px;
+    position: absolute;
+    left: 0px;
+    top: -41px;
+    margin-left: -20px;
+}
 </style>
 </head>
 
 
 <body>
+
     <div id="nav">
         <ul>
-            <li><span>icon</span></li>
+          
          <!--    <li><a href="Searchtrain.jsp">Train</a></li> -->
+          <img id="logo" src="Assests/trainlogo.png">
             <li><a href="AboutUs.jsp">About us</a></li>
             <li><a href="UpdateUser.jsp?Username=<%=userData.getUserName()%>&Userdob=<%=userData.getUserDob()%>&Usermailid=<%=userData.getUserEmail()%>
             &Usermobileno=<%=userData.getUserMobileNumber()%>">Update Profile</a></li>
             <li><a href="ManageWallet.jsp">Manage Wallet</a></li>
             <li>  <a href="BookingHistory.jsp">Bookings</a></li>
-              <li>  <a href="login.jsp">Logout</a></li>
+              <li>  <a href="logout11">Logout</a></li>
 <li> <div id="username"><label for="username">
      Hello _ <%=userData.getUserName() %></label></div>
 <%System.out.println(userData.getUserName()); %> 
     </li>
-             <!--  <li><div class="dropdown">
-                <button class="dropbtn">Bookings</button>
-                <div class="dropdown-content">
-                  <a href="BookingHistory.jsp">Bookings</a>
-                 
-                </div>
-              </div> </li> -->
-
-              <!-- <li>
-              <div class="dropdown">
-                <button class="dropbtn">Wallet </button>
-               
-                <div class="dropdown-content">
-                  <a href="ManageWallet.jsp">Manage Wallet</a>
-                  <a href="UpdateWallet.jsp">Recharge Wallet</a>
-                </div>
-              </div> </li> -->
-
-            <!-- <li><a href="Login.jsp">SignIn</a></li>
-            <li><a href="UserRegister.jsp">SignUp</a></li>
-            </ul>
-        </div> -->
-        
+            
 
 
     <form action="filtertrain.jsp">

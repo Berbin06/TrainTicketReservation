@@ -56,6 +56,7 @@ allBookings=bookingDao.showAllBookings();%>
 <thead>
 <tr>
 <th>No</th>
+<!-- <th>UserID</th> -->
  <th >Train ID</th>
 <th>PNR NUMBER</th>
 <th>Booking Date</th>
@@ -77,7 +78,7 @@ i++;
 
 <tr>
 <td><%=i%></td>
-<%-- <td><%=showBooking.getUsermodel()%></td> --%>
+<%-- <td><%=showBooking.getUsermodel().getUserId()%></td>  --%>
 <td><%= showBooking.getTrainid()%></td>
 <td><%=showBooking.getPnrNumber()%></td>
 <td> <%=showBooking.getBookingDate()%></td>

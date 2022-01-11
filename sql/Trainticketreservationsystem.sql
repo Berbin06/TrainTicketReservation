@@ -67,7 +67,7 @@ drop table trains cascade constraint;
 drop table booking_details cascade constraint;
 
 select * from users;    
-
+commit;
 select * from trains;
 select * from admins;
 select * from booking_details;
