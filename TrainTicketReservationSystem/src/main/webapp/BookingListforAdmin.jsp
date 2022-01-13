@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>BookingList For Admin</title>
 </head>
     <style>
        *{
@@ -56,7 +56,7 @@ allBookings=bookingDao.showAllBookings();%>
 <thead>
 <tr>
 <th>No</th>
-<!-- <th>UserID</th> -->
+<th>UserID</th>
  <th >Train ID</th>
 <th>PNR NUMBER</th>
 <th>Booking Date</th>
@@ -78,7 +78,7 @@ i++;
 
 <tr>
 <td><%=i%></td>
-<%-- <td><%=showBooking.getUsermodel().getUserId()%></td>  --%>
+<td><%=showBooking.getUserId()%></td> 
 <td><%= showBooking.getTrainid()%></td>
 <td><%=showBooking.getPnrNumber()%></td>
 <td> <%=showBooking.getBookingDate()%></td>

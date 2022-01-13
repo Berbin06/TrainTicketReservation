@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Update user</title>
     <style>
     body{
     background: url(images/lgbackground.jpg);
@@ -94,7 +94,7 @@ input{
             <tr>
                 <th>
                     <label for="regpswd">Password:</label>
-                    <input type="password" name="password" id="regpswd"    required><br><br>
+                    <input type="password" name="password" id="regpswd"  pattern="(?=.*\d)(?=.*[@#$%*!^()_+])(?=.*[a-z])(?=.*[A-Z]).{8,}"   required><br><br>
                 </th>
             </tr>
             

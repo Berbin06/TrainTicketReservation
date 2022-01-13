@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>SignUp</title>
     <style>
     body{
     background: url(images/lgbackground.jpg);
@@ -82,7 +82,7 @@ input{
        
            <th><label for="fullname">FullName:</label></th>
             <td>
-            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" required><br><br>
+            <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,40}"  required><br><br>
             </td>
         </tr>
         <tr>
@@ -95,7 +95,7 @@ input{
             
                 <th><label  for="regemail">Email:</label></th>
                 <td>
-                <input type="email" name="email" id="regemail" pattern="[a-zA_z][A-Za-z0-9]+[@][a-zA-Z]+[.][A-Za-z]+{2,3}" placeholder="Enter your MailID" required><br><br>
+                <input type="email" name="email" id="regemail" pattern="[a-z][a-z0-9_.]+@[a-z0-9.]+[.][a-z]+" placeholder="Enter your MailID" required><br><br>
            </td>  
         </tr>
        
@@ -112,7 +112,7 @@ input{
                
                     <th> <label for="regmobilenum">MobileNo:</label></th>
                     <td>
-                    <input type="tel" name="mobileno" id="regmobilenum" pattern="[6-9]{1}+[0-9]{9}" placeholder="Enter your MobileNumber" required><br><br>
+                    <input type="tel" name="mobileno" id="regmobilenum" pattern="[6-9]{1}[0-9]{9}" maxlength="10" placeholder="Enter your MobileNumber" required><br><br>
                 </td>
             </tr>
             <tr>

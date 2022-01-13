@@ -158,7 +158,7 @@ background-size: cover;
         margin-top: 21px;
         margin-left: 1px;
         color: white;
-        background-color: #35fc03;
+        background-color: blue;
         border: none;
         border-radius: 0px;
         cursor: pointer;

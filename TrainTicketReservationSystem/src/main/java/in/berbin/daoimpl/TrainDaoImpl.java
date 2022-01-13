@@ -284,7 +284,6 @@ public class TrainDaoImpl {
 		Trains trainModel = null;
 		
 		 try {
-			 
 			con = ConnectionUtil.getDBconnect();
 			pstatement=con.prepareStatement(getTrain);
 			pstatement.setInt(1, trainId);

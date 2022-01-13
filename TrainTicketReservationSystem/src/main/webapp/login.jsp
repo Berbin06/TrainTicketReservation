@@ -93,13 +93,7 @@ height:100px;
     </style>
 </head>
 <body>
-<%String invalid=(String)session.getAttribute("invalid");
-if(invalid!=null){
-	%>
-	
-<h2><%=invalid %></h2>
 
-<%} %>
 
      <marquee width="100%" direction="right" height="300px">
 <img alt="" class="trainmarquee" src="https://clipart-best.com/img/train/train-clip-art-39.png">
@@ -115,7 +109,7 @@ Special Trains will available on special occasion!!
         <table id="logintable">
             <tr>
                 <th><img src="https://www.logolynx.com/images/logolynx/90/90ae65b2d63dcc5776e4b8da976cc604.jpeg" alt="" ></th>
-                <th><input type="text" name="logincredentials" pattern="[6-9][0-9]+{9}"  placeholder="Enter your Mobile Number" required ><br><br></th>
+                <th><input type="text" name="logincredentials"  placeholder="Enter your Mobile Number" required ><br><br></th>
             </tr>
             <tr>
                 <th><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_6WSwA5jhKurNXgM4KyrYeUGlho634NeXTQ&usqp=CAU" alt=""></th>
@@ -130,7 +124,13 @@ Special Trains will available on special occasion!!
             <label for="signup">Don't have an account ? </label>
             <a id="signup" href="signup.jsp">SignUp</a>
 
-        </form>  
+<%String erroruserid=(String)session.getAttribute("erroruserid");
+if(erroruserid!=null){ %>
+<h4> id="errorcontent"><%=erroruserid %></h4>
+<%} session.removeAttribute("erroruserid"); %> 
+        </form> 
+        
+
  </div>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->

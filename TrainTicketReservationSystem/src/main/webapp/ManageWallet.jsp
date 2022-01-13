@@ -9,20 +9,12 @@
              <% Users userData=(Users)session2.getAttribute("userdata");%>
              <%UserDaoImpl userDao=new UserDaoImpl();
                Users userModel=userDao.getUserDetailsById(userData.getUserId());  %>
-      <!--        /*   int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
-               int totalAmount=amountEntered+userData.getUserwallet();
-               userDao.updateWallet(totalAmount, userData.getUserwallet());
-               
-               
-               Users userModel1=new Users(userModel.getUserId(),userModel.getUserName(),userModel.getUserDob(),userModel.getUserEmail(),
-             		  userModel.getUserMobileNumber(),userModel.getUserGender(),userModel.getUserPassword(),totalAmount);
-               session.setAttribute("userdata2", userModel1); */
-             %> -->
+     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Manage Wallet</title>
 <style>
 body{
     background: url(images/lgbackground.jpg);

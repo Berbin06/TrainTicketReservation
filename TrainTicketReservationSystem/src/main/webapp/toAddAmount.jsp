@@ -4,25 +4,12 @@
         <%@page import="in.berbin.daoimpl.UserDaoImpl"%>
     
     <%@page import="in.berbin.model.*"%>
-   <%--      <%@page import="javax.servlet.http.HttpSession" %>
-        <%HttpSession session2=request.getSession();%> 
-             <% Users userData=(Users)session2.getAttribute("userdata");%>
-             <%UserDaoImpl userDao=new UserDaoImpl();
-               Users userModel=userDao.getUserDetailsById(userData.getUserId());
-               int amountEntered=Integer.parseInt(request.getParameter("ammounttoaddinwallet"));
-               int totalAmount=amountEntered+userData.getUserwallet();
-               userDao.updateWallet(totalAmount, userData.getUserwallet());
-               
-               
-               Users userModel1=new Users(userModel.getUserId(),userModel.getUserName(),userModel.getUserDob(),userModel.getUserEmail(),
-             		  userModel.getUserMobileNumber(),userModel.getUserGender(),userModel.getUserPassword(),totalAmount);
-               session.setAttribute("userdata2", userModel1);
-             %>  --%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>To add amount</title>
 <style>
 body{
     background: url(images/lgbackground.jpg);
@@ -109,13 +96,19 @@ input{
                 <br>
                <tr>
                <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add</button></th>
+                <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
               
             </tr>
              
         </table>
    
     </div>
+    
+     <%-- <%String walletMessage=(String)session.getAttribute("userHome");
+            if(walletMessage.equals("lowbalance")){
+            	session.setAttribute("userHome", "homeSession");
+            	%> --%>
     </form>
-     <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
+    
 </body>
 </html>

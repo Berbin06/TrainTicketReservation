@@ -53,11 +53,8 @@ public boolean cancelTicket(Users userModel1,BookingDetails booking,Trains train
 	int totalseat = booking.getTicketCount() + train.getTotalseat();
 	
 	String toCancel="update booking_details set ticket_status='Cancelled' where pnr_number="+booking.getPnrNumber()+"";
-	System.out.println(toCancel);
 	String refund = "update users set user_wallet="+totalAmount+" where user_id ="+userModel1.getUserId();
-	System.out.println(refund);
 	String seats = "update  TRAINS set TOTAL_SEAT="+totalseat+" where TRAIN_ID="+train.getTrainId();
-	System.out.println(seats);
 	int result = 0;
 	try {
 		Connection con=ConnectionUtil.getDBconnect();
@@ -226,7 +223,7 @@ public List<BookingDetails> showAllBookings()
 		ResultSet rs=ps.executeQuery();
 		while(rs.next())
 		{
-			BookingDetails bookingDetailsModel=new BookingDetails(userModel,rs.getInt(2),rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
+			BookingDetails bookingDetailsModel=new BookingDetails(rs.getInt(1),rs.getInt(2),rs.getLong(3),rs.getDate(4).toLocalDate(),rs.getDate(5).toLocalDate(),rs.getInt(6),rs.getInt(7),rs.getString(8));
 			allBookings.add(bookingDetailsModel);
 		}
 		

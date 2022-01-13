@@ -38,7 +38,7 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         int ticketCount=Integer.parseInt(req.getParameter("seatcount"));
         int totalPrice=Integer.parseInt(req.getParameter("totalprice"));
         
-//     if(user.getUserWallet()>=totalPrice) {
+    if(user.getUserwallet()>=totalPrice) {
      
         int updateAmountInWallet=user1.getUserwallet()-totalPrice;
         Users userModel=new Users(user1.getUserId(),user1.getUserName(),user1.getUserDob(),user1.getUserEmail(),user1.getUserMobileNumber(),
@@ -54,16 +54,12 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         trainDao2.updateSeatCount(trainModel1);
         
         
-        System.out.println("6");
-        
         BookingDetails bookTickets=new BookingDetails(userModel,trainModel.getTrainId(),trainModel.getTrainDepartureTime().toLocalDate(),ticketCount,totalPrice);
         System.out.println("datetime " +trainModel.getTrainDepartureTime());
-        System.out.println("7");
         boolean ticketInsertFlag=bookingdetailsDao.bookTicket(userModel, trainModel, bookTickets);
         session.setAttribute("bookticket", bookTickets);
         session.setAttribute("TrainModel", trainModel);  
         session.setAttribute("lastuserModel", userModel);
-        System.out.println("7");
         if(ticketInsertFlag) {
             try {
                 res.sendRedirect("BookedSucessful.jsp");
@@ -75,4 +71,13 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         
         
     }
+    else {
+		try {
+			session.setAttribute("userHome", "lowbalance");
+			res.sendRedirect("toAddAmount.jsp");
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+}
+}
 }
