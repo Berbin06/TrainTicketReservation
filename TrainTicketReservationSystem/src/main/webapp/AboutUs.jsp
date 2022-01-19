@@ -17,7 +17,7 @@
         
         <h2>About Us</h2>
 
-        <p>Indian Railway Catering and Tourism Corporation Ltd.This company is a “Mini Ratna (Category-I)” Central
+        <p>Indian Railway Catering and Tourism Corporation Ltd.This company is a "Mini Ratna (Category-I)" Central
             Public
             Sector Enterprise under Ministry of Railways, Government of India. This was incorporated on 27 th September,
             1999 as an extended arm of the Indian Railways to upgrade, professionalize and manage the catering and
@@ -57,7 +57,7 @@
         </ul> <br>
         <hr> <br>
 <center>
-        <button class="btn btn-primary"><a href="UserHomePage.jsp">Home</a>
+        <button class="btn btn-secondary"><a href="UserHomePage.jsp">Home</a>
 </body></button></center>
 </section>
 

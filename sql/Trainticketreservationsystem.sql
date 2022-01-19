@@ -23,7 +23,7 @@ CREATE TABLE BOOKING_DETAILS (
   JOURNEY_DATE date NOT NULL,
   BOOKING_DATE date default SYSDATE,
   TICKET_COUNT int NOT NULL,
-  TOTAL_PRICE int,
+  TOTAL_PRICE number(10,2),
   TICKET_STATUS varchar(20) default 'BOOKED',
   
   CONSTRAINT pk_bookingid PRIMARY KEY (PNR_NUMBER),
@@ -40,7 +40,7 @@ CREATE TABLE USERS (
   USER_MOBILENUMBER varchar(30) NOT NULL,
   USER_GENDER varchar(30) NOT NULL,
   USER_PASSWORD varchar(50) NOT NULL ,
-  USER_WALLET int default 0,
+  USER_WALLET number(10,2) default 0,
   
   
   CONSTRAINT pk_userid PRIMARY KEY (user_id),
@@ -57,7 +57,7 @@ CREATE TABLE ADMINS (
  CONSTRAINT pk_adminid primary key (Admin_Id),
  CONSTRAINT unique_admin UNIQUE (Admin_Email)
  );
- insert into admins (admin_name,admin_mobilenumber,admin_password,admin_email)values('Robert',9486209572,'Qwerty@123','robertadmin@admin.com');
+ insert into admins (admin_name,admin_mobilenumber,admin_password,admin_email)values('Selvaraj',9486209571,'Qwerty@123','Selvarajjoseph@admin.com');
 
 select * from admins;
 select * from booking_details;
@@ -78,8 +78,12 @@ drop table users cascade constraints;
 desc trains;
 select*from trains where to_char(train_departure_time,'dd-mm-yyyy')='30-12-2021' and train_source='madurai' and train_destination='chennai';
 resultset
-
+commit;
 select*from trains where train_departure_time='2021-12-30 08:20:00' and train_source='madurai' and train_destination='chennai';
 select*from trains where to_char(train_departure_time,'dd-mm-yyyy')='30-12-2021' and train_source='Madurai' and train_destination='Chennai';
 
 update users set user_wallet=10000 where user_id = 42;
+select * from admins where admin_email='robertadmin@admin.com';
+
+select * from admins where admin_email='robertadmin@admin.com';
+commit;

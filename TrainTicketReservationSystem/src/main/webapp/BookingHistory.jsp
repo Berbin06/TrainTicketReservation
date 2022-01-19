@@ -138,8 +138,7 @@ body{
                
                
                %>
-                      
-                   <table border="2" id="alltrains">
+<table border="2" id="alltrains">
 <h1><b>Booking List</b></h1>
 <thead>
 <tr>
@@ -189,7 +188,7 @@ private static Date getcurrentdate()
 
 <tr>
  <td><%=i%></td> 
-<td><%= train.getTrainName()%></td>
+<td><%= train.getTrainName() %></td>
 <td><%= train.getTrainClass()%></td>
 <td><%= train.getTrainNumber()%></td>
 <td><%= train.getTrainSource()%></td>

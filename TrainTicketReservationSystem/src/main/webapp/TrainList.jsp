@@ -11,6 +11,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>Train List</title>
 </head>
     <style>
@@ -46,10 +47,10 @@
 
     <div id="trainlist">
         <ul>
-            <li><a href="AdminHome.jsp">Profile</a></li>
+            <li><a href="AdminHome.jsp">Home</a></li>
             <li><a href="AddTrain.jsp">Add Train</a></li>            
             <li><a href="TrainList.jsp">Train list</a></li>            
-            <li><a href="UserList.jsp">User list</a></li>
+        <!--     <li><a href="UserList.jsp">User list</a></li> -->
             <li><a href="BookingList.jsp">Booking list</a></li>
         </ul>
     </div>
@@ -58,7 +59,7 @@
     trainList = trainDao.showAllTrains();%>
 
 
-<table border="2" id="alltrains">
+<table border="2" id="alltrains" class="table table-striped table-hover">
 <h1><b>Train List</b></h1>
 <thead>
 <tr>
@@ -73,6 +74,8 @@
 <th>Arrival Time</th>
 <th>Total Seat</th>
 <th>Ticket Price</th>
+<th>Action</th>
+
 </tr>
 </thead>
 <br>
@@ -97,17 +100,17 @@ i++;
 <td> <%=showTrain.getTicketPrice()%></td>
 <td><a href="updateTrain.jsp?TrainName=<%=showTrain.getTrainName()%> &TrainClass=<%=showTrain.getTrainClass()%>&Departuretrain=
 <%=showTrain.getTrainDepartureTime()%>&TrainNumber=<%=showTrain.getTrainNumber()%>&Arrival=<%= showTrain.getTrainArraivalTime()%>&source=<%=showTrain.getTrainSource() %>
-&destination=<%= showTrain.getTrainDestination()%>&totalseat=<%=showTrain.getTotalseat()%>&ticketprice<%=showTrain.getTicketPrice()%>">Update</a>
+&destination=<%= showTrain.getTrainDestination()%>&totalseat=<%=showTrain.getTotalseat()%>&ticketprice=<%=showTrain.getTicketPrice()%>">Update</a>
     
     
     
-    
-    <!-- <a href="deletetrain.jsp"><button type="button">Delete</button></td></a> -->
+
 </tr>
 <%
 }
 %>
 </tbody>
-</table>    
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>       
 </body>
 </html>

@@ -40,29 +40,7 @@ public class UserDaoImpl implements UserDAO {
 		return userModel;
 	}
 	
-//	public void insert(Users UserModule) throws ClassNotFoundException, SQLException {
-//		
-//		String insertquery="insert into users (user_name,user_dob,user_email,user_mobilenumber,user_gender,user_password) values (?,?,?,?,?,?)";
-//		Connection con=ConnectionUtil.getDBconnect();
-//		PreparedStatement ps=con.prepareStatement(insertquery);
-//		ps.setString(1,UserModule.getUserName());
-//		ps.setDate(2, java.sql.Date.valueOf(UserModule.getUserDob()));
-//		ps.setString(3, UserModule.getUserEmail());
-//		ps.setLong(4,UserModule.getUserMobileNumber());
-//		ps.setString(5,UserModule.getUserGender());
-//		ps.setString(6, UserModule.getUserPassword());
-//	
-//		int result=ps.executeUpdate();
-//		if(result>0)
-//		{
-//			System.out.println(result + " user detail inserted !!");
-//	
-//		}
-//		else
-//			System.out.println("something went wrong");
-//		ps.close();
-//		con.close();
-//	}
+
 	
 	public boolean signUpUser(Users userModel) {
 
@@ -131,16 +109,7 @@ public class UserDaoImpl implements UserDAO {
 		con.close();		
 	}
     
-//   public void showusers(UserModel UserModule) throws ClassNotFoundException, SQLException {
-//	  String showusersquery="select*from users";
-//	  Connection con=ConnectionUtil.getDBconnect();
-//		PreparedStatement ps=con.prepareStatement(showusersquery);
-//		 ResultSet rs=ps.executeQuery();
-//		 while(rs.next())
-//		 {
-//			 System.out.println("\n" +rs.getInt(1)+"\n"+rs.getString(2)+"\n" +rs.getInt(3)+"\n" +rs.getString(4)+"\n" +rs.getLong(5)+"\n" +rs.getString(6)+"\n" +rs.getString(7));
-//		 }
-//   }
+
     public List<Users> showAllUsers()
     {
     	List<Users> userList = new ArrayList<Users>();
@@ -192,7 +161,7 @@ public class UserDaoImpl implements UserDAO {
 		return userModel;
     }
 	public boolean updateWallet(int updatedWallet, int userId) {
-		String wallet = "update users set user_wallet=? where user_id=?";
+		String wallet = "update users set user_wallet=user_wallet+? where user_id=?";
 
 		Connection con;
 		PreparedStatement pstatement;
@@ -242,7 +211,7 @@ public class UserDaoImpl implements UserDAO {
 	}
 	public boolean checkUser(long userMobileNumber ) {
 
-		String userLogin = "select * from users where user_mobilenumber='" + userMobileNumber;
+		String userLogin = "select * from users where user_mobilenumber=" + userMobileNumber;
 		Connection con;
 		boolean checkUserFlag = true;
 		try {

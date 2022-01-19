@@ -7,7 +7,7 @@
 <title>Update user</title>
     <style>
     body{
-    background: url(images/lgbackground.jpg);
+    background: url(Assests/Defaultbg.jpg);
     background-size: cover;
     filter: blur();
     
@@ -77,38 +77,50 @@ input{
        
         <tr>
            <th><label for="fullname">FullName:</label>
+           <td>
             <input type="text" name="fullname" id="fullname" placeholder="Enter your FullName" pattern="[A-Za-z]{3,20}" autofocus="autofocus"
             value = "<%=request.getParameter("Username") %>" required><br><br></th>
+            </td>
         </tr>
         <tr>
             <th><label for="regage">DOB:</label>
+               <td>
             <input type="date" name="dob"  value="<%=request.getParameter("Userdob") %>" id="regage" ><br><br></th>
+                   </td>
         </tr>
         <tr>
             <th>
                 <label  for="regemail">Email:</label>
+                 <td>
                 <input type="email" name="email" id="regemail" value="<%=request.getParameter("Usermailid")%>"  readonly><br><br>
+                   </td>
             </th>
         </tr>
        
             <tr>
                 <th>
                     <label for="regpswd">Password:</label>
+                           <td>
                     <input type="password" name="password" id="regpswd"  pattern="(?=.*\d)(?=.*[@#$%*!^()_+])(?=.*[a-z])(?=.*[A-Z]).{8,}"   required><br><br>
+                              </td>
                 </th>
             </tr>
             
             <tr>
                 <th>
                     <label for="regmobilenum">MobileNo:</label>
+                                <td>
                     <input type="tel" name="mobileno" id="regmobilenum" value="<%=request.getParameter("Usermobileno")%>" readonly><br><br>
+                                              </td>
                 </th>
             </tr>
             <tr>
                 <th>
                     <label for="reggender">Gender:</label>
+                                 <td>
                     <input  type="radio"name="gender" id="reggender" value="Male" required><label  for="">Male</label>
                     <input  type="radio" name="gender"id="reggender" value="Female" required><label  for="">Female</label>
+                    </td>
                 </th>
             </tr>
             

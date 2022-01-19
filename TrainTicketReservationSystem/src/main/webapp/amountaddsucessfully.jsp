@@ -28,25 +28,24 @@
 <title>Amount Add sucessfully</title>
 <style>
 body{
-    background: url(images/lgbackground.jpg);
+    background: url(Assests/Defaultbg.jpg);
     background-size: cover;
     filter: blur();
     
 }
-.signup{
-    background-color:rgb(238, 241, 241);
-    margin-left: 120px;
-    margin-top: 5px;
-    height: 480px;
-    width: 500px;
+.signup {
+    background-color: rgb(238, 241, 241);
+    margin-left: 110px;
+    margin-top: 7px;
+    height: 317px;
+    width: 341px;
     text-align: center;
     position: absolute;
     left: 310px;
     top: 50px;
     padding-left: 40px;
     padding-top: 20px;
-    box-shadow: 0 0 5px 5px  rgba(141, 133, 128, 0.849);
-
+    box-shadow: 0 0 5px 5px rgb(141 133 128 / 85%);
 }
 .SignUphere{
     
@@ -62,17 +61,18 @@ input{
 
 }
 .buttonsignup{
-    height: 35px;
+        height: 35px;
     width: 80px;
     background-color: rgb(127, 127, 221);
     outline: none;
     border: none;
+    margin-left: 173px;
 }
 .buttonsignup:hover{
     background-color: rgb(247, 112, 112);
 }
 #subsignup{
-    margin-right: 80px;
+    margin-right:-128px;
     position: relative;
     top: 20px;
 }
@@ -94,19 +94,7 @@ input{
         <table id="logintable">
             <h6>Added sucessful</h6>
           
-          <!--       <th>
-                     <h6>To Add Wallet</h6>
-
-                </th>
-            </tr>
-           
-           
-                <tr>
-                    <th>
-                        <label for="addwallet">Enter Amount:</label>
-                        <input type="number" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
-                    </th>
-                </tr> -->
+      
       
                 <br>
                <tr>
@@ -115,7 +103,7 @@ input{
             </tr>
         </table>
     </form>
-     <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
+     <a href="UserHomePage.jsp"><button type="submit" id="ressignup" class="buttonsignup">Back to HomePage</button></a>
     </div>
 </body>
 </html>

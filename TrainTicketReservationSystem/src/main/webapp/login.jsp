@@ -8,13 +8,13 @@
     <title>Login Page</title>
     <style>
     body{
-    background: url(https://images.squarespace-cdn.com/content/v1/5a3bb03b4c326d76de73ddaa/1622559786569-F4UVF7274QAKJHWD00UM/The_Common_Wanderer_india_train_travel_tips-17_1.jpg?format=1500w);
+    background: url(Assests/loginpage.jpg.jpg);
     background-size: cover;
     filter: blur();
     
     
 }
-div,img{
+div,img{s
     width: 20px;
     height: 25px;
 }
@@ -90,15 +90,21 @@ a{
 width:250px;
 height:100px;
 }
+ marquee{
+      font-size: 30px;
+      font-weight: 800;
+      color:#ebebe0;
+      font-family:monospace;
+      }
     </style>
 </head>
 <body>
 
 
-     <marquee width="100%" direction="right" height="300px">
-<img alt="" class="trainmarquee" src="https://clipart-best.com/img/train/train-clip-art-39.png">
-Welcome to Train Ticket Reservation System.
-Special Trains will available on special occasion!!
+     <marquee width="100%" direction="left" height="300px">
+<!-- <img alt="" class="trainmarquee" src="https://clipart-best.com/img/train/train-clip-art-39.png"> -->
+<h2>Welcome to Train Ticket Reservation System.
+Special Trains will available on special occasion!!</h2>
 </marquee>
     <div class="login">
         <form action="loginusers">
@@ -126,7 +132,7 @@ Special Trains will available on special occasion!!
 
 <%String erroruserid=(String)session.getAttribute("erroruserid");
 if(erroruserid!=null){ %>
-<h4> id="errorcontent"><%=erroruserid %></h4>
+ id="errorcontent"> <h4><%=erroruserid %></h4>
 <%} session.removeAttribute("erroruserid"); %> 
         </form> 
         

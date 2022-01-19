@@ -18,6 +18,8 @@ public class AdminDaoImpl implements AdminDAO{
 
 	public Admins adminLogin(String AdminEmailId)  {
 	String loginadmin="select * from admins where admin_email='"+AdminEmailId+"'";
+	System.out.println(loginadmin);
+
 	Connection con;
 	Admins adminmodule=null;
 	try {
@@ -25,9 +27,10 @@ public class AdminDaoImpl implements AdminDAO{
 		PreparedStatement pstatement=con.prepareStatement(loginadmin);
 		ResultSet rs=pstatement.executeQuery();
 		
-		rs.next() ;
+		if(rs.next()) {
+			System.out.println("enter");
 			adminmodule=new Admins(rs.getString(2),rs.getLong(3),rs.getString(4),rs.getString(5));
-		
+		}
 		
 	} catch (ClassNotFoundException e) {
 		System.out.println(e.getMessage());
@@ -42,18 +45,17 @@ public boolean checkadmin(String AdminEmailId)  {
 	 
 	String loginadmin="select * from admins where admin_email='"+AdminEmailId+"'";
 	Connection con;
-	boolean checkAdminFlag=true;
+	System.out.println(loginadmin);
+	boolean checkAdminFlag=false;
 	try {
 		con = ConnectionUtil.getDBconnect();
 		PreparedStatement ps=con.prepareStatement(loginadmin);
-		int i=ps.executeUpdate();
+		ResultSet i=ps.executeQuery(loginadmin);
 		
-		if(i>0) {
+		if(i.next()) {
 			checkAdminFlag= true;
 		}
-		else {
-			checkAdminFlag= false;	
-		}
+		
 	} catch (ClassNotFoundException e) {
 		System.out.println(e.getMessage());
 	} catch (SQLException e) {
@@ -118,4 +120,3 @@ public List<Admins> viewAdmin(){
 
 
 }
-

@@ -1,3 +1,4 @@
+
 package in.berbin.dao;
 
 import java.sql.SQLException;
@@ -27,4 +28,5 @@ public interface UserDAO {
 		
 		public boolean checkExistingUserWhileRegister(long userMobileNumber);
 		
-}
+}	
+

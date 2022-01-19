@@ -12,25 +12,24 @@
 <title>To add amount</title>
 <style>
 body{
-    background: url(images/lgbackground.jpg);
+    background: url(Assests/Defaultbg.jpg);
     background-size: cover;
     filter: blur();
     
 }
-.signup{
-    background-color:rgb(238, 241, 241);
-    margin-left: 120px;
-    margin-top: 5px;
-    height: 480px;
-    width: 500px;
+.signup {
+    background-color: rgb(238, 241, 241);
+    margin-left: 118px;
+    margin-top: 39px;
+    height: 311px;
+    width: 378px;
     text-align: center;
     position: absolute;
     left: 310px;
     top: 50px;
     padding-left: 40px;
     padding-top: 20px;
-    box-shadow: 0 0 5px 5px  rgba(141, 133, 128, 0.849);
-
+    box-shadow: 0 0 5px 5px rgb(141 133 128 / 85%);
 }
 .SignUphere{
     
@@ -55,19 +54,27 @@ input{
 .buttonsignup:hover{
     background-color: rgb(247, 112, 112);
 }
-#subsignup{
-    margin-right: 80px;
+#subsignup {
+    margin-right: -16px;
     position: relative;
     top: 20px;
 }
 #ressignup{
-    margin-right: 80px;
+   margin-right: -92px;
     position: relative;
-    top: 20px;
+    top: 104px;
+}
+}
 }
 .signup input::target-text{
     height: 40px;
     
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align:center;
 }
 </style>
 </head>
@@ -79,24 +86,27 @@ input{
         <table id="logintable">
             
           
-                <th>
+               <!--  <th>
                      <h6>To Add Wallet</h6>
 
-                </th>
+                </th> -->
             </tr>
            
            
                 <tr>
                     <th>
                         <label for="addwallet">Enter Amount:</label>
+                        <td>
                         <input type="number" min="0" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
+                   </td> 
                     </th>
+                    
                 </tr>
       
                 <br>
                <tr>
                <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add</button></th>
-                <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
+                <a href="UserHomePage.jsp"><button type="submit" id="ressignup"class="buttonsignup">Back to HomePage</button></a>
               
             </tr>
              

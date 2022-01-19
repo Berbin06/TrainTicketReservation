@@ -7,7 +7,7 @@
 <title>SignUp</title>
     <style>
     body{
-    background: url(images/lgbackground.jpg);
+    background: url(Assests/Defaultbg.jpg);
     background-size: cover;
     filter: blur();
     
@@ -57,9 +57,9 @@ input{
     top: 20px;
 }
 #ressignup{
-    margin-right: 80px;
+       margin-right: 80px;
     position: relative;
-    top: 20px;
+    top: 26px;
 }
 .signup input::target-text{
     height: 40px;
@@ -74,10 +74,7 @@ input{
     <h2 class="SignUphere">Sign Up!!</h2>
     <table id="logintable">
         
-        <!-- <tr>
-            <th> <label for="usn">User Name:</label>
-            <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
-        </tr> -->
+        
         <tr>
        
            <th><label for="fullname">FullName:</label></th>
@@ -133,7 +130,7 @@ input{
         if(errorMsg!=null){%>
         <h4 id="errormsg"><%=errorMsg %></h4>
         <%}
-        session.removeAttribute("registerMessage");%>
+        session.removeAttribute("registerMessage");%> 
 </form>
 </div>
 <script type="text/javascript">

@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <title>BookingList For Admin</title>
 </head>
     <style>
@@ -46,13 +47,13 @@
             <li><a href="AddTrain.jsp">Add Train</a></li>            
             <li><a href="TrainList.jsp">Train list</a></li>            
             <li><a href="UserList.jsp">User list</a></li>
-            <li><a href="BookingListforAdmin.jsp">Booking list</a></li>
+           
         </ul>
         <%BookingDetailsDaoImpl bookingDao=new BookingDetailsDaoImpl();
 List<BookingDetails> allBookings=new ArrayList<BookingDetails>();
 allBookings=bookingDao.showAllBookings();%> 
-   <table border="2" id="alltrains">
-<h1><b>Booking List</b></h1>
+   <table border="2" id="alltrains" class="table table-striped table-hover">
+<h1><b><centre>Booking List</centre></b></h1>
 <thead>
 <tr>
 <th>No</th>
@@ -92,4 +93,5 @@ i++;
 %>      
     </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>

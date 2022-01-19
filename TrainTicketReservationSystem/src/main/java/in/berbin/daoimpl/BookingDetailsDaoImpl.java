@@ -80,31 +80,7 @@ public boolean cancelTicket(Users userModel1,BookingDetails booking,Trains train
 
 
 
-//show pnr number to user 
-//public int findPnrNumber(UserModel userModel,TrainModel trainModel)
-//{ 
-//	String findPnrNumber="select pnr_number from booking_Details where user_id='"+userModel.getUserId()+"' and to_char(journey_date,'dd-mm-yyyy')='"+trainModel.getTrainDepartureTime() + "' ";
-//	System.out.println(findPnrNumber);
-//	Connection con;
-//	PreparedStatement pstmt;
-//	int pnrNumber=0;
-//	try {
-//		con=ConnectionUtil.getDBconnect();
-//		pstmt=con.prepareStatement(findPnrNumber);
-//		ResultSet rs=pstmt.executeQuery();
-//		if(rs.next()) {
-//			pnrNumber=rs.getInt(3);
-//		}
-//	} catch (ClassNotFoundException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	} catch (SQLException e) {
-//		// TODO Auto-generated catch block
-//		e.printStackTrace();
-//	}
-//	System.out.println(pnrNumber);
-//	return pnrNumber;
-//}
+
 
 //to show booking history of particular user
 

@@ -54,7 +54,7 @@ margin-bottom:30px;
         </style>
 </head>
 <body>
-<form action="booking" onmouseover="check()">
+<form action="booking" onkeyup="check()">
 	<div class="trainDetails row">
 	<centre><h3 class=text-center">BOOK YOUR TICKET</h3><br></centre>
 		<div class="col-sm-6"><label>Train Name :</label><%=trainModel.getTrainName() %></div>

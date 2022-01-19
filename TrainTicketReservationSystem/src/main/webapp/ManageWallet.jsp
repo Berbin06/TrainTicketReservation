@@ -17,25 +17,25 @@
 <title>Manage Wallet</title>
 <style>
 body{
-    background: url(images/lgbackground.jpg);
+    background: url(Assests/Defaultbg.jpg);
     background-size: cover;
     filter: blur();
     
 }
 .signup{
-    background-color:rgb(238, 241, 241);
+       background-color: rgb(238, 241, 241);
     margin-left: 120px;
     margin-top: 5px;
-    height: 480px;
-    width: 500px;
+    height: 344px;
+    width: 401px;
     text-align: center;
     position: absolute;
     left: 310px;
     top: 50px;
     padding-left: 40px;
     padding-top: 20px;
-    box-shadow: 0 0 5px 5px  rgba(141, 133, 128, 0.849);
-
+    box-shadow: 0 0 5px 5px rgb(141 133 128 / 85%);
+}
 }
 .SignUphere{
     
@@ -56,19 +56,21 @@ input{
     background-color: rgb(127, 127, 221);
     outline: none;
     border: none;
+    top:1000px;
 }
 .buttonsignup:hover{
     background-color: rgb(247, 112, 112);
 }
 #subsignup{
-    margin-right: 80px;
+   margin-right: -41px;
     position: relative;
-    top: 20px;
+    top: 16px;
 }
 #ressignup{
-    margin-right: 80px;
+    margin-right: -90px;
     position: relative;
-    top: 20px;
+    top: -21px;
+}
 }
 .signup input::target-text{
     height: 40px;
@@ -82,33 +84,28 @@ input{
         <h2 class="SignUphere">Manage Wallet</h2>
         <table id="logintable">
             
-            <!-- <tr>
-                <th> <label for="usn">User Name:</label>
-                <input type="text" name=""id="usn" placeholder="Enter UserName" required autofocus><br><br></th>
-            </tr> -->
+          
             <tr>
                 <th><label for="UserName">UserName:</label>
+                <td>
                  <input type="text" name="username" value=<%=userModel.getUserName() %> disabled="disabled" id="username"  required><br><br></th>
+                 </td>
              </tr>
             <tr>
                <th><label for="available balance">Available Balance:</label>
+                   <td>
                 <input type="text" name="" id="availablebalance" value=<%=userModel.getUserwallet() %> disabled="disabled" required><br><br></th>
+                            </td>
             </tr>
             
                 <th>
-                     <h6>To Add Wallet</h6>
+                     <h6>To Add Money in  Wallet</h6>
 
                 </th>
             </tr>
            
            
-                <!-- <tr>
-                    <th>
-                        <label for="addwallet">Enter Amount:</label>
-                        <input type="number" id="addwallet" name="ammounttoaddinwallet" placeholder="Enter amount to add" required><br><br>
-                    </th>
-                </tr>
-       -->
+        
                 <br>
                <tr>
                <th> <button class="buttonsignup" id="subsignup" type="submit" >click to add amount</button></th>
@@ -116,7 +113,7 @@ input{
             </tr>
         </table>
     </form>
-     <a href="UserHomePage.jsp"><button type="submit" class="buttonsignup">Back to HomePage</button></a>
+     <a href="UserHomePage.jsp"><button type="submit" id="ressignup" class="buttonsignup">Back to HomePage</button></a>
     </div>
 </body>
 </html>

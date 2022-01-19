@@ -28,7 +28,11 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         BookingDetailsDaoImpl bookingdetailsDao=new BookingDetailsDaoImpl();
         
         Users user=(Users)session.getAttribute("userdata");
+        System.out.println(user);
         Users user1=userDao.getUserDetailsById(user.getUserId());
+        //for low balance
+        user1=userDao.getUserDetailsById(user1.getUserId());
+        
      
         int trainId=(int) session.getAttribute("presenttrain");
         Trains trainModel=trainDao.findTrainsDetailsUsingID(trainId);
@@ -38,7 +42,7 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         int ticketCount=Integer.parseInt(req.getParameter("seatcount"));
         int totalPrice=Integer.parseInt(req.getParameter("totalprice"));
         
-    if(user.getUserwallet()>=totalPrice) {
+    if(user1.getUserwallet()>=totalPrice) {
      
         int updateAmountInWallet=user1.getUserwallet()-totalPrice;
         Users userModel=new Users(user1.getUserId(),user1.getUserName(),user1.getUserDob(),user1.getUserEmail(),user1.getUserMobileNumber(),
@@ -71,7 +75,7 @@ public void service(HttpServletRequest req,HttpServletResponse res) {
         
         
     }
-    else {
+    else {	
 		try {
 			session.setAttribute("userHome", "lowbalance");
 			res.sendRedirect("toAddAmount.jsp");

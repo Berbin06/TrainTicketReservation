@@ -7,6 +7,11 @@
 <title>Add Train</title>
 </head>
     <style>
+       body{
+    background: url(Assests/Defaultbg.jpg);
+    background-size: cover;
+    filter: blur();   
+}
        *{
         margin: 0;
         padding: 0;
@@ -112,53 +117,72 @@ left: 30px;
             
             <tr>
                <th><label for="trainname">Train Name:</label>
+               <td>
                 <input type="text" name="trainname" id="trainname" pattern="[A-Za-z]+{3,20}" placeholder="Enter Train Name" required><br><br></th>
+       
             </tr>
             <tr>
                 <th><label for="trainclass">Train Class:</label>
+                    <td>
                 <input type="text" name="trainclass" id="trclass" pattern="[A-Za-z]+{3,6}" placeholder="Enter Train class" required><br><br></th>
+                         </td>
             </tr>
             <tr>
                 <th>
                     <label  for="trainnumber">Train Number:</label>
-                    <input type="number" name="trainnumber" id="trnumber" placeholder="Enter trainnumber" required><br><br>
+                      <td>
+                   
+              <input type="number" name="trainnumber" id="trnumber" placeholder="Enter trainnumber" required><br><br>
+                     </td>
                 </th>
             </tr>
            
                 <tr>
                     <th>
                         <label for="trainsource">Train Source:</label>
+                              <td>
                         <input type="text" name="trainsource" id="trainsource" placeholder="Enter trin source" required><br><br>
+                           </td>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <label for="traindestination">Train Destination:</label>
+                                <td>
                         <input type="text" name="traindestination" id="trdestination" placeholder="Repeat train destination" required><br><br>
+                                </td>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <label for="traindeparturetime">Train Departure Time:</label>
+                            <td>
                         <input type="datetime-local" name="traindeparturetime" id="trdestime" placeholder="Enter detination time" required><br><br>
+                                 </td>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <label for="trainarrivaltime">Train Arrival Time:</label>
+                           <td>
                         <input type="datetime-local" name="trainarrivaltime" id="trarrtime" placeholder="Enter arrival time" required><br><br>
+                                             </td>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <label for="totalseat">Total Seat:</label>
+                           <td>
                         <input type="number" name="totalseat" id="trtotalseat" placeholder="Enter total seat" required><br><br>
+                                             </td>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <label for="ticketprice">Ticket Price:</label>
+                             <td>
                         <input type="number" name="ticketprice" id="trticketprice" min="0" placeholder="Enter ticket price" required><br><br>
+                                              </td>
                     </th>
                 </tr>
                 <br>
